@@ -95,6 +95,11 @@ pkgs.writeShellScriptBin "DropTerminal" ''
     local target_y="$3"
     local width="$4"
     local height="$5"
+    if ! [[ "$target_x" =~ ^-?[0-9]+$ ]] || ! [[ "$target_y" =~ ^-?[0-9]+$ ]] || \
+       ! [[ "$width" =~ ^[0-9]+$ ]] || ! [[ "$height" =~ ^[0-9]+$ ]]; then
+      debug_echo "Invalid geometry for slide down; skipping animation"
+      return 1
+    fi
 
     debug_echo "Animating slide down for window $addr to position $target_x,$target_y"
 
@@ -126,6 +131,11 @@ pkgs.writeShellScriptBin "DropTerminal" ''
     local start_y="$3"
     local width="$4"
     local height="$5"
+    if ! [[ "$start_x" =~ ^-?[0-9]+$ ]] || ! [[ "$start_y" =~ ^-?[0-9]+$ ]] || \
+       ! [[ "$width" =~ ^[0-9]+$ ]] || ! [[ "$height" =~ ^[0-9]+$ ]]; then
+      debug_echo "Invalid geometry for slide up; skipping animation"
+      return 1
+    fi
 
     debug_echo "Animating slide up for window $addr from position $start_x,$start_y"
 
@@ -285,12 +295,17 @@ pkgs.writeShellScriptBin "DropTerminal" ''
     if [ $? -ne 0 ]; then
       debug_echo "Warning: Using fallback positioning"
     fi
-
-    local target_x=$(echo $pos_info | cut -d' ' -f1)
-    local target_y=$(echo $pos_info | cut -d' ' -f2)
-    local width=$(echo $pos_info | cut -d' ' -f3)
-    local height=$(echo $pos_info | cut -d' ' -f4)
-    local monitor_name=$(echo $pos_info | cut -d' ' -f5)
+    local target_x target_y width height monitor_name
+    read -r target_x target_y width height monitor_name <<<"$pos_info"
+    if ! [[ "$target_x" =~ ^-?[0-9]+$ ]] || ! [[ "$target_y" =~ ^-?[0-9]+$ ]] || \
+       ! [[ "$width" =~ ^[0-9]+$ ]] || ! [[ "$height" =~ ^[0-9]+$ ]]; then
+      debug_echo "Invalid position parsed; using fallback values"
+      target_x=100
+      target_y=100
+      width=800
+      height=600
+      monitor_name="fallback-monitor"
+    fi
 
     debug_echo "Target position: ''${target_x},''${target_y}, size: ''${width}x''${height}"
 
@@ -351,11 +366,16 @@ pkgs.writeShellScriptBin "DropTerminal" ''
       debug_echo "Monitor focus changed: moving dropdown to $focused_monitor"
       # Calculate new position for focused monitor
       pos_info=$(calculate_dropdown_position)
-      target_x=$(echo $pos_info | cut -d' ' -f1)
-      target_y=$(echo $pos_info | cut -d' ' -f2)
-      width=$(echo $pos_info | cut -d' ' -f3)
-      height=$(echo $pos_info | cut -d' ' -f4)
-      monitor_name=$(echo $pos_info | cut -d' ' -f5)
+      read -r target_x target_y width height monitor_name <<<"$pos_info"
+      if ! [[ "$target_x" =~ ^-?[0-9]+$ ]] || ! [[ "$target_y" =~ ^-?[0-9]+$ ]] || \
+         ! [[ "$width" =~ ^[0-9]+$ ]] || ! [[ "$height" =~ ^[0-9]+$ ]]; then
+        debug_echo "Invalid position parsed; using fallback values"
+        target_x=100
+        target_y=100
+        width=800
+        height=600
+        monitor_name="fallback-monitor"
+      fi
       # Move and resize window
       hyprctl dispatch movewindowpixel "exact $target_x $target_y,address:$TERMINAL_ADDR"
       hyprctl dispatch resizewindowpixel "exact $width $height,address:$TERMINAL_ADDR"
@@ -368,10 +388,15 @@ pkgs.writeShellScriptBin "DropTerminal" ''
 
       # Calculate target position
       pos_info=$(calculate_dropdown_position)
-      target_x=$(echo $pos_info | cut -d' ' -f1)
-      target_y=$(echo $pos_info | cut -d' ' -f2)
-      width=$(echo $pos_info | cut -d' ' -f3)
-      height=$(echo $pos_info | cut -d' ' -f4)
+      read -r target_x target_y width height <<<"$pos_info"
+      if ! [[ "$target_x" =~ ^-?[0-9]+$ ]] || ! [[ "$target_y" =~ ^-?[0-9]+$ ]] || \
+         ! [[ "$width" =~ ^[0-9]+$ ]] || ! [[ "$height" =~ ^[0-9]+$ ]]; then
+        debug_echo "Invalid position parsed; using fallback values"
+        target_x=100
+        target_y=100
+        width=800
+        height=600
+      fi
 
       # Use movetoworkspacesilent to avoid affecting workspace history
       hyprctl dispatch movetoworkspacesilent "$CURRENT_WS,address:$TERMINAL_ADDR"
