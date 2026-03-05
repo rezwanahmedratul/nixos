@@ -388,7 +388,7 @@ pkgs.writeShellScriptBin "DropTerminal" ''
 
       # Calculate target position
       pos_info=$(calculate_dropdown_position)
-      read -r target_x target_y width height <<<"$pos_info"
+      read -r target_x target_y width height monitor_name <<<"$pos_info"
       if ! [[ "$target_x" =~ ^-?[0-9]+$ ]] || ! [[ "$target_y" =~ ^-?[0-9]+$ ]] || \
          ! [[ "$width" =~ ^[0-9]+$ ]] || ! [[ "$height" =~ ^[0-9]+$ ]]; then
         debug_echo "Invalid position parsed; using fallback values"
