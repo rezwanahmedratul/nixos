@@ -56,7 +56,7 @@ pkgs.writeShellScriptBin "DropTerminal" ''
   # Debug echo function
   debug_echo() {
     if [ "$DEBUG" = true ]; then
-      echo "$@"
+      echo "$@" >&2
     fi
   }
 
