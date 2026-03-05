@@ -9,7 +9,6 @@ in {
     ./hypridle.nix
     ./hyprland.nix
     ./hyprlock.nix
-    ./pyprland.nix
     ./windowrules.nix
   ];
 }
