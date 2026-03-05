@@ -171,6 +171,13 @@ pkgs.writeShellScriptBin "DropTerminal" ''
     local mon_height=$(echo $monitor_info | cut -d' ' -f4)
     local mon_scale=$(echo $monitor_info | cut -d' ' -f5)
     local mon_name=$(echo $monitor_info | cut -d' ' -f6)
+    # Ensure geometry values are numeric; Hyprland can emit non-JSON status lines during startup
+    if ! [[ "$mon_x" =~ ^-?[0-9]+$ ]] || ! [[ "$mon_y" =~ ^-?[0-9]+$ ]] || \
+       ! [[ "$mon_width" =~ ^[0-9]+$ ]] || ! [[ "$mon_height" =~ ^[0-9]+$ ]]; then
+      debug_echo "Error: Non-numeric monitor geometry; using fallback values"
+      echo "100 100 800 600 fallback-monitor"
+      return 1
+    fi
 
     debug_echo "Monitor info: x=$mon_x, y=$mon_y, width=$mon_width, height=$mon_height, scale=$mon_scale"
 
