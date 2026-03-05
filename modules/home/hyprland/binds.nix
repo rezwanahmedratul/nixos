@@ -16,7 +16,7 @@
       "$modifier,V, Noctalia Clipboard, exec,  noctalia-shell ipc call launcher clipboard"
       "$modifier ALT,P, Noctalia Settings, exec, noctalia-shell ipc call settings toggle"
       "$modifier SHIFT,comma, Noctalia Settings, exec, noctalia-shell ipc call settings toggle"
-      "$modifier ALT,L, Noctalia Lock Screen, exec,  noctalia-shell ipc call sessionMenu lockAndSuspend"
+      "$modifier CTRL,L, Noctalia Lock Screen, exec,  noctalia-shell ipc call sessionMenu lockscreen lock"
       "$modifier SHIFT,W, Noctalia Wallpaper, exec, noctalia-shell ipc call wallpaper toggle"
       "$modifier,X, Noctalia Power Menu, exec,  noctalia-shell ipc call sessionMenu toggle"
       "$modifier,C, Noctalia Control Center, exec,  noctalia-shell ipc call controlCenter toggle"
