@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   programs = {
     steam = {
-      enable = true;
+      enable = false;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = false;
       gamescopeSession.enable = true;
