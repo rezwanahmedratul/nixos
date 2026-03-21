@@ -295,8 +295,9 @@ Ahora, cuando quieras reconstruir, tienes el alias `fr` que reconstruye el flake
 
 Gracias por toda su ayuda
 
+- KoolDots https://github.com/LinuxBeginnings
 - Jakookit https://github.com/jakookit
-- Justaguylinux https://github.com/drewgrif
+- Justaguylinux https://codeberg.org/Justaguylinux
 - Jerry Starke https://github.com/JerrySM64
 
 ## ¡Disfruta!

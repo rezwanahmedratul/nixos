@@ -88,7 +88,7 @@ pkgs.writeShellScriptBin "qs-vid-wallpapers-apply" ''
           -o "$opts" \
           '*' "$sel" >/dev/null 2>&1 &
       fi
-      disown
+      disown || true
       log "mpvpaper launched"
       exit 0
       ;;

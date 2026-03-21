@@ -291,8 +291,8 @@ cp -r hosts/default hosts/<your-desired-hostname>
 git add .
 ```
 
-4. Edit `hosts/<your-desired-hostname>/variab
-   nixos-generate-config --show-hardware-config > hosts/<your-desired-hostname>/hardware.nix
+4. Edit `hosts/<your-desired-hostname>/variables.nix`
+   ```nixos-generate-config --show-hardware-config > hosts/<your-desired-hostname>/hardware.nix```
 
 ```
 
@@ -310,14 +310,13 @@ Now when you want to rebuild the configuration you have access to an alias
 called `fr` that will rebuild the flake and you do not have to be in the
 `zaneyos` folder for it to work.
 
-</details>
-
 ### Special Recognitions:
 
 Thank you for all your assistance
 
-- Jakookit https://github.com/jakookit
-- Justaguylinux https://github.com/drewgrif
+- KoolDots  https://github.com/LinuxBeginnings
+- JakKoolit  https://github.com/Jakoolit
+- Justaguylinux https://codeberg.org/Justaguylinux
 - Jerry Starke https://github.com/JerrySM64
 
 ## Hope you enjoy!

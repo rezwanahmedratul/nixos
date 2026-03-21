@@ -58,7 +58,7 @@ pkgs.writeShellScriptBin "qs-wallpapers-restore" ''
 
     if ! ${pkgs.swww}/bin/swww query >/dev/null 2>&1; then
       log "Starting swww-daemon"
-      ${pkgs.swww}/bin/swww-daemon >/dev/null 2>&1 & disown
+      ${pkgs.swww}/bin/swww-daemon >/dev/null 2>&1 & disown || true
       for i in $(${pkgs.coreutils}/bin/seq 1 50); do
         if ${pkgs.swww}/bin/swww query >/dev/null 2>&1; then break; fi
         ${pkgs.coreutils}/bin/sleep 0.1
@@ -90,7 +90,7 @@ pkgs.writeShellScriptBin "qs-wallpapers-restore" ''
       echo "wallpaper = $mon,$PATH_J" >> "$_CFG"
     done
     log "Starting hyprpaper"
-    ${pkgs.hyprpaper}/bin/hyprpaper -c "$_CFG" >/dev/null 2>&1 & disown
+    ${pkgs.hyprpaper}/bin/hyprpaper -c "$_CFG" >/dev/null 2>&1 & disown || true
   }
 
   start_mpvpaper() {
@@ -98,7 +98,7 @@ pkgs.writeShellScriptBin "qs-wallpapers-restore" ''
     ${pkgs.procps}/bin/pkill -x hyprpaper >/dev/null 2>&1 || true
     local MPV_OPTS="--no-audio --loop-file=inf --image-display-duration=inf --no-osc --no-osd-bar --keep-open=yes --keepaspect=yes --panscan=1.0"
     log "Starting mpvpaper"
-    ${pkgs.mpvpaper}/bin/mpvpaper -o "$MPV_OPTS" '*' "$PATH_J" >/dev/null 2>&1 & disown
+    ${pkgs.mpvpaper}/bin/mpvpaper -o "$MPV_OPTS" '*' "$PATH_J" >/dev/null 2>&1 & disown || true
   }
 
   start_waypaper() {

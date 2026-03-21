@@ -115,7 +115,7 @@ pkgs.writeShellScriptBin "qs-wallpapers-apply" ''
           -o "$MPV_OPTS" \
           '*' "$sel" >/dev/null 2>&1 &
       fi
-      disown
+      disown || true
       log "mpvpaper launched"
       exit 0
       ;;
@@ -125,7 +125,7 @@ pkgs.writeShellScriptBin "qs-wallpapers-apply" ''
       # Start swww-daemon if needed (newer swww has no 'init' subcommand)
       if ! ${pkgs.swww}/bin/swww query >/dev/null 2>&1; then
         log "Starting swww-daemon"
-        ${pkgs.swww}/bin/swww-daemon >/dev/null 2>&1 & disown
+        ${pkgs.swww}/bin/swww-daemon >/dev/null 2>&1 & disown || true
         # wait briefly for the daemon to be ready
         for i in $(${pkgs.coreutils}/bin/seq 1 50); do
           if ${pkgs.swww}/bin/swww query >/dev/null 2>&1; then
@@ -177,7 +177,7 @@ pkgs.writeShellScriptBin "qs-wallpapers-apply" ''
       else
         ${pkgs.hyprpaper}/bin/hyprpaper -c "$_CFG" >/dev/null 2>&1 &
       fi
-      disown
+      disown || true
       exit 0
       ;;
 
