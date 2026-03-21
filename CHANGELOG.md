@@ -7,12 +7,20 @@
 
 # 🚀 **Current Release - ZaneyOS v2.6.1**
 
-#### 📅 **Updated: March 16th, 2026**
+- Changed to NixOS unstable branch
+- Ported `DropTerminal` from `KoolDots` to ZaneyOS
+  - Replaces pyprland and some python dependencies
+- Hyprland updated to v0.54
+  - Added support for scrolling and monocle layouts
+  - Fixed hyprland float-all bindings
+  - Updated Window Rules for new Hyprland format
+- Disabled steam by default
+- Removed `adb.enable` no longer supported and not needed for ZaneyOS
+- Changed `nixfmt-rfc-style` package for updated `nitfmt`
+  - `nixfmt-rfc-style` no longer supported
+- Fixed other evaluation warnings with `Xorg` package changes
 
-- Fixed issues with `qs-wallpaper,qs-wlogout`
-  - Forced Qt/QML logs to console in qs-wallpapers, qs-vid-wallpapers, and qs-wlogout
-  - Soo the wrapper scripts can parse selections/commands when launched from Waybar/Rofi.
-  - Made disown non‑fatal in qs-wallpapers-apply, qs-vid-wallpapers-apply, and qs-wallpapers-restore.
+# 🚀 **Current Release - ZaneyOS v2.6.0**
 
 #### 📅 **Updated: February 19th, 2026**
 

@@ -30,7 +30,6 @@ in {
     seahorse.enable = true;
     fuse.userAllowOther = true;
     mtr.enable = true;
-    adb.enable = true;
     hyprlock.enable = true;
     gnupg.agent = {
       enable = true;
@@ -75,7 +74,7 @@ in {
       mdcat # CLI markdown parser
       mpv # Incredible Video Player
       ncdu # Disk Usage Analyzer With Ncurses Interface
-      nixfmt-rfc-style # Nix Formatter
+      nixfmt # Nix Formatter
       nwg-displays # configure monitor configs via GUI
       nwg-drawer # Application launcher for wayland
       nwg-dock-hyprland # Dock for hyprland
