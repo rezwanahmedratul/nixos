@@ -62,6 +62,8 @@ in {
       eza # Beautiful ls Replacement
       ffmpeg # Terminal Video / Audio Editing
       file-roller # Archive Manager
+      gearlever # Manage / run Appimages
+      icu # dep for gearlever
       gimp # Great Photo Editor
       gpu-screen-recorder # needed for nnoctalia-shell
       power-profiles-daemon # needed for noctalia-shell power cycle
