@@ -80,7 +80,7 @@
       project-nvim = {
         enable = true;
         settings = {
-          datapath = "${config.home.homeDirectory}/.local/share/nvim/project_nvim";
+          history.save_dir = "${config.home.homeDirectory}/.local/share/nvim/project_nvim";
         };
       };
 
