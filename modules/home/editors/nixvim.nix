@@ -77,11 +77,16 @@
       treesitter-context.enable = false;
 
       # Project management
-      project-nvim.enable = true;
+      project-nvim = {
+        enable = true;
+        settings = {
+          datapath = "${config.home.homeDirectory}/.local/share/nvim/project_nvim";
+        };
+      };
 
       # Notifications and UI polish
       notify.enable = true;
-      noice.enable = true;
+      noice.enable = false;
 
       # Startup dashboard
       alpha = {
