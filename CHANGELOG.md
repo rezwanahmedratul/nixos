@@ -7,6 +7,11 @@
 
 # 🚀 **Current Release - ZaneyOS v2.6.1**
 
+- Changed from `zen` to `latest` kernel
+  - Linux kernel v7.0 is much better than 6.19_zen
+- Disabled `vfr = true;` in hyprland config
+  - It's not supportorted after `v54.3`
+  - Disabling now to avoid error on next update
 - Added `awww` as flake input for installs < 25.11
 - Fixed eval warnings:
   - `gtk.gtk4.theme` set to `null`
