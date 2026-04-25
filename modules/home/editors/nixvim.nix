@@ -460,4 +460,9 @@
       end
     '';
   };
+
+  home.activation.projectNvimHistory = ''
+    mkdir -p "$HOME/.local/share/nvim/project_nvim"
+    find "$HOME/.local/share/nvim/project_nvim" -type f -size 0 -delete 2>/dev/null || true
+  '';
 }
