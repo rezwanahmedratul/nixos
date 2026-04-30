@@ -22,7 +22,7 @@
   doomEmacsEnable = true;
 
   # Python development tools
-  pythonEnable = true;
+  pythonEnable = false;
 
   # Hyprland Settings
   # Examples:

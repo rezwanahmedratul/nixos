@@ -58,7 +58,7 @@ in {
       ./wlogout
       ./xdg.nix
       ./yazi
-      ./zen-browser.nix
+      #./zen-browser.nix
       ./zoxide.nix
       ./zsh
     ]
