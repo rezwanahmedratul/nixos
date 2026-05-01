@@ -23,6 +23,11 @@ in {
       then ./ly.nix
       else ./sddm.nix
     )
+    (
+      if vars.powerManager == "auto-cpufreq"
+      then ./auto-cpufreq.nix
+      else ./tlp.nix
+    )
     ./security.nix
     ./services.nix
     ./steam.nix
@@ -34,6 +39,9 @@ in {
     ./virtualisation.nix
     ./xserver.nix
     ./cachix.nix
+    #./auto-cpufreq.nix
+    ./fingerprint.nix
+    ./shadowsocks.nix
     inputs.stylix.nixosModules.stylix
   ];
 }

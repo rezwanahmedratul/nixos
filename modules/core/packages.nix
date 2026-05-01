@@ -39,7 +39,6 @@ in {
   };
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
 
   environment.systemPackages = with pkgs;
     [
@@ -48,13 +47,15 @@ in {
     ++ noctaliaPkgs
     ++ [
       alejandra # nix formatter
-      amfora # Fancy Terminal Browser For Gemini Protocol
+      #amfora # Fancy Terminal Browser For Gemini Protocol
       appimage-run # Needed For AppImage Support
       brave # Brave Browser
       brightnessctl # For Screen Brightness Control
       cliphist # Clipboard manager using rofi menu
       cmatrix # Matrix Movie Effect In Terminal
       cowsay # Great Fun Terminal Program
+      #discord # Stable client
+      #discord-canary # beta  client
       docker-compose # Allows Controlling Docker From A Single File
       duf # Utility For Viewing Disk Usage In Terminal
       dysk # Disk space util nice formattting
@@ -63,9 +64,9 @@ in {
       file-roller # Archive Manager
       gearlever # Manage / run Appimages
       icu # dep for gearlever
-      gimp # Great Photo Editor
+      #gimp # Great Photo Editor
       gpu-screen-recorder # needed for nnoctalia-shell
-      power-profiles-daemon # needed for noctalia-shell power cycle
+      #power-profiles-daemon # needed for noctalia-shell power cycle
       mesa-demos # needed for inxi diag util
       tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
       htop # Simple Terminal Based System Monitor
@@ -104,5 +105,23 @@ in {
       wget # Tool For Fetching Files With Links
       ytmdl # Tool For Downloading Audio From YouTube
       python3 # Python 3 programming language
+      #rustdesk
+      #tlp
+      #auto-cpufreq
+      telegram-desktop
+      nautilus
+      freerdp
+      kdePackages.krdc
+      localsend
+      gcc
+      gdb
+      cmake
+      gnumake
+      #jetbrains.idea
+      powertop
+      libreoffice
+      heimdall
+      typst
+      #python313Packages.opencv4
     ];
 }

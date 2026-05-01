@@ -90,7 +90,7 @@ in {
           repeat_delay = 300;
           follow_mouse = 1;
           float_switch_override_focus = 0;
-          sensitivity = 0;
+          sensitivity = 0.4;
           touchpad = {
             natural_scroll = true;
             disable_while_typing = true;
@@ -121,9 +121,9 @@ in {
 
       general = {
         layout = "dwindle";
-        gaps_in = 6;
-        gaps_out = 8;
-        border_size = 2;
+        gaps_in = 2;
+        gaps_out = 0;
+        border_size = 0;
         resize_on_border = true;
         "col.active_border" = "rgb(${config.lib.stylix.colors.base08}) rgb(${config.lib.stylix.colors.base0C}) 45deg";
         "col.inactive_border" = "rgb(${config.lib.stylix.colors.base01})";
@@ -216,12 +216,13 @@ in {
     };
 
     extraConfig = "
-      monitor=,preferred,auto,auto
-      monitor=Virtual-1,1920x1080@60,auto,1
+      #monitor=,preferred,auto,auto
+      #monitor=Virtual-1,1920x1080@60,auto,1
       ${extraMonitorSettings}
-      # To enable blur on waybar uncomment the line below
+      # To enable blur on waybar uxncomment the line below
       # Thanks to SchotjeChrisman
       #layerrule = blur,waybar
+      #layerrule = blur on, noctalia*
     ";
   };
 }

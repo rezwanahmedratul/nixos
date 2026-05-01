@@ -45,14 +45,14 @@ in {
       term = "xterm-256color";
       confirm-close-surface = "false";
       font-family = "Maple Mono NF";
-      font-size = 12;
+      font-size = 10;
       theme = "dark:catppuccin-mocha,light:catppuccin-mocha";
       adjust-cell-height = "10%";
       window-theme = "dark";
       window-height = "32";
       window-width = "110";
-      background-opacity = "1.00";
-      background-blur-radius = "60";
+      background-opacity = "0.70";
+      background-blur-radius = "40";
       selection-background = "#2d3f76";
       selection-foreground = "#c8d3f5";
       cursor-style = "bar";

@@ -30,5 +30,12 @@
       symbola
       terminus_font
     ];
+    fontconfig = {
+      defaultFonts = {
+        sansSerif = ["Noto Sans" "Noto Sans Bengali"];
+        serif = ["Noto Serif"];
+        monospace = ["Noto Sans Mono"];
+      };
+    };
   };
 }

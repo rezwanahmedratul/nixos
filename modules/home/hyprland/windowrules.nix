@@ -37,6 +37,12 @@ _: {
       }
 
       windowrule {
+        name = Zen-browser
+        match:class = ^(zen-beta)$
+        tag = +browser
+      }
+
+      windowrule {
         name = Google-chrome
         match:class = ^([Gg]oogle-chrome(-beta|-dev|-unstable)?)$
         tag = +browser

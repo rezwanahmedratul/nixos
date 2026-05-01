@@ -1,28 +1,33 @@
 {
   # Git Configuration ( For Pulling Software Repos )
-  gitUsername = "dwilliams";
-  gitEmail = "don.e.williams@gmail.com";
+  gitUsername = "Rezwan Ahmed Ratul";
+  gitEmail = "rezwanahmedratul007@gmail.com";
 
   # Set Displau Manager
   # `tui` for Text login
   # `sddm` for graphical GUI (default)
   # SDDM background is set with stylixImage
-  displayManager = "tui";
+  displayManager = "sddm";
+  # Set Power Manager
+  # `tlp` for laptops (default)
+  # `auto-cpufreq` for desktops (more aggressive performance)
+  powerManager = "tlp";
+  
 
   # Emable/disable bundled applications
-  tmuxEnable = true;
-  alacrittyEnable = true;
-  weztermEnable = true;
+  tmuxEnable = false;
+  alacrittyEnable = false;
+  weztermEnable = false;
   ghosttyEnable = true;
   vscodeEnable = true;
   antigravityEnable = true; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
-  helixEnable = true;
+  helixEnable = false;
   #To install: Enable here, zcli rebuild, then run zcli doom install
-  doomEmacsEnable = true;
+  doomEmacsEnable = false;
+  obsEnable = false;
 
-  # Python development tools
-  pythonEnable = true;
+  # Python development tools are included by default
 
   # Hyprland Settings
   # Examples:
@@ -31,12 +36,13 @@
   # You can configure multiple monitors.
   # Inside the quotes, create a new line for each monitor.
   extraMonitorSettings = "
-
+   monitor = eDP-1, 1920x1200@60, 0x0, 1.33
     ";
 
   # Bar/Shell Settings
   # Choose between noctalia or waybar
-  barChoice = "noctalia";
+  barChoice = "noctalia"; # Set Bar Choice
+  #barChoice = "waybar"; # Set Bar Choice
 
   # Waybar Settings (used when barChoice = "waybar")
   clock24h = false;
@@ -46,7 +52,8 @@
   # This does NOT install your browser
   # You need to install it by adding it to the `packages.nix`
   # or as a flatpak
-  browser = "google-chrome";
+  browser = "zen-beta";
+  #browser = "brave";
 
   # Host-level default applications (picked up by Home Manager xdg.mimeApps)
   # Uncomment and adjust the .desktop IDs to set per-host defaults.
@@ -67,7 +74,7 @@
   # Kitty, ghostty, wezterm, aalacrity
   # Note: kitty, wezterm, alacritty have to be enabled in `variables.nix`
   # Setting it here does not enable it. Kitty is installed by default
-  terminal = "kitty"; # Set Default System Terminal
+  terminal = "ghostty"; # Set Default System Terminal
 
   keyboardLayout = "us";
   keyboardVariant = "";
@@ -85,8 +92,8 @@
   printEnable = false;
 
   # Enable Thunar GUI File Manager
-  # Yazi is default File Manager
-  thunarEnable = true;
+  # Yazi is alternate File Manager
+  thunarEnable = false;
 
   # Themes, waybar and animation.
   #  Only uncomment your selection
@@ -99,26 +106,27 @@
   #stylixImage = ../../wallpapers/mountainscapedark.jpg;
   #stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;
   #stylixImage = ../../wallpapers/Anime-Purple-eyes.png;
-  stylixImage = ../../wallpapers/Rainnight.jpg;
+  #stylixImage = ../../wallpapers/Rainnight.jpg;
   #stylixImage = ../../wallpapers/zaney-wallpaper.jpg;
-  #stylixImage = ../../wallpapers/nix-wallpapers-strips-logo.jpg;
+  #stylixImage = ../../wallpapers/nix-wallpaper-stripes-logo.png;
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
+  stylixImage = ../../wallpapers/mountainscapedark.jpg;
 
   # Set Waybar
   #  Available Options:
-  #waybarChoice = ../../modules/home/waybar/waybar-ddubs-2.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-curved.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-ddubs.nix;
+  #waybarChoice = ../../modules/home/waybar/waybar-ddubs-2.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-simple.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-dwm.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-dwm-2.nix;
-  #waybarChoice = ../../modules/home/waybar/waybar-jerry.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-nekodyke.nix;
+  #waybarChoice = ../../modules/home/waybar/waybar-jerry.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-TheBlackDon.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-tony.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-ddubsos-v1.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-mecha.nix;
-  waybarChoice = ../../modules/home/waybar/waybar-jak-catppuccin.nix;
+  #waybarChoice = ../../modules/home/waybar/waybar-jak-catppuccin.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-jak-ml4w-modern.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-jak-oglo-simple.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-jwt-catppuccin.nix;
@@ -126,7 +134,7 @@
   #waybarChoice = ../../modules/home/waybar/waybar-jwt-ultradark.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-pctrade-catppuccin.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-mangowc-jak-catppuccin.nix;
-  #waybarChoice = ../../modules/home/waybar/waybar-old-ddubsos.nix;
+  waybarChoice = ../../modules/home/waybar/waybar-old-ddubsos.nix;
 
   # Set Animation style
   # Available options are:

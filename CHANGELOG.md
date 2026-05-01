@@ -7,13 +7,6 @@
 
 # 🚀 **Current Release - ZaneyOS v2.6.1**
 
-- Removed `discord` and `discord-canary`
-  - They use an outdated `electron`
-    - That build uses and `openssl v1.1.1w`
-    - That ius OEL and marked insecure in NIXOS
-    - Users can use an alternativve client until discord is updated
-- Disabled `zen browser` in `zaneyos/modules/home/default.nix`
-  - Needs to be migrated to being enabled via host variable
 - Changed from `zen` to `latest` kernel
   - Linux kernel v7.0 is much better than 6.19_zen
 - Disabled `vfr = true;` in hyprland config

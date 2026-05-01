@@ -12,6 +12,7 @@
     helixEnable
     doomEmacsEnable
     antigravityEnable
+    obsEnable
     ;
   # Select bar module based on barChoice
   barModule =
@@ -41,7 +42,7 @@ in {
       ./hyprland
       ./terminals/kitty.nix
       ./cli/lazygit.nix
-      ./obs-studio.nix
+      #./obs-studio.nix
       #./editors/nvf.nix
       ./editors/nixvim.nix
       ./editors/nano.nix
@@ -58,7 +59,7 @@ in {
       ./wlogout
       ./xdg.nix
       ./yazi
-      #./zen-browser.nix
+      ./zen-browser.nix
       ./zoxide.nix
       ./zsh
     ]
@@ -103,6 +104,11 @@ in {
     ++ (
       if alacrittyEnable
       then [./terminals/alacritty.nix]
+      else []
+    )
+    ++ (
+      if obsEnable
+      then [./obs-studio.nix]
       else []
     );
 }
