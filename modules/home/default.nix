@@ -62,6 +62,8 @@ in {
       ./zen-browser.nix
       ./zoxide.nix
       ./zsh
+      ./screen-recording.nix
+      ./ocr.nix
     ]
     ++ (
       if helixEnable

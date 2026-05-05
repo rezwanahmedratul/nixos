@@ -21,7 +21,7 @@
       "$modifier SHIFT,W, Noctalia Wallpaper, exec, noctalia-shell ipc call wallpaper toggle"
       "$modifier,P, Noctalia Power Menu, exec,  noctalia-shell ipc call sessionMenu toggle"
       "$modifier,C, Noctalia Control Center, exec,  noctalia-shell ipc call controlCenter toggle"
-      "$modifier CTRL,R, Noctalia Screen Recorder, exec,  noctalia-shell ipc call screenRecorder toggle"
+      # "$modifier CTRL,R, Noctalia Screen Recorder, exec,  noctalia-shell ipc call screenRecorder toggle"
       "$modifier SHIFT,R, Restart Noctalia shell, exec,  restart.noctalia"
     ]
     else [];
@@ -68,7 +68,7 @@ in {
         "$modifier,E, Emoji Picker, exec, emopicker9000"
         "$modifier,S, Screenshot, exec, screenshootin"
         "$modifier CTRL,Z, Open ZaneyOS in VS Code, exec, code ~/zaneyos"
-        "$modifier CTRL,R, Rebuild Nix Config, exec, ghostty -e zsh -ic 'fr'"
+        #"$modifier CTRL,R, Rebuild Nix Config, exec, ghostty -e zsh -ic 'fr'"
         "$modifier ALT, P, Power Off, exec, poweroff"
         "$modifier ALT, R, Reboot, exec, reboot"
         
@@ -77,6 +77,11 @@ in {
         "$modifier SHIFT,S, Screenshot Window, exec, hyprshot -m window -o $HOME/Pictures/ScreenShots"
         "$modifier ALT,S, Screenshot Region, exec, hyprshot -m region -o $HOME/Pictures/ScreenShots"
         "$modifier SHIFT,Z, Screenshot Region Clipboard, exec, hyprshot -m region --clipboard-only"
+        "$modifier SHIFT, A, Grab Text from Region, exec, ocr-region"
+        
+        
+        # ============= SCREEN RECORDING =============
+        "$modifier CTRL,R, Screen Recorder, exec, screenrecord"
         "$modifier,O, OBS Studio, exec, obs"
         "$modifier ALT,C, Color Picker, exec, hyprpicker -a"
         "$modifier,G, GIMP, exec, gimp"

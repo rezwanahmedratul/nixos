@@ -22,6 +22,7 @@ in {
       enable = true;
       defaultEditor = true;
     };
+    kdeconnect.enable = true; # KDE Connect For Phone Integration
     firefox.enable = false; # Firefox is not installed by default
     hyprland = {
       enable = true; # set this so desktop file is created
@@ -54,7 +55,7 @@ in {
       cliphist # Clipboard manager using rofi menu
       cmatrix # Matrix Movie Effect In Terminal
       cowsay # Great Fun Terminal Program
-      #discord # Stable client
+      discord # Stable client
       #discord-canary # beta  client
       docker-compose # Allows Controlling Docker From A Single File
       duf # Utility For Viewing Disk Usage In Terminal
@@ -123,5 +124,16 @@ in {
       heimdall
       typst
       #python313Packages.opencv4
+      nodejs
+      jq
+      slurp
+      hyprpicker
+      tesseract
+
+      # runtime utils (safe to include)
+      coreutils
+      gnugrep
+      gawk
+      procps
     ];
 }

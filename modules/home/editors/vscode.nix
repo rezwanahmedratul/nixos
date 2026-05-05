@@ -15,6 +15,7 @@
 
   cppExtsThemesVer = "2.0.0";
   cppExtsDevToolsVer = "0.4.6";
+  chatgptVer = "26.429.30905";
 
   # Helper function
   extOrMarketplace = {
@@ -76,6 +77,13 @@
     sha256 = pkgs.lib.fakeSha256;
   };
 
+  chatGPTExts = extOrMarketplace {
+    publisher = "openai";
+    name = "chatgpt";
+    version = chatgptVer;
+    sha256 = "sha256-KspK1d7bQpO+LipstEpWafcz/eYG1fiuLSszw4nYjE8=";
+  };
+
   # codeRunnerExts = extOrMarketplace {
   #   publisher = "formulahendry";
   #   name = "code-runner";
@@ -123,6 +131,7 @@ in {
           ms-vscode.cpptools-extension-pack
           ms-vscode.cpptools
           ms-vscode.cmake-tools
+          ms-vscode.makefile-tools
           divyanshuagrawal.competitive-programming-helper
 
           # Java Extensions
@@ -143,6 +152,7 @@ in {
         ++ neroHyprlandExts
         #++ codeRunnerExts
         ++ cppExtraExts
+        ++ chatGPTExts
         ++ tinymistExts;
 
       userSettings = lib.mkForce {
@@ -152,6 +162,7 @@ in {
 
         "git.autofetch" = true;
         "git.enableSmartCommit" = true;
+        "git.confirmSync" = false;
 
         "redhat.telemetry.enabled" = true;
 
