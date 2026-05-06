@@ -11,8 +11,7 @@
   # Set Power Manager
   # `tlp` for laptops (default)
   # `auto-cpufreq` for desktops (more aggressive performance)
-  powerManager = "auto-cpufreq";
-  
+  powerManager = "none";
 
   # Emable/disable bundled applications
   tmuxEnable = false;
@@ -58,16 +57,16 @@
   # Host-level default applications (picked up by Home Manager xdg.mimeApps)
   # Uncomment and adjust the .desktop IDs to set per-host defaults.
   mimeDefaultApps = {
-  #   # PDFs
-  #   "application/pdf" = ["okular.desktop"];
-  #   "application/x-pdf" = ["okular.desktop"];
-  #   # Web browser
-     "x-scheme-handler/http"  = ["zen-beta.desktop"];  # or brave-browser.desktop, firefox.desktop
-     "x-scheme-handler/https" = ["zen-beta.desktop"];
-  #   "text/html"              = ["google-chrome.desktop"];
-  #   # Files
-  #   "inode/directory" = ["thunar.desktop"];      # file manager
-  #   "text/plain"      = ["nvim.desktop"];        # or code.desktop
+    #   # PDFs
+    #   "application/pdf" = ["okular.desktop"];
+    #   "application/x-pdf" = ["okular.desktop"];
+    #   # Web browser
+    "x-scheme-handler/http" = ["zen-beta.desktop"]; # or brave-browser.desktop, firefox.desktop
+    "x-scheme-handler/https" = ["zen-beta.desktop"];
+    #   "text/html"              = ["google-chrome.desktop"];
+    #   # Files
+    #   "inode/directory" = ["thunar.desktop"];      # file manager
+    #   "text/plain"      = ["nvim.desktop"];        # or code.desktop
   };
 
   # Available Options:
