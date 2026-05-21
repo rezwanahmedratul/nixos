@@ -288,6 +288,7 @@ fi
 
 cd "$TARGET_DIR" || { print_error "Could not change directory to $TARGET_DIR"; exit 1; }
 
+
 print_header "Git Configuration"
 echo "👤 Setting up git configuration for version control:"
 echo "  This is needed for system updates and configuration management."
