@@ -266,7 +266,7 @@ print_header "Cloning NixOS Repository"
 # increase postBuffer for large transfers, and use an explicit $HOME path.
 REPO_URL="https://github.com/rezwanahmedratul/nixos.git"
 TARGET_DIR="$HOME/nixos"
-CLONE_ATTEMPTS=3
+CLONE_ATTEMPTS=1
 CLONE_SUCCESS=false
 
 for attempt in $(seq 1 "$CLONE_ATTEMPTS"); do
