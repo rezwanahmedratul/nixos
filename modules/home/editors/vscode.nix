@@ -156,6 +156,23 @@ in {
         ++ tinymistExts;
 
       userSettings = lib.mkForce {
+        # Java settings for NixOS
+        "java.jdt.ls.java.home" = "${pkgs.jdk21}/lib/openjdk";
+
+        "java.configuration.runtimes" = [
+          {
+            name = "JavaSE-21";
+            path = "${pkgs.jdk21}/lib/openjdk";
+            default = true;
+          }
+        ];
+
+        "java.import.gradle.java.home" = "${pkgs.jdk21}/lib/openjdk";
+        "java.import.maven.java.home" = "${pkgs.jdk21}/lib/openjdk";
+        "java.debug.settings.console" = "integratedTerminal";
+        "code-runner.runInTerminal" = true;
+        "code-runner.saveFileBeforeRun" = true;
+
         "chat.disableAIFeatures" = false;
         "files.autoSave" = "afterDelay";
         "files.autoSaveDelay" = 1000;
@@ -165,6 +182,7 @@ in {
         "git.confirmSync" = false;
 
         "redhat.telemetry.enabled" = true;
+        "explorer.confirmDelete" = false;
 
         "workbench.colorTheme" = "Catppuccin Mocha";
         "workbench.iconTheme" = "catppuccin-mocha";

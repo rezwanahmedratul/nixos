@@ -86,15 +86,16 @@ in {
             "grp:alt_caps_toggle"
             "caps:super"
           ];
-          numlock_by_default = true;
+          numlock_by_default = false;
           repeat_delay = 300;
           follow_mouse = 1;
           float_switch_override_focus = 0;
-          sensitivity = 0.4;
+          sensitivity = 0.7;
+           scroll_factor = 1.7;  # try 1.2 / 1.5 / 2.0
           touchpad = {
             natural_scroll = true;
             disable_while_typing = true;
-            scroll_factor = 0.8;
+            scroll_factor = 1.0;
           };
         }
         // lib.optionalAttrs (hyprKbVariant != "") {kb_variant = hyprKbVariant;};
@@ -111,7 +112,7 @@ in {
       "$modifier" = "SUPER";
 
       scrolling = {
-        column_width = 0.80;
+        column_width = 1.0;
         fullscreen_on_one_column = true;
         direction = "right";
         follow_focus = true;
@@ -148,7 +149,7 @@ in {
       };
 
       dwindle = {
-        pseudotile = false;
+        #pseudotile = false;
         preserve_split = true;
         smart_resizing = true;
         use_active_for_splits = true;

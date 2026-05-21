@@ -1,30 +1,25 @@
 {
   # Git Configuration ( For Pulling Software Repos )
-  gitUsername = "Rezwan Ahmed Ratul";
-  gitEmail = "rezwanahmedratul007@gmail.com";
+  gitUsername = "Don Williams";
+  gitEmail = "don.e.williams@gmail.com";
 
   # Set Displau Manager
   # `tui` for Text login
   # `sddm` for graphical GUI (default)
   # SDDM background is set with stylixImage
-  displayManager = "sddm";
-  # Set Power Manager
-  # `tlp` for laptops (default)
-  # `auto-cpufreq` for desktops (more aggressive performance)
-  powerManager = "none";
+  displayManager = "tui";
 
   # Emable/disable bundled applications
   tmuxEnable = false;
   alacrittyEnable = false;
   weztermEnable = false;
-  ghosttyEnable = true;
+  ghosttyEnable = false;
   vscodeEnable = false;
   antigravityEnable = false; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
   helixEnable = false;
   #To install: Enable here, zcli rebuild, then run zcli doom install
   doomEmacsEnable = false;
-  obsEnable = false;
 
   # Python development tools are included by default
 
@@ -35,13 +30,12 @@
   # You can configure multiple monitors.
   # Inside the quotes, create a new line for each monitor.
   extraMonitorSettings = "
-   monitor = eDP-1, 1920x1200@60, 0x0, 1.33
+   monitor = Virtual-1,1920x1080@60,auto,1
     ";
 
   # Bar/Shell Settings
   # Choose between noctalia or waybar
-  barChoice = "noctalia"; # Set Bar Choice
-  #barChoice = "waybar"; # Set Bar Choice
+  barChoice = "noctalia";
 
   # Waybar Settings (used when barChoice = "waybar")
   clock24h = false;
@@ -51,29 +45,28 @@
   # This does NOT install your browser
   # You need to install it by adding it to the `packages.nix`
   # or as a flatpak
-  browser = "zen-beta";
-  #browser = "brave";
+  browser = "brave";
 
   # Host-level default applications (picked up by Home Manager xdg.mimeApps)
   # Uncomment and adjust the .desktop IDs to set per-host defaults.
-  mimeDefaultApps = {
-    #   # PDFs
-    #   "application/pdf" = ["okular.desktop"];
-    #   "application/x-pdf" = ["okular.desktop"];
-    #   # Web browser
-    "x-scheme-handler/http" = ["zen-beta.desktop"]; # or brave-browser.desktop, firefox.desktop
-    "x-scheme-handler/https" = ["zen-beta.desktop"];
-    #   "text/html"              = ["google-chrome.desktop"];
-    #   # Files
-    #   "inode/directory" = ["thunar.desktop"];      # file manager
-    #   "text/plain"      = ["nvim.desktop"];        # or code.desktop
-  };
+  # mimeDefaultApps = {
+  #   # PDFs
+  #   "application/pdf" = ["okular.desktop"];
+  #   "application/x-pdf" = ["okular.desktop"];
+  #   # Web browser
+  #   "x-scheme-handler/http"  = ["google-chrome.desktop"];  # or brave-browser.desktop, firefox.desktop
+  #   "x-scheme-handler/https" = ["google-chrome.desktop"];
+  #   "text/html"              = ["google-chrome.desktop"];
+  #   # Files
+  #   "inode/directory" = ["thunar.desktop"];      # file manager
+  #   "text/plain"      = ["nvim.desktop"];        # or code.desktop
+  # };
 
   # Available Options:
   # Kitty, ghostty, wezterm, aalacrity
   # Note: kitty, wezterm, alacritty have to be enabled in `variables.nix`
   # Setting it here does not enable it. Kitty is installed by default
-  terminal = "ghostty"; # Set Default System Terminal
+  terminal = "kitty"; # Set Default System Terminal
 
   keyboardLayout = "us";
   keyboardVariant = "";
@@ -92,7 +85,7 @@
 
   # Enable Thunar GUI File Manager
   # Yazi is alternate File Manager
-  thunarEnable = false;
+  thunarEnable = true;
 
   # Themes, waybar and animation.
   #  Only uncomment your selection
@@ -105,11 +98,10 @@
   #stylixImage = ../../wallpapers/mountainscapedark.jpg;
   #stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;
   #stylixImage = ../../wallpapers/Anime-Purple-eyes.png;
-  #stylixImage = ../../wallpapers/Rainnight.jpg;
+  stylixImage = ../../wallpapers/Rainnight.jpg;
   #stylixImage = ../../wallpapers/zaney-wallpaper.jpg;
   #stylixImage = ../../wallpapers/nix-wallpaper-stripes-logo.png;
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
-  stylixImage = ../../wallpapers/mountainscapedark.jpg;
 
   # Set Waybar
   #  Available Options:
@@ -132,8 +124,8 @@
   #waybarChoice = ../../modules/home/waybar/waybar-jwt-transparent.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-jwt-ultradark.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-pctrade-catppuccin.nix;
-  #waybarChoice = ../../modules/home/waybar/waybar-mangowc-jak-catppuccin.nix;
-  waybarChoice = ../../modules/home/waybar/waybar-old-ddubsos.nix;
+  waybarChoice = ../../modules/home/waybar/waybar-mangowc-jak-catppuccin.nix;
+  #waybarChoice = ../../modules/home/waybar/waybar-old-ddubsos.nix;
 
   # Set Animation style
   # Available options are:

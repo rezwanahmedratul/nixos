@@ -113,6 +113,7 @@ in {
       nautilus
       freerdp
       kdePackages.krdc
+      kdePackages.okular
       localsend
       gcc
       gdb
@@ -124,12 +125,12 @@ in {
       heimdall
       typst
       #python313Packages.opencv4
-      nodejs
+      pangolin-cli
       jq
       slurp
       hyprpicker
       tesseract
-
+      gnome-calculator
       # runtime utils (safe to include)
       coreutils
       gnugrep

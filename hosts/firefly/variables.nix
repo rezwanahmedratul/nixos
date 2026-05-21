@@ -36,7 +36,7 @@
   # You can configure multiple monitors.
   # Inside the quotes, create a new line for each monitor.
   extraMonitorSettings = "
-   monitor = eDP-1, 1920x1200@60, 0x0, 1.33
+   monitor = eDP-1, 1920x1200@60, 0x0, 1.20
     ";
 
   # Bar/Shell Settings
@@ -59,15 +59,15 @@
   # Uncomment and adjust the .desktop IDs to set per-host defaults.
   mimeDefaultApps = {
   #   # PDFs
-  #   "application/pdf" = ["okular.desktop"];
-  #   "application/x-pdf" = ["okular.desktop"];
+     "application/pdf" = ["org.kde.okular.desktop"];  # or evince.desktop
+     "application/x-pdf" = ["org.kde.okular.desktop"];
   #   # Web browser
      "x-scheme-handler/http"  = ["zen-beta.desktop"];  # or brave-browser.desktop, firefox.desktop
      "x-scheme-handler/https" = ["zen-beta.desktop"];
   #   "text/html"              = ["google-chrome.desktop"];
   #   # Files
   #   "inode/directory" = ["thunar.desktop"];      # file manager
-  #   "text/plain"      = ["nvim.desktop"];        # or code.desktop
+     "text/plain"      = ["nvim.desktop"];        # or code.desktop
   };
 
   # Available Options:
@@ -110,7 +110,8 @@
   #stylixImage = ../../wallpapers/zaney-wallpaper.jpg;
   #stylixImage = ../../wallpapers/nix-wallpaper-stripes-logo.png;
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
-  stylixImage = ../../wallpapers/mountainscapedark.jpg;
+  #stylixImage = ../../wallpapers/mountainscapedark.jpg;
+   stylixImage = ../../wallpapers/Skyscraper.jpg;
 
   # Set Waybar
   #  Available Options:

@@ -64,6 +64,7 @@ in {
       ./zsh
       ./screen-recording.nix
       ./ocr.nix
+      ./mpv.nix
     ]
     ++ (
       if helixEnable
