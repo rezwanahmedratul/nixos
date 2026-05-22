@@ -112,7 +112,7 @@
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
   #stylixImage = ../../wallpapers/mountainscapedark.jpg;
   #stylixImage = ../../wallpapers/Skyscraper.jpg;
-   stylixImage = ../../wallpapers/luffy.png;
+   stylixImage = ../../wallpapers/luffy.jpg;
 
   # Set Waybar
   #  Available Options:
