@@ -109,7 +109,7 @@ in {
       #rustdesk
       #tlp
       #auto-cpufreq
-      #telegram-desktop
+      telegram-desktop
       nautilus
       freerdp
       kdePackages.krdc
@@ -121,11 +121,11 @@ in {
       gnumake
       #jetbrains.idea
       #powertop
-      #libreoffice
+      libreoffice
       #heimdall
       typst
       #python313Packages.opencv4
-      #pangolin-cli
+      pangolin-cli
       jq
       slurp
       hyprpicker

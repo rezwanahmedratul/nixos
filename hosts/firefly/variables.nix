@@ -111,7 +111,8 @@
   #stylixImage = ../../wallpapers/nix-wallpaper-stripes-logo.png;
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
   #stylixImage = ../../wallpapers/mountainscapedark.jpg;
-   stylixImage = ../../wallpapers/Skyscraper.jpg;
+  #stylixImage = ../../wallpapers/Skyscraper.jpg;
+   stylixImage = ../../wallpapers/luffy.png;
 
   # Set Waybar
   #  Available Options:
