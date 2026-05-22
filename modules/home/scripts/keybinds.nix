@@ -8,7 +8,7 @@ pkgs.writeShellScriptBin "list-keybinds" ''
   msg='☣️ NOTE ☣️: Clicking with Mouse or Pressing ENTER will have NO function'
 
   # Parse keybind entries from the Nix config and format for rofi display
-  BIND_NIX="$HOME/zaneyos/modules/home/hyprland/binds.nix"
+  BIND_NIX="$HOME/nixos/modules/home/hyprland/binds.nix"
   if [[ -f "$BIND_NIX" ]]; then
     display_keybinds=$(
       ${pkgs.gawk}/bin/awk '

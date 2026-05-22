@@ -87,7 +87,7 @@ in
     # zcli - NixOS System Management CLI
     # ==================================
     #
-    #    Purpose: NixOS system management utility for ZaneyOS distribution
+    #    Purpose: NixOS system management utility for NixOS distribution
     #     Author: Don Williams (ddubs) & Zaney
     # Start Date: June 7th, 2025
     #    Version: 1.0.2
@@ -121,7 +121,7 @@ in
     # doom [sub]          - Doom Emacs management (install/status/remove/update)
     #
     # Variables:
-    # PROJECT             - Base directory name (ddubsos/zaneyos)
+    # PROJECT             - Base directory name (ddubsos/nixos)
     # PROFILE             - Hardware profile from Nix parameter
     # BACKUP_FILES        - Array of backup file paths to clean
     # FLAKE_NIX_PATH      - Path to flake.nix for host/profile updates

@@ -48,11 +48,11 @@ pkgs.writeShellScriptBin "qs-cheatsheets" ''
     done
 
     # Validate category (dynamically check if directory exists or is "root")
-    if [[ "$CATEGORY" != "root" && ! -d "$HOME/zaneyos/cheatsheets/$CATEGORY" ]]; then
+    if [[ "$CATEGORY" != "root" && ! -d "$HOME/nixos/cheatsheets/$CATEGORY" ]]; then
       echo "Error: Category directory '$CATEGORY' not found in cheatsheets/" >&2
       echo "Available categories:" >&2
       echo "  root" >&2
-      ls -1 "$HOME/zaneyos/cheatsheets/" | grep -E '^[a-z]' | head -10 >&2
+      ls -1 "$HOME/nixos/cheatsheets/" | grep -E '^[a-z]' | head -10 >&2
       exit 1
     fi
 
@@ -129,8 +129,8 @@ pkgs.writeShellScriptBin "qs-cheatsheets" ''
     done
 
     # Then dynamically discover all category directories
-    if [ -d "$HOME/zaneyos/cheatsheets" ]; then
-      for category_dir in "$HOME/zaneyos/cheatsheets"/*/; do
+    if [ -d "$HOME/nixos/cheatsheets" ]; then
+      for category_dir in "$HOME/nixos/cheatsheets"/*/; do
         if [ -d "$category_dir" ]; then
           category=$(basename "$category_dir")
           for lang in en es; do
@@ -266,9 +266,9 @@ pkgs.writeShellScriptBin "qs-cheatsheets" ''
       // Handle root directory files
       var filePath;
       if (selectedCategory === "root") {
-        filePath = "${config.home.homeDirectory}/zaneyos/cheatsheets/" + filename;
+        filePath = "${config.home.homeDirectory}/nixos/cheatsheets/" + filename;
       } else {
-        filePath = "${config.home.homeDirectory}/zaneyos/cheatsheets/" + selectedCategory + "/" + filename;
+        filePath = "${config.home.homeDirectory}/nixos/cheatsheets/" + selectedCategory + "/" + filename;
       }
 
       const xhr = new XMLHttpRequest();

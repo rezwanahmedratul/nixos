@@ -4,7 +4,7 @@ pkgs.writeShellScriptBin "cheatsheets-parser" ''
     set -euo pipefail
 
     # Default paths (ported to ZaneyOS repo location)
-    CHEATSHEETS_DIR="$HOME/zaneyos/cheatsheets"
+    CHEATSHEETS_DIR="$HOME/nixos/cheatsheets"
 
     # Handle arguments
     MODE="''${1:-files}"

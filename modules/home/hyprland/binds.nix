@@ -67,7 +67,7 @@ in {
         "$modifier,F, File Manager, exec, nautilus"
         "$modifier,E, Emoji Picker, exec, emopicker9000"
         "$modifier,S, Screenshot, exec, screenshootin"
-        "$modifier CTRL,Z, Open ZaneyOS in VS Code, exec, code ~/zaneyos"
+        "$modifier CTRL,Z, Open NixOS in VS Code, exec, code ~/nixos"
         #"$modifier CTRL,R, Rebuild Nix Config, exec, ghostty -e zsh -ic 'fr'"
         "$modifier ALT, P, Power Off, exec, poweroff"
         "$modifier ALT, R, Reboot, exec, reboot"
