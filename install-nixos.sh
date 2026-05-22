@@ -261,9 +261,32 @@ else
   echo -e "${GREEN}I hope you find your time here enjoyable!${NC}"
 fi
 
-print_header "Cloning NixOS Repository"
-git clone https://github.com/rezwanahmedratul/nixos.git ~/nixos
-cd ~/nixos || exit 1
+# Robust clone: retry a few times, prefer HTTP/1.1 to avoid HTTP/2 curl reset issues,
+# increase postBuffer for large transfers, and use an explicit $HOME path.
+REPO_URL="https://github.com/rezwanahmedratul/nixos.git"
+TARGET_DIR="$HOME/nixos"
+CLONE_ATTEMPTS=2
+CLONE_SUCCESS=false
+
+for attempt in $(seq 1 "$CLONE_ATTEMPTS"); do
+  echo "Cloning repository (attempt $attempt/$CLONE_ATTEMPTS)..."
+  # Force HTTP/1.1 and raise postBuffer for robustness; use shallow clone first.
+  git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 clone "$REPO_URL" -b main --depth=1 "$TARGET_DIR" && { CLONE_SUCCESS=true; break; }
+  echo "Clone attempt $attempt failed; retrying in 2s..."
+  sleep 2
+done
+
+if [ "$CLONE_SUCCESS" != true ]; then
+  echo "Shallow clones failed; attempting a final full clone with HTTP/1.1..."
+  git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 clone "$REPO_URL" -b main "$TARGET_DIR" || {
+    print_error "Failed to clone repository after $CLONE_ATTEMPTS attempts."
+    print_failure_banner
+    exit 1
+  }
+fi
+
+cd "$TARGET_DIR" || { print_error "Could not change directory to $TARGET_DIR"; exit 1; }
+
 
 print_header "Git Configuration"
 echo "👤 Setting up git configuration for version control:"
