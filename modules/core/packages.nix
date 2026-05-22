@@ -104,12 +104,12 @@ in {
       v4l-utils # Used For Things Like OBS Virtual Camera
       waypaper # Change wallpaper
       wget # Tool For Fetching Files With Links
-      ytmdl # Tool For Downloading Audio From YouTube
+      #ytmdl # Tool For Downloading Audio From YouTube
       python3 # Python 3 programming language
       #rustdesk
       #tlp
       #auto-cpufreq
-      telegram-desktop
+      #telegram-desktop
       nautilus
       freerdp
       kdePackages.krdc
@@ -120,12 +120,12 @@ in {
       cmake
       gnumake
       #jetbrains.idea
-      powertop
-      libreoffice
-      heimdall
+      #powertop
+      #libreoffice
+      #heimdall
       typst
       #python313Packages.opencv4
-      pangolin-cli
+      #pangolin-cli
       jq
       slurp
       hyprpicker
