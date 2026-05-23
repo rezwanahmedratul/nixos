@@ -91,7 +91,7 @@ in {
           follow_mouse = 1;
           float_switch_override_focus = 0;
           sensitivity = 0.7;
-           scroll_factor = 1.7;  # try 1.2 / 1.5 / 2.0
+          scroll_factor = 1.7; # try 1.2 / 1.5 / 2.0
           touchpad = {
             natural_scroll = true;
             disable_while_typing = true;
@@ -216,14 +216,15 @@ in {
       };
     };
 
-    extraConfig = "
-      #monitor=,preferred,auto,auto
-      #monitor=Virtual-1,1920x1080@60,auto,1
+    extraConfig = ''
       ${extraMonitorSettings}
-      # To enable blur on waybar uxncomment the line below
-      # Thanks to SchotjeChrisman
-      #layerrule = blur,waybar
-      #layerrule = blur on, noctalia*
-    ";
+
+      layerrule {
+        name = noctalia-bg
+        match:namespace = noctalia.*$
+        blur = true
+        ignore_alpha = 0.5
+      }
+    '';
   };
 }
