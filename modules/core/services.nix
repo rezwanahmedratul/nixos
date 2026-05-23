@@ -8,6 +8,8 @@
     #power-profiles-daemon.enable = true; # Power Profiles
     #howdy.enable = true; # For Touchpad Gestures
     #mako.enable = true;
+    cloudflare-warp.enable = true;
+
 
     openssh = {
       enable = true; # Enable SSH
