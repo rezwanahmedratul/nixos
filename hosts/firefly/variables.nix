@@ -11,7 +11,7 @@
   # Set Power Manager
   # `tlp` for laptops (default)
   # `auto-cpufreq` for desktops (more aggressive performance)
-  powerManager = "tlp";
+  powerManager = "auto-cpufreq";
   
 
   # Emable/disable bundled applications
