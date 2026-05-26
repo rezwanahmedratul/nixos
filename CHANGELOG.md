@@ -9,6 +9,8 @@
 
 #### 📅 **Updated: May 2026**
 
+- Disbled zen browser `zaneyos/modules/home/default.nix`
+- Fixed: eval warnings for `nixvim`
 - Removed `psuedotile` from `dwingle` layout no longer supported
 - Set hyprland `configType` to `hyprlang` for now.
   - Will set to `lua` once conversion is done

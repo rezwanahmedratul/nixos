@@ -30,10 +30,10 @@ _: {
     alacrittyEnable = true;
     weztermEnable = true;
     ghosttyEnable = true;
-    vscodeEnable = true;
-    antigravityEnable = true; # Google port of vscodium
+    vscodeEnable = false;
+    antigravityEnable = false; # Google port of vscodium
     # Note: This is evil-helix with VIM keybindings by default
-    helixEnable = true;
+    helixEnable = false;
     #To install: Enable here, zcli rebuild, then run zcli doom install
     doomEmacsEnable = true;
     # Neovim config: "nixvim" | "nvf"

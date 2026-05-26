@@ -18,7 +18,6 @@
         power-profiles-daemon # needed for noctalia-shell power cycle
       ]
     else [];
-
 in {
   programs = {
     neovim = {
@@ -42,7 +41,7 @@ in {
   };
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
+  nixpkgs.config.permittedInsecurePackages = ["openssl-1.1.1w"];
 
   environment.systemPackages = with pkgs;
     [
@@ -56,6 +55,7 @@ in {
       brave # Brave Browser
       brightnessctl # For Screen Brightness Control
       caligula # TUI for writing ISOs to flash
+      cliamp # CLI music streaming app like winamp
       cliphist # Clipboard manager using rofi menu
       cmatrix # Matrix Movie Effect In Terminal
       cowsay # Great Fun Terminal Program
@@ -67,6 +67,7 @@ in {
       eza # Beautiful ls Replacement
       ffmpeg # Terminal Video / Audio Editing
       file-roller # Archive Manager
+      gearlever # manage appimages
       gedit # Simple Graphical Text Editor
       gimp # Great Photo Editor
       google-chrome # Browser
