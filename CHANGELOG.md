@@ -9,6 +9,7 @@
 
 #### 📅 **Updated: May 2026**
 
+- Updated yazi config to my current version
 - Disbled zen browser `zaneyos/modules/home/default.nix`
 - Fixed: eval warnings for `nixvim`
 - Removed `psuedotile` from `dwingle` layout no longer supported
