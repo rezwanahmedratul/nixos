@@ -9,6 +9,7 @@
 
 #### 📅 **Updated: May 2026**
 
+- Add: `synfetch`
 - Updated yazi config to my current version
 - Disbled zen browser `zaneyos/modules/home/default.nix`
 - Fixed: eval warnings for `nixvim`
