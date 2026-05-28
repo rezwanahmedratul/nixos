@@ -27,7 +27,7 @@
     (import ./ff4.nix {inherit pkgs;})
     (import ./ff5.nix {inherit pkgs;})
     (import ./wallsetter.nix {
-      inherit inputs pkgs username;
+      inherit pkgs username;
     })
     (import ./web-search.nix {inherit pkgs;})
     # Cheatsheets viewer + parser
@@ -39,8 +39,8 @@
     (import ./qs-vid-wallpapers-apply.nix {inherit pkgs;})
     (import ./qs-vid-wallpapers-watchdog.nix {inherit pkgs;})
     (import ./qs-wallpapers.nix {inherit pkgs;})
-    (import ./qs-wallpapers-apply.nix {inherit inputs pkgs;})
-    (import ./qs-wallpapers-restore.nix {inherit inputs pkgs;})
+    (import ./qs-wallpapers-apply.nix {inherit pkgs;})
+    (import ./qs-wallpapers-restore.nix {inherit pkgs;})
     (import ./qs-wlogout.nix {inherit pkgs;})
     (import ./qs-docs.nix {inherit pkgs;})
     (import ./docs-parser.nix {inherit pkgs;})

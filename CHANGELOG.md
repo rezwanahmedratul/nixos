@@ -9,6 +9,8 @@
 
 #### 📅 **Updated: May 2026**
 
+- Chg: `swww` from flake input to `nixpkgs.awww`
+  - Resolves build issues
 - Add: `synfetch`
 - Updated yazi config to my current version
 - Disbled zen browser `zaneyos/modules/home/default.nix`

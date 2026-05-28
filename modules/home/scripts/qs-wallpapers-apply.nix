@@ -1,5 +1,5 @@
-{pkgs, inputs}: let
-  awwwPkg = inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww;
+{pkgs}: let
+  awwwPkg = pkgs.awww;
 in
 pkgs.writeShellScriptBin "qs-wallpapers-apply" ''
   #!/usr/bin/env bash
