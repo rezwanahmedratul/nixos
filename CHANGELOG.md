@@ -9,6 +9,9 @@
 
 #### 📅 **Updated: April 25th, 2026**
 
+- Moved `awww` from flake input to `pkgs.awww`
+  - Resolves build issues
+- Add: `synfetch`
 - Moved to latest kernel vs. zen kernel
   - Kernel 7.0.x is better than 6.19.zen
 - Disabled `vfr` in hyprland config
