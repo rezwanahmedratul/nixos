@@ -42,8 +42,8 @@
       url = "github:0xc000022070/zen-browser-flake/beta";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    awww = {
-      url = "git+https://codeberg.org/LGFae/awww";
+    synfetch = {
+      url = "github:SXSLVT/synfetch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
