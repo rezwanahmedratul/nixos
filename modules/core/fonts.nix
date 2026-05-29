@@ -31,6 +31,8 @@
       terminus_font
     ];
     fontconfig = {
+      enable = true;
+      cache32Bit = true;
       defaultFonts = {
         sansSerif = ["Noto Sans" "Noto Sans Bengali"];
         serif = ["Noto Serif"];
