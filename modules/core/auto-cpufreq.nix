@@ -8,7 +8,7 @@
 
     settings = {
       charger = {
-        governor = "powersave";
+        governor = "powermode";
         turbo = "never";
       };
 

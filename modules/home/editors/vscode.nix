@@ -77,12 +77,12 @@
     sha256 = pkgs.lib.fakeSha256;
   };
 
-  chatGPTExts = extOrMarketplace {
-    publisher = "openai";
-    name = "chatgpt";
-    version = chatgptVer;
-    sha256 = "sha256-KspK1d7bQpO+LipstEpWafcz/eYG1fiuLSszw4nYjE8=";
-  };
+  # chatGPTExts = extOrMarketplace {
+  #   publisher = "openai";
+  #   name = "chatgpt";
+  #   version = chatgptVer;
+  #   sha256 = "sha256-KspK1d7bQpO+LipstEpWafcz/eYG1fiuLSszw4nYjE8=";
+  # };
 
   # codeRunnerExts = extOrMarketplace {
   #   publisher = "formulahendry";
@@ -152,7 +152,7 @@ in {
         ++ neroHyprlandExts
         #++ codeRunnerExts
         ++ cppExtraExts
-        ++ chatGPTExts
+        # ++ chatGPTExts
         ++ tinymistExts;
 
       userSettings = lib.mkForce {
