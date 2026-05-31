@@ -45,11 +45,11 @@
         "backgroundOpacity": 0,
         "barType": "simple",
         "capsuleColorKey": "none",
-        "capsuleOpacity": 1,
+        "capsuleOpacity": 0.14,
         "contentPadding": 0,
         "density": "compact",
         "displayMode": "always_visible",
-        "enableExclusionZoneInset": false,
+        "enableExclusionZoneInset": true,
         "fontScale": 1,
         "frameRadius": 12,
         "frameThickness": 8,
@@ -141,6 +141,73 @@
                     "textColor": "none",
                     "useMonospaceFont": false,
                     "usePadding": false
+                },
+                {
+                    "defaultSettings": {
+                        "connectedColor": "primary",
+                        "disconnectedColor": "none",
+                        "refreshInterval": 5000
+                    },
+                    "id": "plugin:cloudflare-warp"
+                },
+                {
+                    "defaultSettings": {
+                        "colorHistory": [
+                        ],
+                        "detectedRecorder": "",
+                        "filenameFormat": "",
+                        "gifMaxSeconds": 30,
+                        "installedLangs": [
+                            "eng"
+                        ],
+                        "paletteColors": [
+                        ],
+                        "recordCopyToClipboard": false,
+                        "recordSkipConfirmation": false,
+                        "screenshotPath": "",
+                        "selectedOcrLang": "eng",
+                        "transAvailable": false,
+                        "videoPath": ""
+                    },
+                    "id": "plugin:screen-toolkit"
+                },
+                {
+                    "defaultSettings": {
+                        "ai": {
+                            "apiKeys": {
+                            },
+                            "maxHistoryLength": 100,
+                            "model": "gemini-2.5-flash",
+                            "openaiBaseUrl": "https://api.openai.com/v1/chat/completions",
+                            "openaiLocal": false,
+                            "provider": "google",
+                            "systemPrompt": "You are a helpful assistant integrated into a Linux desktop shell. Be concise and helpful.",
+                            "temperature": 0.7
+                        },
+                        "maxHistoryLength": 100,
+                        "panelDetached": true,
+                        "panelHeightRatio": 0.85,
+                        "panelPosition": "right",
+                        "panelWidth": 520,
+                        "scale": 1,
+                        "translator": {
+                            "backend": "google",
+                            "deeplApiKey": "",
+                            "realTimeTranslation": true,
+                            "sourceLanguage": "auto",
+                            "targetLanguage": "en"
+                        }
+                    },
+                    "id": "plugin:assistant-panel"
+                },
+                {
+                    "defaultSettings": {
+                        "githubGistId": "",
+                        "githubToken": "",
+                        "notes": "[]",
+                        "syncEnabled": false
+                    },
+                    "id": "plugin:sticky-notes"
                 }
             ],
             "right": [
@@ -196,17 +263,7 @@
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false
-                },
-                {
-                    "colorizeDistroLogo": false,
-                    "colorizeSystemIcon": "primary",
-                    "colorizeSystemText": "none",
-                    "customIconPath": "",
-                    "enableColorization": false,
-                    "icon": "noctalia",
-                    "id": "ControlCenter",
-                    "useDistroLogo": false
+                    "showPowerProfiles": true
                 }
             ]
         }
@@ -294,13 +351,15 @@
                     "id": "Notifications"
                 },
                 {
-                    "id": "PowerProfile"
-                },
-                {
                     "id": "KeepAwake"
                 },
                 {
                     "id": "NightLight"
+                },
+                {
+                    "defaultSettings": {
+                    },
+                    "id": "plugin:kde-connect"
                 }
             ]
         }
@@ -310,6 +369,11 @@
         "gridSnap": false,
         "gridSnapScale": false,
         "monitorWidgets": [
+            {
+                "name": "eDP-1",
+                "widgets": [
+                ]
+            }
         ],
         "overviewEnabled": true
     },
@@ -523,7 +587,7 @@
         "overlayLayer": true
     },
     "plugins": {
-        "autoUpdate": false,
+        "autoUpdate": true,
         "notifyUpdates": true
     },
     "sessionMenu": {
@@ -628,7 +692,7 @@
         "fontDefaultScale": 0.9,
         "fontFixed": "monospace",
         "fontFixedScale": 0.9,
-        "panelBackgroundOpacity": 0.8,
+        "panelBackgroundOpacity": 0.17,
         "panelsAttachedToBar": false,
         "scrollbarAlwaysVisible": false,
         "settingsPanelMode": "centered",
