@@ -1,7 +1,7 @@
 {
   # Git Configuration ( For Pulling Software Repos )
-  gitUsername = "Don Williams";
-  gitEmail = "don.e.williams@gmail.com";
+  gitUsername = "Rezwan Ahmed Ratul";
+  gitEmail = "rezwanahmedratul007@gmail.com";
 
   # Set Displau Manager
   # `tui` for Text login
@@ -11,7 +11,7 @@
   # Set Power Manager
   # `tlp` for laptops (default)
   # `auto-cpufreq` for desktops (more aggressive performance)
-  powerManager = "none";
+  powerManager = "auto-cpufreq";
   
 
   # Emable/disable bundled applications
@@ -20,7 +20,7 @@
   weztermEnable = false;
   ghosttyEnable = true;
   vscodeEnable = true;
-  antigravityEnable = false; # Google port of vscodium
+  antigravityEnable = true; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
   helixEnable = false;
   #To install: Enable here, zcli rebuild, then run zcli doom install
@@ -36,7 +36,7 @@
   # You can configure multiple monitors.
   # Inside the quotes, create a new line for each monitor.
   extraMonitorSettings = "
-   monitor = eDP-1, 1920x1200@60, 0x0, 1.00
+   monitor = eDP-1, 1920x1200@60, 0x0, 1.20
     ";
 
   # Bar/Shell Settings
@@ -111,7 +111,8 @@
   #stylixImage = ../../wallpapers/nix-wallpaper-stripes-logo.png;
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
   #stylixImage = ../../wallpapers/mountainscapedark.jpg;
-   stylixImage = ../../wallpapers/Skyscraper.jpg;
+  #stylixImage = ../../wallpapers/Skyscraper.jpg;
+   stylixImage = ../../wallpapers/fuji.jpg;
 
   # Set Waybar
   #  Available Options:
