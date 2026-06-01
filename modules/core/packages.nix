@@ -52,8 +52,8 @@ in {
       appimage-run # Needed For AppImage Support
       brave # Brave Browser
       brightnessctl # For Screen Brightness Control
-      cliphist # Clipboard manager using rofi menu
-      cmatrix # Matrix Movie Effect In Terminal
+      #cliphist # Clipboard manager using rofi menu
+      #cmatrix # Matrix Movie Effect In Terminal
       #cowsay # Great Fun Terminal Program
       #discord # Stable client
       #discord-canary # beta  client
@@ -72,7 +72,7 @@ in {
       tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
       htop # Simple Terminal Based System Monitor
       eog # For Image Viewing
-      inxi # CLI System Information Tool
+      #inxi # CLI System Information Tool
       killall # For Killing All Instances Of Programs
       libnotify # For Notifications
       lm_sensors # Used For Getting Hardware Temps
@@ -83,14 +83,14 @@ in {
       ncdu # Disk Usage Analyzer With Ncurses Interface
       nixfmt # Nix Formatter
       nwg-displays # configure monitor configs via GUI
-      nwg-drawer # Application launcher for wayland
-      nwg-dock-hyprland # Dock for hyprland
-      nwg-menu # App menu for waybar
+      #nwg-drawer # Application launcher for wayland
+      #nwg-dock-hyprland # Dock for hyprland
+      #nwg-menu # App menu for waybar
       onefetch # provides zsaneyos build info on current system
       pandoc # format MD to HTML for cheatsheet parser
       pavucontrol # For Editing Audio Levels & Devices
       pciutils # Collection Of Tools For Inspecting PCI Devices
-      picard # For Changing Music Metadata & Getting Cover Art
+      #picard # For Changing Music Metadata & Getting Cover Art
       pkg-config # Wrapper Script For Allowing Packages To Get Info On Others
       playerctl # Allows Changing Media Volume Through Scripts
       rhythmbox # audio player
@@ -99,9 +99,9 @@ in {
       unrar # Tool For Handling .rar Files
       unzip # Tool For Handling .zip Files
       usbutils # Good Tools For USB Devices
-      #upower # noctalia shell battery
+      upower # noctalia shell battery
       uwsm # Universal Wayland Session Manager (optional must be enabled)
-      v4l-utils # Used For Things Like OBS Virtual Camera
+      #v4l-utils # Used For Things Like OBS Virtual Camera
       waypaper # Change wallpaper
       wget # Tool For Fetching Files With Links
       #ytmdl # Tool For Downloading Audio From YouTube
@@ -109,7 +109,7 @@ in {
       #rustdesk
       #tlp
       #auto-cpufreq
-      #telegram-desktop
+      telegram-desktop
       nautilus
       freerdp
       kdePackages.krdc
@@ -125,7 +125,7 @@ in {
       #heimdall
       typst
       #python313Packages.opencv4
-      #pangolin-cli
+      pangolin-cli
       jq
       slurp
       hyprpicker
