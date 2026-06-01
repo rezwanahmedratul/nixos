@@ -44,7 +44,7 @@ in {
       ./virtualisation.nix
       ./xserver.nix
       ./cachix.nix
-      ./fingerprint.nix
+      #./fingerprint.nix
       ./shadowsocks.nix
       inputs.stylix.nixosModules.stylix
     ];
