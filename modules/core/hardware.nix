@@ -13,5 +13,5 @@
     bluetooth.enable = true;
     bluetooth.powerOnBoot = true;
   };
-  local.hardware-clock.enable = false;
+  # local.hardware-clock.enable = false;
 }
