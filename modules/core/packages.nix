@@ -54,10 +54,10 @@ in {
       brightnessctl # For Screen Brightness Control
       cliphist # Clipboard manager using rofi menu
       cmatrix # Matrix Movie Effect In Terminal
-      cowsay # Great Fun Terminal Program
+      #cowsay # Great Fun Terminal Program
       #discord # Stable client
       #discord-canary # beta  client
-      docker-compose # Allows Controlling Docker From A Single File
+      #docker-compose # Allows Controlling Docker From A Single File
       duf # Utility For Viewing Disk Usage In Terminal
       dysk # Disk space util nice formattting
       eza # Beautiful ls Replacement
@@ -99,7 +99,7 @@ in {
       unrar # Tool For Handling .rar Files
       unzip # Tool For Handling .zip Files
       usbutils # Good Tools For USB Devices
-      upower # noctalia shell battery
+      #upower # noctalia shell battery
       uwsm # Universal Wayland Session Manager (optional must be enabled)
       v4l-utils # Used For Things Like OBS Virtual Camera
       waypaper # Change wallpaper
@@ -109,7 +109,7 @@ in {
       #rustdesk
       #tlp
       #auto-cpufreq
-      telegram-desktop
+      #telegram-desktop
       nautilus
       freerdp
       kdePackages.krdc
@@ -125,12 +125,12 @@ in {
       #heimdall
       typst
       #python313Packages.opencv4
-      pangolin-cli
+      #pangolin-cli
       jq
       slurp
       hyprpicker
       tesseract
-      gnome-calculator
+      #gnome-calculator
       # runtime utils (safe to include)
       coreutils
       gnugrep
