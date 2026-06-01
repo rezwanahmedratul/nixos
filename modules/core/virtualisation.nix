@@ -2,7 +2,7 @@
   # Only enable either docker or podman -- Not both
   virtualisation = {
     docker = {
-      enable = true;
+      enable = false;
     };
 
     podman.enable = false;
@@ -22,8 +22,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    virt-viewer # View Virtual Machines
-    lazydocker
-    docker-client
+    #virt-viewer # View Virtual Machines
+    #lazydocker
+    #docker-client
   ];
 }
