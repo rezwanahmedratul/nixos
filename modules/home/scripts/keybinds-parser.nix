@@ -1,4 +1,4 @@
-{pkgs}:
+{ pkgs }:
 pkgs.writeShellScriptBin "keybinds-parser" ''
     #!/usr/bin/env bash
     set -euo pipefail
@@ -77,117 +77,308 @@ pkgs.writeShellScriptBin "keybinds-parser" ''
             END { print "\n]" }
           ' "$BIND_NIX"
         else
-          # Parse actual Hyprland config file
           HYPR_CONFIG="$HOME/.config/hypr/hyprland.conf"
-          if [[ ! -f "$HYPR_CONFIG" ]]; then
-            echo "Error: Hyprland config not found at $HYPR_CONFIG" >&2
+          HYPR_LUA_MAIN="$HOME/.config/hypr/hyprland.lua"
+          HYPR_LUA_VARS="$HOME/.config/hypr/zaneyos/vars.lua"
+
+          if [[ -f "$HYPR_CONFIG" ]]; then
+            # Parse legacy Hyprland .conf config
+            ${pkgs.gawk}/bin/awk -F= '
+            BEGIN {
+              print "["
+              first = 1
+            }
+
+            /^bind[em]*=/ {
+              if (!first) print ","
+              first = 0
+
+              # Parse bind line: bind=MODIFIERS,KEY,ACTION,PARAMS
+              gsub(/^bind[em]*=/, "")
+              split($0, parts, ",")
+
+              if (length(parts) >= 3) {
+                modifiers = parts[1]
+                key = parts[2]
+                action = parts[3]
+                params = ""
+
+                # Join remaining parts as parameters
+                for (i = 4; i <= length(parts); i++) {
+                  if (i > 4) params = params ","
+                  params = params parts[i]
+                }
+
+                # Clean up modifiers and key
+                gsub(/\$modifier/, "SUPER", modifiers)
+                gsub(/^ +| +$/, "", modifiers)
+                gsub(/^ +| +$/, "", key)
+                gsub(/^ +| +$/, "", action)
+                gsub(/^ +| +$/, "", params)
+
+                # Build keybind string
+                keybind = modifiers
+                if (keybind != "" && key != "") keybind = keybind " + " key
+                else if (key != "") keybind = key
+
+                # Build description - improve formatting
+                description = action
+                if (params != "") description = description " " params
+
+                # Clean up common formatting issues
+                gsub(/exec, *exec/, "exec", description)  # Fix duplicate exec
+                gsub(/exec, *exec,/, "exec", description)  # Fix "exec, exec," patterns
+                gsub(/, *exec,/, ", exec", description)  # Fix ", exec," patterns
+                gsub(/, *$/, "", description)  # Remove trailing commas
+                gsub(/  +/, " ", description)  # Collapse multiple spaces
+
+                # Format different action types nicely with proper spacing
+                if (match(action, /^exec$/) || match(description, /^exec/)) {
+                  gsub(/^ *exec *,? */, "Run: ", description)
+                  gsub(/^Run: *exec */, "Run: ", description)  # Clean up "Run: exec"
+                } else if (match(action, /^(killactive|togglefloating|fullscreen|pseudo|togglesplit|exit|cyclenext|bringactivetotop)$/)) {
+                  description = "Action: " action
+                  if (params != "") description = description " " params
+                } else if (match(action, /^(workspace|movetoworkspace)$/)) {
+                  description = "Workspace: " params
+                } else if (match(action, /^(movewindow|swapwindow|movefocus|resizewindow)$/)) {
+                  description = "Window: " action " " params
+                } else if (match(action, /^workspaceopt$/)) {
+                  description = "Workspace option: " params
+                }
+
+                # Final cleanup pass - ensure proper spacing
+                gsub(/^Run: *, */, "Run: ", description)  # Fix "Run: , app"
+                gsub(/^Run:([^ ])/, "Run: \\1", description)  # Ensure space after "Run:"
+                gsub(/^Action:([^ ])/, "Action: \\1", description)  # Ensure space after "Action:"
+                gsub(/^Workspace:([^ ])/, "Workspace: \\1", description)  # Ensure space after "Workspace:"
+                gsub(/^Window:([^ ])/, "Window: \\1", description)  # Ensure space after "Window:"
+                gsub(/, *$/, "", description)  # Remove trailing commas again
+                gsub(/  +/, " ", description)  # Final space cleanup
+
+                # Categorize based on action/description (improved logic)
+                if (match(action, /^exec$/) && match(description, /(terminal|foot|wezterm|ghostty|kitty)/)) category = "terminal"
+                else if (match(action, /^exec$/) && match(description, /(emacs|vscode|editor)/)) category = "editor"
+                else if (match(action, /^exec$/) && match(description, /(rofi|wofi|dmenu|menu|launcher)/)) category = "launcher"
+                else if (match(action, /^exec$/) && match(description, /(screenshot|screenshoot)/)) category = "screenshot"
+                else if (match(action, /^exec$/) && match(description, /wallpaper/)) category = "wallpaper"
+                else if (match(action, /^exec$/) && match(description, /(volume|brightness|audio|XF86Audio|XF86MonBrightness)/)) category = "media"
+                else if (match(action, /^exec$/) && match(description, /(browser|chrome|firefox)/)) category = "browser"
+                else if (match(action, /^(workspace|movetoworkspace)$/)) category = "workspace"
+                else if (match(action, /^(movewindow|swapwindow|movefocus|killactive|togglefloating|fullscreen|pseudo|resizewindow)$/)) category = "window"
+                else if (match(action, /^(togglesplit|cyclenext|bringactivetotop|exit|workspaceopt)$/)) category = "hyprland"
+                else if (match(action, /^exec$/)) category = "app"
+                else category = "hyprland"
+                # Override category for mouse bindings
+                if (key ~ /^mouse:/) category = "mouse"
+
+                # Escape quotes and backslashes for JSON
+                gsub(/\\/, "\\\\", keybind)
+                gsub(/"/, "\\\"", keybind)
+                gsub(/\\/, "\\\\", description)
+                gsub(/"/, "\\\"", description)
+                gsub(/\\/, "\\\\", category)
+                gsub(/"/, "\\\"", category)
+
+                printf "{\"keybind\":\"%s\",\"description\":\"%s\",\"category\":\"%s\"}", keybind, description, category
+              }
+            }
+
+            END { print "\n]" }
+          ' "$HYPR_CONFIG"
+          elif [[ -f "$HYPR_LUA_VARS" ]] && ${pkgs.gnugrep}/bin/grep -q '\["bindd"\][ ]*=' "$HYPR_LUA_VARS"; then
+            # Parse Home Manager Lua vars table (e.g. ~/.config/hypr/zaneyos/vars.lua)
+            ${pkgs.gawk}/bin/awk '
+              function trim(s) { gsub(/^[ \t]+|[ \t]+$/, "", s); return s }
+              function classify(key, act, params, desc, low, category) {
+                category = "hyprland"
+                low = tolower(act " " params " " desc)
+                if (act == "exec" && low ~ /(kitty|ghostty|wezterm|alacritty|foot)/) category = "terminal"
+                else if (act == "exec" && low ~ /(emacs|code|vscode|editor)/) category = "editor"
+                else if (act == "exec" && low ~ /(rofi|wofi|dmenu|menu|launcher)/) category = "launcher"
+                else if (act == "exec" && low ~ /(screenshot|screenshoot|hyprshot)/) category = "screenshot"
+                else if (act == "exec" && low ~ /wallpaper/) category = "wallpaper"
+                else if (act == "exec" && low ~ /(volume|brightness|audio|xf86audio|xf86monbrightness|playerctl|wpctl|brightnessctl)/) category = "media"
+                else if (act == "exec" && low ~ /(browser|chrome|firefox|brave)/) category = "browser"
+                else if (act ~ /^(workspace|movetoworkspace)$/) category = "workspace"
+                else if (act ~ /^(movewindow|swapwindow|movefocus|killactive|togglefloating|fullscreen|pseudo|resizewindow|resizeactive)$/) category = "window"
+                else if (act ~ /^(togglesplit|cyclenext|bringactivetotop|exit|workspaceopt)$/) category = "hyprland"
+                else if (act == "exec") category = "app"
+                if (key ~ /^mouse:/) category = "mouse"
+                return category
+              }
+              BEGIN { print "["; first=1; in_block=0; btype="" }
+              {
+                line=$0
+                if (line ~ /\["bindd"\][ ]*=[ ]*\{/) { in_block=1; btype="bindd"; next }
+                if (line ~ /\["bindm"\][ ]*=[ ]*\{/) { in_block=1; btype="bindm"; next }
+                if (in_block && line ~ /^[ ]*}[,]?[ ]*$/) { in_block=0; btype=""; next }
+
+                if (in_block && match(line, /"([^"]*)"/, m)) {
+                  s=m[1]
+                  n=split(s, parts, ",")
+                  for (i=1; i<=n; i++) parts[i]=trim(parts[i])
+
+                  mods=(n>=1?parts[1]:"")
+                  key=(n>=2?parts[2]:"")
+                  desc=(btype=="bindd" && n>=3?parts[3]:"")
+                  act=(btype=="bindd" ? (n>=4?parts[4]:"") : (n>=3?parts[3]:""))
+                  pstart=(btype=="bindd" ? 5 : 4)
+                  params=""
+                  if (n>=pstart) {
+                    params=parts[pstart]
+                    for (i=pstart+1; i<=n; i++) params=params "," parts[i]
+                    params=trim(params)
+                  }
+
+                  if (key == "" || act == "") next
+
+                  display=key
+                  if (mods != "") display = mods " + " key
+                  gsub(/\$modifier/, "SUPER", display)
+                  if (desc == "") {
+                    desc = act
+                    if (params != "") desc = desc " " params
+                  }
+                  category=classify(key, act, params, desc)
+
+                  gsub(/\\/, "\\\\", display); gsub(/"/, "\\\"", display)
+                  gsub(/\\/, "\\\\", desc); gsub(/"/, "\\\"", desc)
+                  gsub(/\\/, "\\\\", category); gsub(/"/, "\\\"", category)
+
+                  if (!first) printf ",\n"; first=0
+                  printf "{\"keybind\":\"%s\",\"description\":\"%s\",\"category\":\"%s\"}", display, desc, category
+                }
+              }
+              END { print "\n]" }
+            ' "$HYPR_LUA_VARS"
+          elif [[ -f "$HYPR_LUA_MAIN" ]]; then
+            # Parse Lua function-call style keybind definitions (bindd/bindm)
+            LUA_CANDIDATES=(
+              "$HYPR_LUA_MAIN"
+              "$HOME/.config/hypr/keybinds.lua"
+              "$HOME/.config/hypr/lua/keybinds.lua"
+              "$HOME/.config/hypr/zaneyos/keybinds.lua"
+            )
+            EXISTING_LUA_FILES=()
+            for f in "''${LUA_CANDIDATES[@]}"; do
+              [[ -f "$f" ]] && EXISTING_LUA_FILES+=("$f")
+            done
+
+            if [[ ''${#EXISTING_LUA_FILES[@]} -eq 0 ]]; then
+              echo "Error: Hyprland Lua config found at $HYPR_LUA_MAIN but no readable Lua keybind files were detected" >&2
+              exit 1
+            fi
+
+            ${pkgs.gawk}/bin/awk '
+              function trim(s) { gsub(/^[ \t]+|[ \t]+$/, "", s); return s }
+              function classify(key, act, params, desc, low, category) {
+                category = "hyprland"
+                low = tolower(act " " params " " desc)
+                if (act == "exec" && low ~ /(kitty|ghostty|wezterm|alacritty|foot)/) category = "terminal"
+                else if (act == "exec" && low ~ /(emacs|code|vscode|editor)/) category = "editor"
+                else if (act == "exec" && low ~ /(rofi|wofi|dmenu|menu|launcher)/) category = "launcher"
+                else if (act == "exec" && low ~ /(screenshot|screenshoot|hyprshot)/) category = "screenshot"
+                else if (act == "exec" && low ~ /wallpaper/) category = "wallpaper"
+                else if (act == "exec" && low ~ /(volume|brightness|audio|xf86audio|xf86monbrightness|playerctl|wpctl|brightnessctl)/) category = "media"
+                else if (act == "exec" && low ~ /(browser|chrome|firefox|brave)/) category = "browser"
+                else if (act ~ /^(workspace|movetoworkspace)$/) category = "workspace"
+                else if (act ~ /^(movewindow|swapwindow|movefocus|killactive|togglefloating|fullscreen|pseudo|resizewindow|resizeactive)$/) category = "window"
+                else if (act ~ /^(togglesplit|cyclenext|bringactivetotop|exit|workspaceopt)$/) category = "hyprland"
+                else if (act == "exec") category = "app"
+                if (key ~ /^mouse:/) category = "mouse"
+                return category
+              }
+              function decode_mods(raw, m, extra) {
+                raw = trim(raw)
+                if (raw ~ /^mod\([[:space:]]*\)$/) return "SUPER"
+                if (match(raw, /^mod\([[:space:]]*"([^"]*)"[[:space:]]*\)$/, m)) {
+                  extra = trim(m[1])
+                  if (extra == "") return "SUPER"
+                  return "SUPER + " extra
+                }
+                if (match(raw, /^"([^"]*)"$/, m)) return trim(m[1])
+                return ""
+              }
+              function extract_quoted(str, out, rest, count, token) {
+                delete out
+                rest = str
+                count = 0
+                while (match(rest, /"([^"\\]|\\.)*"/)) {
+                  token = substr(rest, RSTART + 1, RLENGTH - 2)
+                  gsub(/\\"/, "\"", token)
+                  gsub(/\\\\/, "\\", token)
+                  out[++count] = token
+                  rest = substr(rest, RSTART + RLENGTH)
+                }
+                return count
+              }
+              BEGIN { print "["; first=1 }
+              {
+                line=$0
+                sub(/--.*/, "", line)
+                if (!match(line, /bind[dm][[:space:]]*\((.*)\)[[:space:]]*$/, m)) next
+                call = (line ~ /bindd[[:space:]]*\(/ ? "bindd" : "bindm")
+                argsline = m[1]
+                firstArg = argsline
+                sub(/,.*/, "", firstArg)
+                firstArg = trim(firstArg)
+                qn = extract_quoted(argsline, q)
+
+                mods=""; key=""; desc=""; act=""; params=""
+                if (call == "bindd") {
+                  if (firstArg ~ /^"/) {
+                    mods=(qn>=1?q[1]:"")
+                    key=(qn>=2?q[2]:"")
+                    desc=(qn>=3?q[3]:"")
+                    act=(qn>=4?q[4]:"")
+                    if (qn>=5) { params=q[5]; for (i=6; i<=qn; i++) params=params ", " q[i] }
+                  } else {
+                    mods=decode_mods(firstArg)
+                    key=(qn>=1?q[1]:"")
+                    desc=(qn>=2?q[2]:"")
+                    act=(qn>=3?q[3]:"")
+                    if (qn>=4) { params=q[4]; for (i=5; i<=qn; i++) params=params ", " q[i] }
+                  }
+                } else {
+                  if (firstArg ~ /^"/) {
+                    mods=(qn>=1?q[1]:"")
+                    key=(qn>=2?q[2]:"")
+                    desc=(qn>=3?q[3]:"")
+                    act=(qn>=4?q[4]:"")
+                    if (qn>=5) { params=q[5]; for (i=6; i<=qn; i++) params=params ", " q[i] }
+                  } else {
+                    mods=decode_mods(firstArg)
+                    key=(qn>=1?q[1]:"")
+                    desc=(qn>=2?q[2]:"")
+                    act=(qn>=3?q[3]:"")
+                    if (qn>=4) { params=q[4]; for (i=5; i<=qn; i++) params=params ", " q[i] }
+                  }
+                }
+
+                if (key == "" || act == "") next
+                display = key
+                if (mods != "") display = mods " + " key
+                gsub(/\$modifier/, "SUPER", display)
+                if (desc == "") {
+                  desc = act
+                  if (params != "") desc = desc " " params
+                }
+                category = classify(key, act, params, desc)
+
+                gsub(/\\/, "\\\\", display); gsub(/"/, "\\\"", display)
+                gsub(/\\/, "\\\\", desc); gsub(/"/, "\\\"", desc)
+                gsub(/\\/, "\\\\", category); gsub(/"/, "\\\"", category)
+
+                if (!first) printf ",\n"; first=0
+                printf "{\"keybind\":\"%s\",\"description\":\"%s\",\"category\":\"%s\"}", display, desc, category
+              }
+              END { print "\n]" }
+            ' "''${EXISTING_LUA_FILES[@]}"
+          else
+            echo "Error: Hyprland config not found at $HYPR_CONFIG or $HYPR_LUA_MAIN" >&2
             exit 1
           fi
-
-          # Extract bind statements and convert to JSON
-          ${pkgs.gawk}/bin/awk -F= '
-          BEGIN {
-            print "["
-            first = 1
-          }
-
-          /^bind[em]*=/ {
-            if (!first) print ","
-            first = 0
-
-            # Parse bind line: bind=MODIFIERS,KEY,ACTION,PARAMS
-            gsub(/^bind[em]*=/, "")
-            split($0, parts, ",")
-
-            if (length(parts) >= 3) {
-              modifiers = parts[1]
-              key = parts[2]
-              action = parts[3]
-              params = ""
-
-              # Join remaining parts as parameters
-              for (i = 4; i <= length(parts); i++) {
-                if (i > 4) params = params ","
-                params = params parts[i]
-              }
-
-              # Clean up modifiers and key
-              gsub(/\$modifier/, "SUPER", modifiers)
-              gsub(/^ +| +$/, "", modifiers)
-              gsub(/^ +| +$/, "", key)
-              gsub(/^ +| +$/, "", action)
-              gsub(/^ +| +$/, "", params)
-
-              # Build keybind string
-              keybind = modifiers
-              if (keybind != "" && key != "") keybind = keybind " + " key
-              else if (key != "") keybind = key
-
-              # Build description - improve formatting
-              description = action
-              if (params != "") description = description " " params
-
-              # Clean up common formatting issues
-              gsub(/exec, *exec/, "exec", description)  # Fix duplicate exec
-              gsub(/exec, *exec,/, "exec", description)  # Fix "exec, exec," patterns
-              gsub(/, *exec,/, ", exec", description)  # Fix ", exec," patterns
-              gsub(/, *$/, "", description)  # Remove trailing commas
-              gsub(/  +/, " ", description)  # Collapse multiple spaces
-
-              # Format different action types nicely with proper spacing
-              if (match(action, /^exec$/) || match(description, /^exec/)) {
-                gsub(/^ *exec *,? */, "Run: ", description)
-                gsub(/^Run: *exec */, "Run: ", description)  # Clean up "Run: exec"
-              } else if (match(action, /^(killactive|togglefloating|fullscreen|pseudo|togglesplit|exit|cyclenext|bringactivetotop)$/)) {
-                description = "Action: " action
-                if (params != "") description = description " " params
-              } else if (match(action, /^(workspace|movetoworkspace)$/)) {
-                description = "Workspace: " params
-              } else if (match(action, /^(movewindow|swapwindow|movefocus|resizewindow)$/)) {
-                description = "Window: " action " " params
-              } else if (match(action, /^workspaceopt$/)) {
-                description = "Workspace option: " params
-              }
-
-              # Final cleanup pass - ensure proper spacing
-              gsub(/^Run: *, */, "Run: ", description)  # Fix "Run: , app"
-              gsub(/^Run:([^ ])/, "Run: \1", description)  # Ensure space after "Run:"
-              gsub(/^Action:([^ ])/, "Action: \1", description)  # Ensure space after "Action:"
-              gsub(/^Workspace:([^ ])/, "Workspace: \1", description)  # Ensure space after "Workspace:"
-              gsub(/^Window:([^ ])/, "Window: \1", description)  # Ensure space after "Window:"
-              gsub(/, *$/, "", description)  # Remove trailing commas again
-              gsub(/  +/, " ", description)  # Final space cleanup
-
-              # Categorize based on action/description (improved logic)
-              if (match(action, /^exec$/) && match(description, /(terminal|foot|wezterm|ghostty|kitty)/)) category = "terminal"
-              else if (match(action, /^exec$/) && match(description, /(emacs|vscode|editor)/)) category = "editor"
-              else if (match(action, /^exec$/) && match(description, /(rofi|wofi|dmenu|menu|launcher)/)) category = "launcher"
-              else if (match(action, /^exec$/) && match(description, /(screenshot|screenshoot)/)) category = "screenshot"
-              else if (match(action, /^exec$/) && match(description, /wallpaper/)) category = "wallpaper"
-              else if (match(action, /^exec$/) && match(description, /(volume|brightness|audio|XF86Audio|XF86MonBrightness)/)) category = "media"
-              else if (match(action, /^exec$/) && match(description, /(browser|chrome|firefox)/)) category = "browser"
-              else if (match(action, /^(workspace|movetoworkspace)$/)) category = "workspace"
-              else if (match(action, /^(movewindow|swapwindow|movefocus|killactive|togglefloating|fullscreen|pseudo|resizewindow)$/)) category = "window"
-              else if (match(action, /^(togglesplit|cyclenext|bringactivetotop|exit|workspaceopt)$/)) category = "hyprland"
-              else if (match(action, /^exec$/)) category = "app"
-              else category = "hyprland"
-              # Override category for mouse bindings
-              if (key ~ /^mouse:/) category = "mouse"
-
-              # Escape quotes and backslashes for JSON
-              gsub(/\\/, "\\\\", keybind)
-              gsub(/"/, "\\\"", keybind)
-              gsub(/\\/, "\\\\", description)
-              gsub(/"/, "\\\"", description)
-              gsub(/\\/, "\\\\", category)
-              gsub(/"/, "\\\"", category)
-
-              printf "{\"keybind\":\"%s\",\"description\":\"%s\",\"category\":\"%s\"}", keybind, description, category
-            }
-          }
-
-          END { print "\n]" }
-        ' "$HYPR_CONFIG"
         fi
         ;;
       niri)

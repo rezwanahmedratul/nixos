@@ -110,6 +110,16 @@ in {
       waypaper # Change wallpaper
       wget # Tool For Fetching Files With Links
       ytmdl # Tool For Downloading Audio From YouTube
+      # Lua triage / management / development
+      lua
+      luajit
+      luarocks
+      lua-language-server
+      stylua
+      luaformatter
+      selene
+      lua54Packages.luacheck
+      lua54Packages.busted
       python3 # Python 3 programming language
       matugen
     ];

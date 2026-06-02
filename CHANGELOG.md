@@ -9,10 +9,10 @@
 
 #### 📅 **Updated: Jun 2026**
 
-- Updated to NixOS v26.11 
-- Disabled `plymouth` by default  
-- Disabled `kmscon` in Stylix caused build to fail 
-
+- Updated to NixOS v26.11
+- Disabled `plymouth` by default
+- Disabled `kmscon` in Stylix caused build to fail
+- Converted `hyprlang` config to `lua` config files
 
 #### 📅 **Updated: May 2026**
 
