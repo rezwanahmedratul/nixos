@@ -130,7 +130,7 @@ in {
       slurp
       hyprpicker
       tesseract
-      #gnome-calculator
+      gnome-calculator
       # runtime utils (safe to include)
       coreutils
       gnugrep
