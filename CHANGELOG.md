@@ -7,6 +7,13 @@
 
 # 🚀 **Current Release - ZaneyOS v3.0**
 
+#### 📅 **Updated: Jun 2026**
+
+- Updated to NixOS v26.11 
+- Disabled `plymouth` by default  
+- Disabled `kmscon` in Stylix caused build to fail 
+
+
 #### 📅 **Updated: May 2026**
 
 - Chg: `swww` from flake input to `nixpkgs.awww`
