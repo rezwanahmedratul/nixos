@@ -13,7 +13,17 @@
 - Disabled `plymouth` by default
 - Disabled `kmscon` in Stylix caused build to fail
 - Converted `hyprlang` config to `lua` config files
+  - The binds are still in `binds.nix`
+  - The binds are parsed by `hypr/lua/keybinds.lua`
+  - Makes updatinmg them same as before
 - Building `waybar` from flake to resolve lua cfg incompatiblity
+- Fixed: Reboot/shutdown powermenu
+
+- Changed default bindings:
+  - Toggle Window Float --> SUPER + SPACE
+  - Toggle All Windows Floating --> SUPER + ALT + SPACE
+  - Toggle Window SPECIALWORKSPACE --> SUPER + SHIFT + SPACE
+  - Move Window to SPECIALWORKSPACE --> SUPER + CTRL + SPACE
 
 #### 📅 **Updated: May 2026**
 

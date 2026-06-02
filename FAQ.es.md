@@ -173,8 +173,8 @@ fácil referencia.
 - `$modifier + P` → Alternar tiling pseudo
 - `$modifier + Shift + I` → Alternar modo split
 - `$modifier + F` → Alternar fullscreen
-- `$modifier + Shift + F` → Alternar modo flotante
-- `$modifier + Alt + F` → Flotar todas las ventanas
+- `$modifier + Space` → Alternar modo flotante
+- `$modifier + Alt + Space` → Flotar todas las ventanas
 - `$modifier + Shift + C` → Salir de Hyprland
 
 ## Movimiento de Ventanas
@@ -196,8 +196,8 @@ fácil referencia.
 ## Espacios de Trabajo
 
 - `$modifier + 1-10` → Cambiar a espacio de trabajo 1-10
-- `$modifier + Shift + Space` → Mover ventana a espacio de trabajo especial
-- `$modifier + Space` → Alternar espacio de trabajo especial
+- `$modifier + Control + Space` → Mover ventana a espacio de trabajo especial
+- `$modifier + Shift + Space` → Alternar espacio de trabajo especial
 - `$modifier + Shift + 1-10` → Mover ventana a espacio de trabajo 1-10
 - `$modifier + Control + → / ←` → Cambiar espacio de trabajo adelante/atrás
 

@@ -94,6 +94,17 @@ Migration lessons to preserve (Hyprland Lua + Waybar source)
     - `SUPER+SHIFT+arrow` is reserved for resize (`resizeactive`).
     - Movement/swap remain on their dedicated bindings (`SUPER+SHIFT+h/j/k/l` and `SUPER+ALT+...`).
 
+- Hyprland Lua keybind mapping flow (where `SUPER+ENTER` actually comes from)
+  - Chords are defined as data in `modules/home/hyprland/binds.nix` (`bindd`/`bindm` string entries), not hardcoded in `lua/keybinds.lua`.
+  - `modules/home/hyprland/hyprland.nix` imports `binds.nix` and serializes those arrays into `ZANEYOS.bindd` / `ZANEYOS.bindm` in generated `zaneyos/vars.lua`.
+  - `modules/home/hyprland/lua/keybinds.lua` is an execution layer: the bottom `for _, entry in ipairs(bindd_entries)` / `bindm_entries` loops parse each string and call `hl.bind(...)`.
+  - Example: `SUPER+ENTER` is controlled by the `"$modifier,Return, ..."` entry in `modules/home/hyprland/binds.nix`; edit there to change chord/action.
+  - Debug path when confused:
+    1) edit/check `modules/home/hyprland/binds.nix`
+    2) rebuild/switch
+    3) inspect generated `~/.config/hypr/zaneyos/vars.lua`
+    4) run `hyprctl configerrors`
+
 - keybinds-parser expectations after Lua migration
   - Hyprland mode must support all sources in order:
     1) `~/zaneyos/modules/home/hyprland/binds.nix`
@@ -109,6 +120,19 @@ Migration lessons to preserve (Hyprland Lua + Waybar source)
     - `doCheck = false`
     - `doInstallCheck = false`
   - Waybar theme modules should continue using `package = pkgs.waybar` so all themes inherit the same source-build fix.
+
+- Power menu reboot/shutdown reliability requirements
+  - Keep reboot/shutdown actions resilient across all entry points:
+    - `modules/home/waybar/scripts/power-menu.sh`
+    - `modules/home/wlogout/default.nix`
+    - `modules/home/scripts/qs-wlogout.nix`
+  - Use fallback pattern for power actions:
+    - reboot: `systemctl reboot || loginctl reboot`
+    - shutdown: `systemctl poweroff || loginctl poweroff`
+  - In `power-menu.sh`, handle rofi cancel safely (`|| exit 0`) and normalize selected text before case matching.
+  - Validate generated outputs after changes:
+    - `~/.config/waybar/scripts/power-menu.sh`
+    - `~/.config/wlogout/layout`
 
 - Fast validation checklist for these migrations
   - `nix eval --raw path:$PWD#nixosConfigurations.<host>.config.system.build.toplevel.drvPath`

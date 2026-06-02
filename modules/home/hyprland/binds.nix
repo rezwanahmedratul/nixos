@@ -76,8 +76,8 @@ in {
         "$modifier,P, Pseudo Tile, pseudo,"
         "$modifier SHIFT,I, Toggle Split, layoutmsg, togglesplit"
         "$modifier,F, Maximize, fullscreen,"
-        "$modifier SHIFT,F, Toggle Floating, togglefloating,"
-        "$modifier ALT,F, Float All Windows, exec, hyprland-float-all"
+        "$modifier,SPACE, Toggle Floating, togglefloating,"
+        "$modifier ALT,SPACE, Float All Windows, exec, hyprland-float-all"
         # ============= LAYOUTS =============
         "$modifier ALT,L, Toggle Layouts, exec, hyprland-change-layout toggle"
         "$modifier ALT,1, Layout Dwindle, exec, hyprland-change-layout dwindle"
@@ -127,8 +127,8 @@ in {
         "$modifier,9, Workspace 9, workspace, 9"
         "$modifier,0, Workspace 10, workspace, 10"
         # ============= MOVE WINDOW TO WORKSPACE (1-10) =============
-        "$modifier SHIFT,SPACE, Move to Special, movetoworkspace, special"
-        "$modifier,SPACE, Toggle Special, togglespecialworkspace"
+        "$modifier CTRL,SPACE, Move to Special, movetoworkspace, special"
+        "$modifier SHIFT,SPACE, Toggle Special, togglespecialworkspace"
         "$modifier SHIFT,1, Move to Workspace 1, movetoworkspace, 1"
         "$modifier SHIFT,2, Move to Workspace 2, movetoworkspace, 2"
         "$modifier SHIFT,3, Move to Workspace 3, movetoworkspace, 3"

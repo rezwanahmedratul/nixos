@@ -165,8 +165,8 @@ when `barChoice = "noctalia"`).
 - `$modifier + P` → Toggle pseudo tiling
 - `$modifier + Shift + I` → Toggle split mode
 - `$modifier + F` → Toggle fullscreen
-- `$modifier + Shift + F` → Toggle floating mode
-- `$modifier + Alt + F` → Float all windows
+- `$modifier + Space` → Toggle floating mode
+- `$modifier + Alt + Space` → Float all windows
 - `$modifier + Shift + C` → Exit Hyprland
 
 ### Window Movement
@@ -183,8 +183,8 @@ when `barChoice = "noctalia"`).
 ### Workspaces
 
 - `$modifier + 1-10` → Switch to workspace 1-10
-- `$modifier + Shift + Space` → Move window to special workspace
-- `$modifier + Space` → Toggle special workspace
+- `$modifier + Control + Space` → Move window to special workspace
+- `$modifier + Shift + Space` → Toggle special workspace
 - `$modifier + Shift + 1-10` → Move window to workspace 1-10
 - `$modifier + Control + → / ←` → Switch workspace forward/backward
 

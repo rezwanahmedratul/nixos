@@ -127,15 +127,15 @@ in
             { command: "hyprctl dispatch exit", keybind: Qt.Key_E, text: "Cerrar Sesión", icon: "logout" },
             { command: "systemctl suspend", keybind: Qt.Key_U, text: "Suspender", icon: "suspend" },
             { command: "systemctl hibernate", keybind: Qt.Key_H, text: "Hibernar", icon: "hibernate" },
-            { command: "systemctl poweroff", keybind: Qt.Key_S, text: "Apagar", icon: "shutdown" },
-            { command: "systemctl reboot", keybind: Qt.Key_R, text: "Reiniciar", icon: "reboot" }
+            { command: "systemctl poweroff || loginctl poweroff", keybind: Qt.Key_S, text: "Apagar", icon: "shutdown" },
+            { command: "systemctl reboot || loginctl reboot", keybind: Qt.Key_R, text: "Reiniciar", icon: "reboot" }
         ] : [
             { command: "loginctl lock-session", keybind: Qt.Key_L, text: "Lock", icon: "lock" },
             { command: "hyprctl dispatch exit", keybind: Qt.Key_E, text: "Logout", icon: "logout" },
             { command: "systemctl suspend", keybind: Qt.Key_U, text: "Suspend", icon: "suspend" },
             { command: "systemctl hibernate", keybind: Qt.Key_H, text: "Hibernate", icon: "hibernate" },
-            { command: "systemctl poweroff", keybind: Qt.Key_S, text: "Shutdown", icon: "shutdown" },
-            { command: "systemctl reboot", keybind: Qt.Key_R, text: "Reboot", icon: "reboot" }
+            { command: "systemctl poweroff || loginctl poweroff", keybind: Qt.Key_S, text: "Shutdown", icon: "shutdown" },
+            { command: "systemctl reboot || loginctl reboot", keybind: Qt.Key_R, text: "Reboot", icon: "reboot" }
         ]
 
         function executeCommand(command) {

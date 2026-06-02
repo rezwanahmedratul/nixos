@@ -64,9 +64,8 @@
 - SUPERKEY+Q — Cerrar ventana activa
 - SUPERKEY+F — Alternar pantalla completa
 - SUPERKEY+ALT+F — Maximizar (mantiene barras)
-- SUPERKEY+SHIFT+F — Alternar flotante
 - SUPERKEY+Space — Alternar flotante
-- SUPERKEY+SHIFT+Space — Todo flotante en espacio
+- SUPERKEY+ALT+Space — Flotar todas las ventanas
 - SUPERKEY+P — Pseudo mosaico
 - SUPERKEY+SHIFT+M — Intercambiar diseño
 - SUPERKEY+SHIFT+I — Alternar división
@@ -90,6 +89,8 @@
 ## 🗂️ Espacios de Trabajo
 - SUPERKEY+1..9,0 — Espacio 1..10
 - SUPERKEY+SHIFT+1..9,0 — Mover a espacio 1..10
+- SUPERKEY+CTRL+Space — Mover a espacio especial
+- SUPERKEY+SHIFT+Space — Alternar espacio especial
 - SUPERKEY+CTRL+Derecha/Izquierda — Espacio siguiente/anterior
 - SUPERKEY+Rueda Abajo/Arriba — Espacio siguiente/anterior
 

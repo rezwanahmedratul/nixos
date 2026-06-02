@@ -64,9 +64,8 @@ English | [Español](./hyprland.binds.cheatsheet.es.md)
 - SUPERKEY+Q — Kill Active Window
 - SUPERKEY+F — Toggle Fullscreen
 - SUPERKEY+ALT+F — Maximize (keep bars)
-- SUPERKEY+SHIFT+F — Toggle Floating
 - SUPERKEY+Space — Toggle Floating
-- SUPERKEY+SHIFT+Space — Workspace All Float
+- SUPERKEY+ALT+Space — Float All Windows
 - SUPERKEY+P — Pseudo Tile
 - SUPERKEY+SHIFT+M — Swap Layout
 - SUPERKEY+SHIFT+I — Toggle Split
@@ -90,6 +89,8 @@ English | [Español](./hyprland.binds.cheatsheet.es.md)
 ## 🗂️ Workspaces
 - SUPERKEY+1..9,0 — Workspace 1..10
 - SUPERKEY+SHIFT+1..9,0 — Move To Workspace 1..10
+- SUPERKEY+CTRL+Space — Move To Special Workspace
+- SUPERKEY+SHIFT+Space — Toggle Special Workspace
 - SUPERKEY+CTRL+Right/Left — Next/Previous Workspace
 - SUPERKEY+Mouse Wheel Down/Up — Next/Previous Workspace
 

@@ -148,8 +148,8 @@ A continuación los atajos de Hyprland, en formato de referencia rápida. La col
 - `$modifier + P` → Alternar pseudo tiling
 - `$modifier + Shift + I` → Alternar modo dividido
 - `$modifier + F` → Alternar pantalla completa
-- `$modifier + Shift + F` → Alternar modo flotante
-- `$modifier + Alt + F` → Flotar todas las ventanas
+- `$modifier + Space` → Alternar modo flotante
+- `$modifier + Alt + Space` → Flotar todas las ventanas
 - `$modifier + Shift + C` → Salir de Hyprland
 
 ### Movimiento de ventanas
@@ -166,8 +166,8 @@ A continuación los atajos de Hyprland, en formato de referencia rápida. La col
 ### Espacios de trabajo
 
 - `$modifier + 1-10` → Cambiar al espacio 1-10
-- `$modifier + Shift + Space` → Mover ventana a espacio especial
-- `$modifier + Space` → Alternar espacio especial
+- `$modifier + Control + Space` → Mover ventana a espacio especial
+- `$modifier + Shift + Space` → Alternar espacio especial
 - `$modifier + Shift + 1-10` → Mover ventana al espacio 1-10
 - `$modifier + Control + → / ←` → Cambiar espacio adelante/atrás
 
