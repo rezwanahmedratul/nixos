@@ -5,7 +5,7 @@
     libinput.enable = true; # Input Handling
     fstrim.enable = true; # SSD Optimizer
     gvfs.enable = true; # For Mounting USB & More
-    power-profiles-daemon.enable = true; # Power Profiles
+    #power-profiles-daemon.enable = true; # Power Profiles
     #howdy.enable = true; # For Touchpad Gestures
     #mako.enable = true;
     cloudflare-warp.enable = true;
