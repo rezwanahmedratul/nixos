@@ -85,11 +85,11 @@ in {
         "$modifier ALT,3, Layout Scrolling, exec, hyprland-change-layout scrolling"
         "$modifier ALT,4, Layout Monocle, exec, hyprland-change-layout monocle"
         "$modifier SHIFT,C, Exit/Logout of Hyprland, exit,"
-        # ============= WINDOW MOVEMENT (ARROW KEYS) =============
-        "$modifier SHIFT,left, Move Left, movewindow, l"
-        "$modifier SHIFT,right, Move Right, movewindow, r"
-        "$modifier SHIFT,up, Move Up, movewindow, u"
-        "$modifier SHIFT,down, Move Down, movewindow, d"
+        # ============= WINDOW RESIZE (ARROW KEYS) =============
+        "$modifier SHIFT,left, Resize Left, resizeactive, -30 0"
+        "$modifier SHIFT,right, Resize Right, resizeactive, 30 0"
+        "$modifier SHIFT,up, Resize Up, resizeactive, 0 -30"
+        "$modifier SHIFT,down, Resize Down, resizeactive, 0 30"
         # ============= WINDOW MOVEMENT (VI STYLE) =============
         "$modifier SHIFT,h, Move Left (VI), movewindow, l"
         "$modifier SHIFT,l, Move Right (VI), movewindow, r"
