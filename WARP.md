@@ -76,6 +76,45 @@ Key development choices
 - Validation is via nix flake check; there is no separate unit test suite.
 - Formatting is via nixfmt-rfc-style (provided in system packages).
 
+Migration lessons to preserve (Hyprland Lua + Waybar source)
+- Hyprland Lua conversion (critical pitfalls)
+  - Do not set `["$modifier"]` via `hl.config`. In Lua mode this is treated as an unknown config key. Keep modifier handling in Lua helpers (`cfg.modifier`) instead.
+  - Do not pass border gradients as hyprlang-style strings like `rgb(...) rgb(...) 45deg`. For Lua, use structured values:
+    - `general.col.active_border = { colors = { "rgba(...)", "rgba(...)" }, angle = 45 }`
+    - `general.col.inactive_border = "rgba(...)"` (or equivalent valid format)
+  - Stylix/base16 colors are hex strings; normalize/sanitize them before building `rgba(...)` values (strip `#`, validate length, add alpha if needed).
+  - After editing `modules/home/hyprland/lua/*.lua`, remember HM files under `~/.config/hypr/zaneyos/` are store symlinks; changes do not apply until rebuild/switch.
+
+- Hyprland Lua keybind reliability rules
+  - Normalize modifier tokens to canonical uppercase (`SUPER`, `SHIFT`, `CTRL`, `ALT`) before calling `hl.bind`; lowercase tokens can produce keysym parse errors.
+  - Normalize numeric keycodes used as keys:
+    - Keep workspace digits `0-9` as-is.
+    - Convert numeric keycodes like `43/44/45/46` to `code:43`/etc to avoid `Unknown keysym` errors.
+  - Preserve a single intent per chord to avoid duplicate behavior regressions:
+    - `SUPER+SHIFT+arrow` is reserved for resize (`resizeactive`).
+    - Movement/swap remain on their dedicated bindings (`SUPER+SHIFT+h/j/k/l` and `SUPER+ALT+...`).
+
+- keybinds-parser expectations after Lua migration
+  - Hyprland mode must support all sources in order:
+    1) `~/zaneyos/modules/home/hyprland/binds.nix`
+    2) `~/.config/hypr/hyprland.conf`
+    3) `~/.config/hypr/zaneyos/vars.lua`
+    4) Lua function-style bind files (e.g. `hyprland.lua` + `zaneyos/keybinds.lua`)
+  - Keep parser output schema stable: `[{ keybind, description, category }]`.
+
+- Waybar source-build override requirements
+  - Keep Waybar as a flake input (`inputs.waybar = github:Alexays/Waybar`) and lock it in `flake.lock`.
+  - Keep a global overlay in `flake.nix` that overrides `pkgs.waybar` from the flake package and enforces:
+    - `mesonFlags` includes only `-Dtests=disabled` for tests (filter out any existing `-Dtests=...` first)
+    - `doCheck = false`
+    - `doInstallCheck = false`
+  - Waybar theme modules should continue using `package = pkgs.waybar` so all themes inherit the same source-build fix.
+
+- Fast validation checklist for these migrations
+  - `nix eval --raw path:$PWD#nixosConfigurations.<host>.config.system.build.toplevel.drvPath`
+  - `nix eval --json path:$PWD#nixosConfigurations.<host>.pkgs.waybar.mesonFlags`
+  - `hyprctl configerrors` (after rebuild/switch) to catch Lua runtime/config issues immediately.
+
 Useful docs in-repo
 - README.md: requirements, install and upgrade overview (including the 2.3→2.4 process).
 - zcli.md: full CLI docs, commands, options, and examples.

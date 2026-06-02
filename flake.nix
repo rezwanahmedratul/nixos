@@ -46,6 +46,10 @@
       url = "github:SXSLVT/synfetch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    waybar = {
+      url = "github:Alexays/Waybar";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -59,6 +63,15 @@
     username = "dwilliams";
 
     forAllSystems = nixpkgs.lib.genAttrs (import systems);
+    waybarOverlay = final: prev: {
+      waybar = inputs.waybar.packages.${prev.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
+        mesonFlags = (builtins.filter (flag: (builtins.match "-Dtests=.*" flag) == null) (old.mesonFlags or [])) ++ [
+          "-Dtests=disabled"
+        ];
+        doCheck = false;
+        doInstallCheck = false;
+      });
+    };
 
     # Deduplicate nixosConfigurations while preserving the top-level 'profile'
     mkNixosConfig = host:
@@ -68,6 +81,9 @@
           inherit username;
         };
         modules = [
+          {
+            nixpkgs.overlays = [ waybarOverlay ];
+          }
           ./modules/core
           ./modules/drivers
           ./hosts/${host}
