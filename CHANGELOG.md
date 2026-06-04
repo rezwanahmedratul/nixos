@@ -9,9 +9,24 @@
 
 #### 📅 **Updated: Jun 2026**
 
+- Fix: `gtk.nix` error regarding `null`
+
+    ```nix
+    {config, pkgs, lib, ...}: {
+      gtk = {
+        gtk4.theme = lib.mkForce null;
+    ```
+- Fix:  `kmscon` error
+   - `zaneyos/modules/core/stylix.nix`
+   - Added: `targets.kmscon.enable = false;`
+       ```nix
+     stylix = {
+        enable = true;
+        image = stylixImage;
+        targets.kmscon.enable = false;
+       ```
 - Updated to NixOS v26.11
 - Disabled `plymouth` by default
-- Disabled `kmscon` in Stylix caused build to fail
 - Converted `hyprlang` config to `lua` config files
   - The binds are still in `binds.nix`
   - The binds are parsed by `hypr/lua/keybinds.lua`
