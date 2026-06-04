@@ -8,6 +8,7 @@ in {
   # Styling Options
   stylix = {
     enable = true;
+    targets.kmscon.enable = false;
     image = stylixImage;
     # base16Scheme = {
     #   base00 = "282936";
