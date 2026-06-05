@@ -23,6 +23,7 @@
   ghosttyEnable = false;
   vscodeEnable = true;
   zed-editorEnable = false;
+  vscodiumEnable = true; # Open-source build of VSCode without telemetry
   antigravityEnable = false; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
   helixEnable = false;

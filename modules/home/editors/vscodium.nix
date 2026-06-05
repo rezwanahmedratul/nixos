@@ -3,7 +3,7 @@
 let
   common = import ./common.nix { inherit pkgs lib; };
 in {
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
 
     profiles.default = {
@@ -15,6 +15,6 @@ in {
 
   home.packages = with pkgs; [ jdk21 ];
 
-  home.file.".config/Code/User/snippets/cpp.json".text =
+  home.file.".config/VSCodium/User/snippets/cpp.json".text =
     common.cppSnippets;
 }

@@ -14,6 +14,7 @@
     antigravityEnable
     obsEnable
     zed-editorEnable
+    vscodiumEnable
     ;
   # Select bar module based on barChoice
   barModule =
@@ -75,7 +76,18 @@ in {
     )
     ++ (
       if vscodeEnable
-      then [./editors/vscode.nix]
+      then [
+        ./editors/common.nix
+        ./editors/vscode.nix
+      ]
+      else []
+    )
+    ++ (
+      if vscodiumEnable
+      then [
+        ./editors/common.nix
+        ./editors/vscodium.nix
+      ]
       else []
     )
     ++ (
