@@ -138,5 +138,6 @@ in {
       gnugrep
       gawk
       procps
+      qimgv
     ];
 }

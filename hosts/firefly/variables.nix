@@ -16,7 +16,7 @@
   powerManager = "tlp";
 
   # Emable/disable bundled applications
-  tmuxEnable = false;
+  tmuxEnable = true; # Terminal Multiplexer
   alacrittyEnable = true;
   weztermEnable = false;
   ghosttyEnable = false;
@@ -115,7 +115,9 @@
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
   #stylixImage = ../../wallpapers/mountainscapedark.jpg;
   #stylixImage = ../../wallpapers/Skyscraper.jpg;
-  stylixImage = ../../wallpapers/fuji.jpg;
+  #stylixImage = ../../wallpapers/fuji.jpg;
+  # stylixImage = ../../wallpapers/daniel-leone-v7daTKlZzaw-unsplash.jpg;
+  stylixImage = ../../wallpapers/gruv-portal-cake.png;
 
   # Set Waybar
   #  Available Options:
@@ -147,12 +149,12 @@
   #animChoice = ../../modules/home/hyprland/animations-end4.nix;
   #animChoice = ../../modules/home/hyprland/animations-end4-slide.nix;
   #animChoice = ../../modules/home/hyprland/animations-end-slide.nix;
-  #animChoice = ../../modules/home/hyprland/animations-dynamic.nix;
+  animChoice = ../../modules/home/hyprland/animations-dynamic.nix;
   #animChoice = ../../modules/home/hyprland/animations-moving.nix;
   #animChoice = ../../modules/home/hyprland/animations-hyde-optimized.nix;
   #animChoice = ../../modules/home/hyprland/animations-mahaveer-me-1.nix;
   #animChoice = ../../modules/home/hyprland/animations-mahaveer-me-2.nix;
-  animChoice = ../../modules/home/hyprland/animations-ml4w-classic.nix;
+  #animChoice = ../../modules/home/hyprland/animations-ml4w-classic.nix;
   #animChoice = ../../modules/home/hyprland/animations-ml4w-fast.nix;
   #animChoice = ../../modules/home/hyprland/animations-ml4w-high.nix;
 

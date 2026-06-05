@@ -12,7 +12,9 @@
   codeRunnerVer = "0.12.2";
   tinymistVer = "0.14.16";
   typstPreviewVer = "0.11.14";
-  continueVer = "0.9.246";
+  copilotVer = "1.388.0";
+  copilotChatVer = "1.120.0";
+  codeiumVer = "1.49.2";
 
   # Helper function
   extOrMarketplace = {
@@ -74,17 +76,29 @@
   };
 
   # Continue.dev is not on OpenVSX so we fetch from marketplace
-  continueExts = extOrMarketplace {
-    publisher = "continue";
-    name = "continue";
-    version = continueVer;
-    sha256 = pkgs.lib.fakeSha256; # will be replaced on first build
+  # copilotExts = extOrMarketplace {
+  #   publisher = "GitHub";
+  #   name = "copilot";
+  #   version = copilotVer;
+  #   sha256 = "sha256-7RjK8+PNI+rIuRQfCwpvswAiz991dacRO2qYhcv1vhk="; # will be replaced on first build
+  # };
+  # copilotChatExts = extOrMarketplace {
+  #   publisher = "GitHub";
+  #   name = "copilot-chat";
+  #   version = copilotChatVer;
+  #   sha256 = "sha256-eFLfYMFxvgtZtmwLsxfneMjD4jOg8/Uk0Eu/6+A6odY="; # will be replaced on first build
+  # };
+
+  codeiumExts = extOrMarketplace {
+    publisher = "Codeium";
+    name = "codeium";
+    version = codeiumVer;
+    sha256 = "sha256-Nj7r596RWuUNkjn06q5yEaMAqphPXWx+8oIw/GtXwFc="; # will be replaced on first build
   };
 in {
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
-    mutableExtensionsDir = false;
 
     profiles.default = {
       extensions =
@@ -115,7 +129,9 @@ in {
         ++ neroHyprlandExts
         ++ codeRunnerExts
         ++ tinymistExts
-        ++ continueExts;
+        # ++ copilotExts
+        # ++ copilotChatExts;
+        ++ codeiumExts;
 
       userSettings = lib.mkForce {
         "java.jdt.ls.java.home" = "${pkgs.jdk21}/lib/openjdk";
@@ -142,13 +158,13 @@ in {
         "redhat.telemetry.enabled" = false;
         "explorer.confirmDelete" = false;
 
-        "workbench.colorTheme" = "Catppuccin Mocha";
-        "workbench.iconTheme" = "catppuccin-mocha";
+        # "workbench.colorTheme" = "Catppuccin Mocha";
+        # "workbench.iconTheme" = "catppuccin-mocha";
 
         "clangd.path" = "${pkgs.clang-tools}/bin/clangd";
 
-        # Continue.dev keybinding (optional, default is Ctrl+Shift+L for chat)
-        "continue.enableTabAutocomplete" = true;
+        # Codeium keybinding (optional, default is Ctrl+Shift+L for chat)
+        #"codeium.enableTabAutocomplete" = true;
 
         "terminal.integrated.profiles.linux" = {
           "bash" = {
