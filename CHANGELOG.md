@@ -5,8 +5,45 @@
 
 ---
 
-# 🚀 **Current Release - ZaneyOS v2.6.1**
+# 🚀 **Current Release - ZaneyOS v2.6.2**
 
+- Fix: `nixvim` eval error regarding nixpkgs
+  - Proper fix is add this to `nixvim.nix`
+
+  ```nix
+   nixpkgs.source = inputs.nixpkgs;
+  ```
+
+- Fix: `gtk.nix` error regarding `null`
+
+  ```nix
+  {config, pkgs, lib, ...}: {
+    gtk = {
+      gtk4.theme = lib.mkForce null;
+  ```
+
+- Fix: `kmscon` error
+  - `zaneyos/modules/core/stylix.nix`
+  - Added: `targets.kmscon.enable = false;`
+    ```nix
+    stylix = {
+     enable = true;
+     image = stylixImage;
+     targets.kmscon.enable = false;
+    ```
+- Updated to NixOS v26.11
+- Disabled `plymouth` by default
+
+- Chg: `awww` from flake input to `pkgs.awww`
+  - This resolves build errors
+- Add: `synfetch`
+- Removed `discord` and `discord-canary`
+  - They use an outdated `electron`
+    - That build uses and `openssl v1.1.1w`
+    - That ius OEL and marked insecure in NIXOS
+    - Users can use an alternativve client until discord is updated
+- Disabled `zen browser` in `zaneyos/modules/home/default.nix`
+  - Needs to be migrated to being enabled via host variable
 - Changed from `zen` to `latest` kernel
   - Linux kernel v7.0 is much better than 6.19_zen
 - Disabled `vfr = true;` in hyprland config

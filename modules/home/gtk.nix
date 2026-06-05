@@ -1,6 +1,10 @@
-{config, pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   gtk = {
-    #gtk4.theme = null;
+    gtk4.theme = lib.mkForce null;
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;

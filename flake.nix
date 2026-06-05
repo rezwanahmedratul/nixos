@@ -32,12 +32,12 @@
       url = "github:0xc000022070/zen-browser-flake/beta";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    alejandra = {
-      url = "github:kamadorueda/alejandra";
+    synfetch = {
+      url = "github:SXSLVT/synfetch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    awww = {
-      url = "git+https://codeberg.org/LGFae/awww";
+    alejandra = {
+      url = "github:kamadorueda/alejandra";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -51,9 +51,9 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    host = "firefly";
-    profile = "intel";
-    username = "ratul";
+    host = "zaneyos-24-vm";
+    profile = "vm";
+    username = "dwilliams";
 
     # Deduplicate nixosConfigurations while preserving the top-level 'profile'
     mkNixosConfig = gpuProfile:
