@@ -52,7 +52,7 @@
   } @ inputs: let
     system = "x86_64-linux";
     host = "firefly";
-    profile = "firefly";
+    profile = "intel";
     username = "ratul";
 
     # Deduplicate nixosConfigurations while preserving the top-level 'profile'

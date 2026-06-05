@@ -76,18 +76,7 @@ in {
     )
     ++ (
       if vscodeEnable
-      then [
-        ./editors/common.nix
-        ./editors/vscode.nix
-      ]
-      else []
-    )
-    ++ (
-      if vscodiumEnable
-      then [
-        ./editors/common.nix
-        ./editors/vscodium.nix
-      ]
+      then [./editors/vscode.nix]
       else []
     )
     ++ (
@@ -106,6 +95,11 @@ in {
         ./editors/doom-emacs-install.nix
         ./editors/doom-emacs.nix
       ]
+      else []
+    )
+        ++ (
+      if vscodiumEnable
+      then [./editors/vscodium.nix]
       else []
     )
     ++ (
@@ -133,4 +127,5 @@ in {
       then [./obs-studio.nix]
       else []
     );
+
 }

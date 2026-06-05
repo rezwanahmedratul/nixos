@@ -14,16 +14,15 @@
   # `ppd` for power-profiles-daemon (more aggressive performance)
   # `none` to disable power management
   powerManager = "tlp";
-  
 
   # Emable/disable bundled applications
   tmuxEnable = false;
   alacrittyEnable = true;
   weztermEnable = false;
   ghosttyEnable = false;
-  vscodeEnable = true;
+  vscodeEnable = true; # Microsoft VSCode with telemetry
   zed-editorEnable = false;
-  vscodiumEnable = true; # Open-source build of VSCode without telemetry
+  vscodiumEnable = false; # Open-source build of VSCode without telemetry
   antigravityEnable = false; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
   helixEnable = false;
@@ -62,16 +61,16 @@
   # Host-level default applications (picked up by Home Manager xdg.mimeApps)
   # Uncomment and adjust the .desktop IDs to set per-host defaults.
   mimeDefaultApps = {
-  #   # PDFs
-     "application/pdf" = ["org.kde.okular.desktop"];  # or evince.desktop
-     "application/x-pdf" = ["org.kde.okular.desktop"];
-  #   # Web browser
-     "x-scheme-handler/http"  = ["zen-beta.desktop"];  # or brave-browser.desktop, firefox.desktop
-     "x-scheme-handler/https" = ["zen-beta.desktop"];
-  #   "text/html"              = ["google-chrome.desktop"];
-  #   # Files
-  #   "inode/directory" = ["thunar.desktop"];      # file manager
-     "text/plain"      = ["nvim.desktop"];        # or code.desktop
+    #   # PDFs
+    "application/pdf" = ["org.kde.okular.desktop"]; # or evince.desktop
+    "application/x-pdf" = ["org.kde.okular.desktop"];
+    #   # Web browser
+    "x-scheme-handler/http" = ["zen-beta.desktop"]; # or brave-browser.desktop, firefox.desktop
+    "x-scheme-handler/https" = ["zen-beta.desktop"];
+    #   "text/html"              = ["google-chrome.desktop"];
+    #   # Files
+    #   "inode/directory" = ["thunar.desktop"];      # file manager
+    "text/plain" = ["nvim.desktop"]; # or code.desktop
   };
 
   # Available Options:
@@ -116,7 +115,7 @@
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
   #stylixImage = ../../wallpapers/mountainscapedark.jpg;
   #stylixImage = ../../wallpapers/Skyscraper.jpg;
-   stylixImage = ../../wallpapers/fuji.jpg;
+  stylixImage = ../../wallpapers/fuji.jpg;
 
   # Set Waybar
   #  Available Options:
