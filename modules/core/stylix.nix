@@ -28,7 +28,7 @@ in {
     #   base0F = "00f769";
     # };
     polarity = "dark";
-    opacity.terminal = 1.0;
+    opacity.terminal = 0.8;
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
@@ -49,7 +49,7 @@ in {
       };
       sizes = {
         applications = 12;
-        terminal = 15;
+        terminal = 11;
         desktop = 11;
         popups = 12;
       };

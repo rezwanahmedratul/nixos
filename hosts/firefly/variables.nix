@@ -11,16 +11,19 @@
   # Set Power Manager
   # `tlp` for laptops (default)
   # `auto-cpufreq` for desktops (more aggressive performance)
-  powerManager = "none";
+  # `ppd` for power-profiles-daemon (more aggressive performance)
+  # `none` to disable power management
+  powerManager = "tlp";
   
 
   # Emable/disable bundled applications
   tmuxEnable = false;
   alacrittyEnable = false;
   weztermEnable = false;
-  ghosttyEnable = true;
+  ghosttyEnable = false;
   vscodeEnable = true;
-  antigravityEnable = true; # Google port of vscodium
+  zed-editorEnable = false;
+  antigravityEnable = false; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
   helixEnable = false;
   #To install: Enable here, zcli rebuild, then run zcli doom install
@@ -74,7 +77,7 @@
   # Kitty, ghostty, wezterm, aalacrity
   # Note: kitty, wezterm, alacritty have to be enabled in `variables.nix`
   # Setting it here does not enable it. Kitty is installed by default
-  terminal = "ghostty"; # Set Default System Terminal
+  terminal = "kitty"; # Set Default System Terminal
 
   keyboardLayout = "us";
   keyboardVariant = "";

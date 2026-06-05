@@ -13,6 +13,7 @@
     doomEmacsEnable
     antigravityEnable
     obsEnable
+    zed-editorEnable
     ;
   # Select bar module based on barChoice
   barModule =
@@ -75,6 +76,11 @@ in {
     ++ (
       if vscodeEnable
       then [./editors/vscode.nix]
+      else []
+    )
+    ++ (
+      if zed-editorEnable
+      then [./editors/zed-editor.nix]
       else []
     )
     ++ (

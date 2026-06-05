@@ -30,6 +30,8 @@ in {
         then [ ./auto-cpufreq.nix ]
         else if vars.powerManager == "tlp"
         then [ ./tlp.nix ]
+        else if vars.powerManager == "ppd"
+        then [ ./power-profiles-deamon.nix ]
         else [])
 
     ++ [
