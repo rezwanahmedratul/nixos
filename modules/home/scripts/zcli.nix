@@ -129,7 +129,7 @@ in
 
 
     # --- Configuration ---
-    PROJECT="zaneyos"   #ddubos or zaneyos
+    PROJECT="nixos"   #ddubos or zaneyos
     PROFILE_DEFAULT="${profile}"
     BACKUP_FILES_STR="${backupFilesString}"
     VERSION="1.0.2"
@@ -183,7 +183,7 @@ in
     }
 
     print_help() {
-      echo "ZaneyOS CLI Utility -- version $VERSION"
+      echo "NixOS CLI Utility -- version $VERSION"
       echo ""
       echo "Usage: zcli [command] [options]"
       echo ""

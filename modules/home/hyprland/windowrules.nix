@@ -16,6 +16,7 @@ _: {
         name = Thunar
         match:class = ^([Tt]hunar|org.gnome.Nautilus|[Pp]cmanfm-qt)$
         tag = +file-manager
+        opacity = 0.65 = 0.5
       }
 
       windowrule {
@@ -319,7 +320,7 @@ _: {
       windowrule {
         name = Terminals-opacity
         match:tag = terminal*
-        opacity = 0.8 = 0.7
+        opacity = 0.6 = 0.45
         no_blur = off
       }
 
