@@ -118,7 +118,7 @@ in {
     profiles.default = {
       extensions =
         (with pkgs.vscode-extensions; [
-          #catppuccin.catppuccin-vsc
+          catppuccin.catppuccin-vsc
           bbenoist.nix
           kamadorueda.alejandra
           jeff-hykin.better-nix-syntax
@@ -184,10 +184,10 @@ in {
         "redhat.telemetry.enabled" = true;
         "explorer.confirmDelete" = false;
 
-        # "workbench.colorTheme" = "Catppuccin Mocha";
-        # "workbench.iconTheme" = "catppuccin-mocha";
-        "workbench.colorTheme" = "Stylix";
-        "workbench.iconTheme" = "Stylix";
+        "workbench.colorTheme" = "Catppuccin Mocha";
+        "workbench.iconTheme" = "catppuccin-mocha";
+        # "workbench.colorTheme" = "Stylix";
+        # "workbench.iconTheme" = "Stylix";
 
         "workbench.activityBar.compact" = "true";
 
