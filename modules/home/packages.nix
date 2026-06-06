@@ -15,5 +15,6 @@ in {
       # alacritty
       # appimage-run
       # brave
+      pangolin-cli
     ]);
 }

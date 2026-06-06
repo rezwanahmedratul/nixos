@@ -11,12 +11,12 @@
           owner = "fosrl";
           repo = "cli";
           tag = "0.9.0";
-          hash = prev.lib.fakeHash; # Replace after first failed build
+          hash = "sha256-TWn0xwjQTIZ5oNrMScGko27HpVfwMi/LpLFCQADmhKw="; 
         };
         ldflags = [
           "-X github.com/fosrl/cli/internal/version.Version=0.9.0"
         ];
-        vendorHash = prev.lib.fakeHash; # Replace after first failed build
+        vendorHash = "sha256-6rWNo84a+aqcHgjtNqrgfYnERSO6AdWwZ36+mhxk6Z8=";
       });
     })
 
