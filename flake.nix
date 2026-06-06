@@ -7,6 +7,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    custom-packages.url = "github:Rishabh5321/custom-packages-flake";
     nvf.url = "github:notashelf/nvf";
     stylix.url = "github:danth/stylix/master";
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";

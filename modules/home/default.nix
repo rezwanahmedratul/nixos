@@ -67,7 +67,7 @@ in {
       ./screen-recording.nix
       ./ocr.nix
       ./mpv.nix
-      ./abdm.nix
+      ./packages.nix
     ]
     ++ (
       if helixEnable
