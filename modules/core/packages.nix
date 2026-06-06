@@ -127,7 +127,6 @@ in {
       #heimdall
       typst
       #python313Packages.opencv4
-      pangolin-cli
       jq
       slurp
       hyprpicker
