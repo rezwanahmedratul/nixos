@@ -73,27 +73,21 @@ in {
       mesa-demos # needed for inxi diag util
       tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
       htop # Simple Terminal Based System Monitor
-      eog # For Image Viewing
       #inxi # CLI System Information Tool
       killall # For Killing All Instances Of Programs
       libnotify # For Notifications
       lm_sensors # Used For Getting Hardware Temps
       lolcat # Add Colors To Your Terminal Command Output
-      lshw # Detailed Hardware Information
-      mdcat # CLI markdown parser
       mpv # Incredible Video Player
-      ncdu # Disk Usage Analyzer With Ncurses Interface
       nixfmt # Nix Formatter
       nwg-displays # configure monitor configs via GUI
       #nwg-drawer # Application launcher for wayland
       #nwg-dock-hyprland # Dock for hyprland
       #nwg-menu # App menu for waybar
       onefetch # provides zsaneyos build info on current system
-      pandoc # format MD to HTML for cheatsheet parser
       pavucontrol # For Editing Audio Levels & Devices
       pciutils # Collection Of Tools For Inspecting PCI Devices
       #picard # For Changing Music Metadata & Getting Cover Art
-      pkg-config # Wrapper Script For Allowing Packages To Get Info On Others
       playerctl # Allows Changing Media Volume Through Scripts
       rhythmbox # audio player
       ripgrep # Improved Grep

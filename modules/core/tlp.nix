@@ -66,16 +66,16 @@
     tlp-pd
   ];
 
-#   systemd.services.tlp-pd = {
-#   wantedBy = [ "multi-user.target" ];
-#   after = [ "tlp.service" ];
+  systemd.services.tlp-pd = {
+  wantedBy = [ "multi-user.target" ];
+  after = [ "tlp.service" ];
 
-#   serviceConfig = {
-#     ExecStart = "${pkgs.tlp-pd}/bin/tlp-pd";
-#     Restart = "always";
-#   };
-# };
+  serviceConfig = {
+    ExecStart = "${pkgs.tlp-pd}/bin/tlp-pd";
+    Restart = "always";
+  };
+};
 
   # Optional but recommended
-  powerManagement.enable = true;
+  #powerManagement.enable = true;
 }

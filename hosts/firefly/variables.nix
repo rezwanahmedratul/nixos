@@ -19,7 +19,7 @@
   tmuxEnable = true; # Terminal Multiplexer
   alacrittyEnable = true;
   weztermEnable = false;
-  ghosttyEnable = false;
+  ghosttyEnable = true;
   vscodeEnable = true; # Microsoft VSCode with telemetry
   zed-editorEnable = false;
   vscodiumEnable = false; # Open-source build of VSCode without telemetry
@@ -62,8 +62,8 @@
   # Uncomment and adjust the .desktop IDs to set per-host defaults.
   mimeDefaultApps = {
     #   # PDFs
-    "application/pdf" = ["org.kde.okular.desktop"]; # or evince.desktop
-    "application/x-pdf" = ["org.kde.okular.desktop"];
+    "application/pdf" = ["okular.desktop"]; # or evince.desktop
+    "application/x-pdf" = ["okular.desktop"];
     #   # Web browser
     "x-scheme-handler/http" = ["zen-beta.desktop"]; # or brave-browser.desktop, firefox.desktop
     "x-scheme-handler/https" = ["zen-beta.desktop"];
@@ -77,7 +77,7 @@
   # Kitty, ghostty, wezterm, aalacrity
   # Note: kitty, wezterm, alacritty have to be enabled in `variables.nix`
   # Setting it here does not enable it. Kitty is installed by default
-  terminal = "alacritty"; # Set Default System Terminal
+  terminal = "ghostty"; # Set Default System Terminal
 
   keyboardLayout = "us";
   keyboardVariant = "";
@@ -115,9 +115,9 @@
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
   #stylixImage = ../../wallpapers/mountainscapedark.jpg;
   #stylixImage = ../../wallpapers/Skyscraper.jpg;
-  #stylixImage = ../../wallpapers/fuji.jpg;
+  stylixImage = ../../wallpapers/fuji.jpg;
   # stylixImage = ../../wallpapers/daniel-leone-v7daTKlZzaw-unsplash.jpg;
-  stylixImage = ../../wallpapers/gruv-portal-cake.png;
+  # stylixImage = ../../wallpapers/gruv-portal-cake.png;
 
   # Set Waybar
   #  Available Options:
