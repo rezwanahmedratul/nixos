@@ -19,7 +19,7 @@
   tmuxEnable = true; # Terminal Multiplexer
   alacrittyEnable = true;
   weztermEnable = false;
-  ghosttyEnable = true;
+  ghosttyEnable = false;
   vscodeEnable = true; # Microsoft VSCode with telemetry
   zed-editorEnable = false;
   vscodiumEnable = false; # Open-source build of VSCode without telemetry
@@ -30,6 +30,12 @@
   doomEmacsEnable = false;
   obsEnable = false;
 
+  # Available Options:
+  # Kitty, ghostty, wezterm, aalacrity
+  # Note: kitty, wezterm, alacritty have to be enabled in `variables.nix`
+  # Setting it here does not enable it. Kitty is installed by default
+  terminal = "alacritty"; # Set Default System Terminal
+
   # Python development tools are included by default
 
   # Hyprland Settings
@@ -38,9 +44,7 @@
   # extraMonitorSettings = "monitor = HDMI-A-1,1920x1080@60,auto,1";
   # You can configure multiple monitors.
   # Inside the quotes, create a new line for each monitor.
-  extraMonitorSettings = "
-   monitor = eDP-1, 1920x1200@60, 0x0, 1.20
-    ";
+  extraMonitorSettings = "monitor = eDP-1, 1920x1200@60, 0x0, 1.20";
 
   # Bar/Shell Settings
   # Choose between noctalia or waybar
@@ -72,12 +76,6 @@
     #   "inode/directory" = ["thunar.desktop"];      # file manager
     "text/plain" = ["nvim.desktop"]; # or code.desktop
   };
-
-  # Available Options:
-  # Kitty, ghostty, wezterm, aalacrity
-  # Note: kitty, wezterm, alacritty have to be enabled in `variables.nix`
-  # Setting it here does not enable it. Kitty is installed by default
-  terminal = "ghostty"; # Set Default System Terminal
 
   keyboardLayout = "us";
   keyboardVariant = "";
@@ -115,9 +113,10 @@
   #stylixImage = ../../wallpapers/beautifulmountainscape.jpg;
   #stylixImage = ../../wallpapers/mountainscapedark.jpg;
   #stylixImage = ../../wallpapers/Skyscraper.jpg;
-  stylixImage = ../../wallpapers/fuji.jpg;
+  #stylixImage = ../../wallpapers/fuji.jpg;
   # stylixImage = ../../wallpapers/daniel-leone-v7daTKlZzaw-unsplash.jpg;
   # stylixImage = ../../wallpapers/gruv-portal-cake.png;
+  stylixImage = ../../wallpapers/call-it-a-day.jpg;
 
   # Set Waybar
   #  Available Options:

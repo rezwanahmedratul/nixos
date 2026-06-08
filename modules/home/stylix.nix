@@ -8,7 +8,7 @@ _: {
     hyprlock.enable = false;
     ghostty.enable = true;
     kitty.enable = true;
-    #vscode.enable = true;
+    vscode.enable = true;
     qt = {
       enable = true;
       platform = "qtct";

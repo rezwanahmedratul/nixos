@@ -32,6 +32,10 @@ in {
 
         # Images and video
         "image/png" = ["qimgv.desktop"]; # or org.gnome.eog.desktop
+        "image/jpeg" = ["qimgv.desktop"];
+        "image/jpg" = ["qimgv.desktop"];
+        "image/gif" = ["qimgv.desktop"];
+        "image/webp" = ["qimgv.desktop"];
         "video/mp4" = ["mpv.desktop"]; # or vlc.desktop
 
         # Archives
