@@ -1,29 +1,44 @@
 { pkgs, ... }:
 
 let
-  cp-session = pkgs.writeShellScriptBin "cp-session" ''
-    #!${pkgs.bash}/bin/bash
+cp-session = pkgs.writeShellScriptBin "cp-session" ''
+#!${pkgs.bash}/bin/bash
 
-    # Open Codeforces in default browser
-    xdg-open "https://codeforces.com/problemset" &
+WS=$(hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq '.id')
 
-    sleep 1
+# --- FORCE NEW WINDOWS ---
+zen-beta --new-window "https://codeforces.com/" &
+sleep 1
 
-    # Open CP folder in VS Code
-    code "$HOME/CP" &
+code --new-window "$HOME/Github/CP" &
+sleep 2
 
-    # Wait for both windows to appear and be tiled
-    sleep 2
+# --- GET WINDOWS ONLY FROM CURRENT WORKSPACE ---
+ZEN_ADDR=$(hyprctl clients -j | ${pkgs.jq}/bin/jq -r --argjson ws "$WS" '
+  .[] | select(.workspace.id == $ws and .class == "zen-beta") | .address
+' | head -n 1)
 
-    # Try to focus browser window (best-effort)
-    hyprctl dispatch focuswindow "title:.*Codeforces.*"
+CODE_ADDR=$(hyprctl clients -j | ${pkgs.jq}/bin/jq -r --argjson ws "$WS" '
+  .[] | select(.workspace.id == $ws and (.class | test("code|Code|vscode"; "i"))) | .address
+' | head -n 1)
 
-    # Set dwindle split ratio (browser ~35%, code ~65%)
-    hyprctl dispatch splitratio 0.35
-  '';
+# --- POSITION ONLY THESE WINDOWS ---
+if [ -n "$ZEN_ADDR" ]; then
+  hyprctl dispatch movewindowpixel exact 0 24,address:$ZEN_ADDR
+  hyprctl dispatch resizewindowpixel exact 560 976,address:$ZEN_ADDR
+fi
+
+if [ -n "$CODE_ADDR" ]; then
+  hyprctl dispatch movewindowpixel exact 564 24,address:$CODE_ADDR
+  hyprctl dispatch resizewindowpixel exact 1036 976,address:$CODE_ADDR
+fi
+
+# optional focus (current workspace only)
+if [ -n "$ZEN_ADDR" ]; then
+  hyprctl dispatch focuswindow "address:$ZEN_ADDR"
+fi
+'';
 in
 {
-  home.packages = [
-    cp-session
-  ];
+home.packages = [ cp-session ];
 }
