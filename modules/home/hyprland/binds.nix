@@ -68,6 +68,7 @@ in {
         "$modifier,S, Screenshot, exec, screenshootin"
         "$modifier CTRL,Z, Open NixOS in VS Code, exec, code ~/nixos"
         "$modifier CTRL,C, Open Competitive Programming in VS Code, exec, code ~/Github/CP"
+        "$modifier CTRL,C, Competitive Programming Mode, exec, cp-session"
         #"$modifier CTRL,R, Rebuild Nix Config, exec, ghostty -e zsh -ic 'fr'"
         "$modifier ALT, P, Power Off, exec, poweroff"
         "$modifier ALT, R, Reboot, exec, reboot"

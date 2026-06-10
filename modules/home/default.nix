@@ -68,6 +68,7 @@ in {
       ./ocr.nix
       ./mpv.nix
       ./packages.nix
+      ./cp.nix
     ]
     ++ (
       if helixEnable
