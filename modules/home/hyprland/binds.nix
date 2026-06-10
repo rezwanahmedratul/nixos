@@ -56,7 +56,6 @@ in {
         "$modifier,Return, Terminal, exec, ${terminal}"
         # ============= APPLICATION LAUNCHERS =============
         "$modifier,K, Keybinds Search Tool, exec, qs-keybinds"
-        "$modifier CTRL,C, Cheatsheets Viewer, exec, qs-cheatsheets"
         "$modifier SHIFT,K, Keybinds Search Tool, exec, qs-keybinds"
         "$modifier SHIFT,D, Discord, exec, discord"
         "$modifier ALT,W, Web Search, exec, web-search"
@@ -68,6 +67,7 @@ in {
         "$modifier,E, Emoji Picker, exec, emopicker9000"
         "$modifier,S, Screenshot, exec, screenshootin"
         "$modifier CTRL,Z, Open NixOS in VS Code, exec, code ~/nixos"
+        "$modifier CTRL,C, Open Competitive Programming in VS Code, exec, code ~/Github/CP"
         #"$modifier CTRL,R, Rebuild Nix Config, exec, ghostty -e zsh -ic 'fr'"
         "$modifier ALT, P, Power Off, exec, poweroff"
         "$modifier ALT, R, Reboot, exec, reboot"

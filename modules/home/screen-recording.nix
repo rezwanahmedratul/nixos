@@ -21,14 +21,14 @@ let
     ]}
 
     [[ -f ~/.config/user-dirs.dirs ]] && source ~/.config/user-dirs.dirs
-    OUTPUT_DIR="''${XDG_VIDEOS_DIR:-$HOME/Videos}"
+
+    OUTPUT_DIR="''${XDG_VIDEOS_DIR:-''$HOME/Videos}"
 
     if [[ ! -d "$OUTPUT_DIR" ]]; then
       notify-send "Screen recording directory does not exist: $OUTPUT_DIR"
       exit 1
     fi
 
-    DESKTOP_AUDIO="false"
     MICROPHONE_AUDIO="false"
     WEBCAM="false"
     WEBCAM_DEVICE=""
@@ -39,7 +39,6 @@ let
 
     for arg in "$@"; do
       case "$arg" in
-        --with-desktop-audio) DESKTOP_AUDIO="true" ;;
         --with-microphone-audio) MICROPHONE_AUDIO="true" ;;
         --with-webcam) WEBCAM="true" ;;
         --webcam-device=*) WEBCAM_DEVICE="''${arg#*=}" ;;
@@ -132,16 +131,21 @@ let
 
       filename="$OUTPUT_DIR/recording-$(date +'%Y-%m-%d_%H-%M-%S').mp4"
 
-      audio_devices=""
-      [[ "$DESKTOP_AUDIO" == "true" ]] && audio_devices+="default_output"
+      # ALWAYS record system audio
+      audio_devices="default_output"
+
+      # optional mic
       [[ "$MICROPHONE_AUDIO" == "true" ]] && audio_devices+="|default_input"
 
-      audio_args=()
-      [[ -n "$audio_devices" ]] && audio_args=(-a "$audio_devices" -ac aac)
+      audio_args=(-a "$audio_devices" -ac aac)
 
+      # start recording
       gpu-screen-recorder "''${args[@]}" -f 60 -o "$filename" "''${audio_args[@]}" &
 
       echo "$filename" > "$RECORDING_FILE"
+
+      notify-send "Screen Recording" "Started recording: $filename"
+
       pkill -RTMIN+8 waybar 2>/dev/null || true
     }
 
@@ -154,7 +158,7 @@ let
       filename=$(cat "$RECORDING_FILE" 2>/dev/null || true)
 
       if [[ -f "$filename" ]]; then
-        notify-send "Recording saved" "$filename"
+        notify-send "Screen Recording" "Saved: $filename"
       fi
 
       rm -f "$RECORDING_FILE"
@@ -169,9 +173,9 @@ let
       start_recording
     fi
   '';
+
 in
 {
-  # ✅ CORRECT for Home Manager
   home.packages = [
     screenrecord
   ];

@@ -12,9 +12,7 @@ in {
       customPkgs.ab-download-manager
     ]
     ++ (with pkgs; [
-      # alacritty
-      # appimage-run
-      # brave
       pangolin-cli
+      obsidian
     ]);
 }
