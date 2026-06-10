@@ -226,115 +226,75 @@ in {
 
   # C++ snippets
   home.file.".config/Code/User/snippets/cpp.json".text = ''
-      {
-        "CP Basic Boilerplate": {
-          "prefix": "cpb",
-          "body": [
-            "#include <bits/stdc++.h>",
-            "using namespace std;",
-            "",
-            "int main(){",
-            "\t$0",
-            "\treturn 0;",
-            "}"
-          ],
-          "description": "Basic CP boilerplate"
-        },
+          {
+            "CP Basic Boilerplate": {
+              "prefix": "cpb",
+              "body": [
+                "#include <bits/stdc++.h>",
+                "using namespace std;",
+                "",
+                "int main(){",
+                "\t$0",
+                "\treturn 0;",
+                "}"
+              ],
+              "description": "Basic CP boilerplate"
+            },
 
-         "CP Solve Template": {
-      "prefix": "cpp",
-      "body": [
-        "#include <bits/stdc++.h>",
-        "using namespace std;",
-        "",
-        "typedef vector<int> vi;",
-        "typedef long long ll;",
-        "typedef vector<ll> vl;",
-        "typedef vector<vi> vvi;",
-        "typedef vector<vl> vvl;",
-        "typedef pair<int,int> pii;",
-        "typedef pair<ll,ll> pll;",
-        "typedef vector<pll> vpl;",
-        "typedef map<int,int> mii;",
-        "",
-        "#define fastInput() ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);",
-        "#define el \"\\n\"",
-        "#define pb push_back",
-        "#define YES cout << \"YES\\n\"",
-        "#define NO cout << \"NO\\n\"",
-        "#define allr(a) a.rbegin(), a.rend()",
-        "#define all(a) a.begin(), a.end()",
-        "#define vin(v) for(auto &u : v) cin >> u",
-        "#define vout(v) for(auto u : v) cout << u << \" \"",
-        "#define F first",
-        "#define S second",
-        "#define sp ' '",
-        "#define mem(a,b) memset(a,b,sizeof(a))",
-        "#define gcd(a,b) __gcd(a,b)",
-        "int const MOD = 1e9 + 7;",
-        "",
-        "void solve(){",
-        "\t$0",
-        "}",
-        "",
-        "int main(){",
-        "\tfastInput();",
-        "\t",
-        "\tll t = 1;",
-        "\tcin >> t;",
-        "\twhile(t--){",
-        "\t\tsolve();",
-        "\t}",
-        "\t",
-        "\treturn 0;",
-        "}"
-      ],
-      "description": "Competitive programming template with solve() and test cases"
-    },
+            "CP Solve Template": {
+              "prefix": "cpp",
+              "body": [
+                "#include <bits/stdc++.h>",
+                "using namespace std;",
+                "typedef long long ll;",
+                "#define YES cout << \"YES\\n\"",
+                "#define NO cout << \"NO\\n\"",
+                "#define vin(v) for(auto &u : v) cin >> u",
+                "#define vout(v) for(ll i = 0; i < (ll)v.size(); i++) cout << v[i] << (i + 1 == (ll)v.size() ? '\\n' : ' ')",
+                "#define sp ' '",
+                "",
+                "void solve(){",
+                "\t$0",
+                "}",
+                "",
+                "int main(){",
+                "\tios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);",
+                "",
+                "\tll t = 1;",
+                "\tcin >> t;",
+                "\twhile(t--){",
+                "\t\tsolve();",
+                "\t}",
+                "",
+                "\treturn 0;",
+                "}"
+              ],
+              "description": "Competitive programming template with solve()"
+            },
 
-      "CP Single Main Template": {
-      "prefix": "cpm",
-      "body": [
-        "#include <bits/stdc++.h>",
-        "using namespace std;",
-        "",
-        "typedef vector<int> vi;",
-        "typedef long long ll;",
-        "typedef vector<ll> vl;",
-        "typedef vector<vi> vvi;",
-        "typedef vector<vl> vvl;",
-        "typedef pair<int,int> pii;",
-        "typedef pair<ll,ll> pll;",
-        "typedef vector<pll> vpl;",
-        "typedef map<int,int> mii;",
-        "",
-        "#define fastInput() ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);",
-        "#define el \"\\n\"",
-        "#define pb push_back",
-        "#define YES cout << \"YES\\n\"",
-        "#define NO cout << \"NO\\n\"",
-        "#define allr(a) a.rbegin(), a.rend()",
-        "#define all(a) a.begin(), a.end()",
-        "#define vin(v) for(auto &u : v) cin >> u",
-        "#define vout(v) for(auto u : v) cout << u << \" \"",
-        "#define F first",
-        "#define S second",
-        "#define sp ' '",
-        "#define mem(a,b) memset(a,b,sizeof(a))",
-        "#define gcd(a,b) __gcd(a,b)",
-        "int const MOD = 1e9 + 7;",
-        "",
-        "int main(){",
-        "\tfastInput();",
-        "",
-        "\t$0",
-        "",
-        "\treturn 0;",
-        "}"
-      ],
-      "description": "Competitive programming single main template"
-    }
-      }
+            "CP Single Main Template": {
+              "prefix": "cpm",
+              "body": [
+                "#include <bits/stdc++.h>",
+                "using namespace std;",
+                "typedef long long ll;",
+                "#define YES cout << \"YES\\n\"",
+                "#define NO cout << \"NO\\n\"",
+                "#define vin(v) for(auto &u : v) cin >> u",
+                "#define vout(v) for(ll i = 0; i < (ll)v.size(); i++) cout << v[i] << (i + 1 == (ll)v.size() ? '\\n' : ' ')",
+                "#define sp ' '",
+                "",
+                "int main(){",
+                "\tios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);",
+                "",
+                "\t$0",
+                "",
+                "\treturn 0;",
+                "}"
+              ],
+              "description": "Competitive programming single main template"
+            }
+          }
   '';
 
   nixpkgs.config.allowUnfree = true;
