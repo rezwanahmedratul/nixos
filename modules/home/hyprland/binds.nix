@@ -1,7 +1,6 @@
-{host, ...}: let
-  vars = import ../../../hosts/${host}/variables.nix;
+{zaneyos, ...}: let
   inherit
-    (vars)
+    (zaneyos)
     barChoice
     browser
     terminal
