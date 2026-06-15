@@ -1,6 +1,7 @@
-{zaneyos, ...}: let
+{host, ...}: let
+  vars = import ../../../hosts/${host}/variables.nix;
   inherit
-    (zaneyos)
+    (vars)
     barChoice
     browser
     terminal
@@ -9,17 +10,18 @@
   noctaliaBind =
     if barChoice == "noctalia"
     then [
-      "$modifier,D, Noctalia Launcher, exec,  noctalia-msg panel-toggle launcher"
-      "$modifier SHIFT,Return, Noctalia Launcher, exec, noctalia-msg panel-toggle launcher"
-      "$modifier,M, Noctalia Notifications, exec, noctalia-msg panel-toggle control-center notifications"
-      "$modifier,V, Noctalia Clipboard, exec,  noctalia-msg panel-toggle clipboard"
-      "$modifier ALT,P, Noctalia Settings, exec,  noctalia-msg settings-toggle"
-      "$modifier SHIFT,comma, Noctalia Settings, exec,  noctalia-msg settings-toggle"
-      "$modifier CTRL,L, Noctalia Lock Screen, exec,  noctalia-msg session lock"
-      "$modifier SHIFT,W, Noctalia Wallpaper, exec,  noctalia-msg panel-toggle wallpaper"
-      "$modifier,X, Noctalia Power Menu, exec,  noctalia-msg panel-toggle session"
-      "$modifier,C, Noctalia Control Center, exec,  noctalia-msg panel-toggle control-center"
-      "$modifier CTRL,R, Noctalia Screenshot Region, exec,  noctalia-msg screenshot-region"
+      "$modifier,D, Noctalia Launcher, exec, noctalia msg panel-toggle launcher"
+      "$modifier SHIFT,Return, Noctalia Launcher, exec, noctalia msg panel-toggle launcher"
+      "$modifier,M, Noctalia Notifications, exec, noctalia msg panel-toggle control-center notifications"
+      "$modifier,V, Noctalia Clipboard, exec, noctalia msg panel-toggle clipboard"
+      "$modifier ALT,P, Noctalia Settings, exec, noctalia msg settings-toggle"
+      "$modifier SHIFT,comma, Noctalia Settings, exec, noctalia msg settings-toggle"
+      "$modifier CTRL,L, Noctalia Lock Screen, exec, noctalia msg session lock"
+      "$modifier SHIFT,W, Noctalia Wallpaper, exec, noctalia msg panel-toggle wallpaper"
+      "$modifier,X, Noctalia Power Menu, exec, noctalia msg panel-toggle session"
+      "$modifier,C, Noctalia Control Center, exec, noctalia msg panel-toggle control-center"
+      "$modifier CTRL,R, Noctalia Screenshot Region, exec, noctalia msg screenshot-region"
+      "$modifier SHIFT,R, Restart Noctalia shell, exec, restart.noctalia"
     ]
     else [];
   # Rofi launcher bindings (only included when barChoice != "noctalia")
@@ -68,7 +70,7 @@ in {
         "$modifier,O, OBS Studio, exec, obs"
         "$modifier ALT,C, Color Picker, exec, hyprpicker -a"
         "$modifier,G, GIMP, exec, gimp"
-        "$modifier shift,T, Dropdown Terminal, exec, sh -lc 'DropTerminal \${TERM:-kitty}'"
+        "$modifier SHIFT,T, Dropdown Terminal, exec, sh -lc 'DropTerminal'"
         "$modifier,T, Thunar, exec, thunar"
         "$modifier ALT,M, Audio Control, exec, pavucontrol"
         # ============= WINDOW MANAGEMENT =============
@@ -76,8 +78,8 @@ in {
         "$modifier,P, Pseudo Tile, pseudo,"
         "$modifier SHIFT,I, Toggle Split, layoutmsg, togglesplit"
         "$modifier,F, Maximize, fullscreen,"
-        "$modifier,SPACE, Toggle Floating, togglefloating,"
-        "$modifier ALT,SPACE, Float All Windows, exec, hyprland-float-all"
+        "$modifier SHIFT,F, Toggle Floating, togglefloating,"
+        "$modifier ALT,F, Float All Windows, exec, hyprland-float-all"
         # ============= LAYOUTS =============
         "$modifier ALT,L, Toggle Layouts, exec, hyprland-change-layout toggle"
         "$modifier ALT,1, Layout Dwindle, exec, hyprland-change-layout dwindle"
@@ -85,11 +87,11 @@ in {
         "$modifier ALT,3, Layout Scrolling, exec, hyprland-change-layout scrolling"
         "$modifier ALT,4, Layout Monocle, exec, hyprland-change-layout monocle"
         "$modifier SHIFT,C, Exit/Logout of Hyprland, exit,"
-        # ============= WINDOW RESIZE (ARROW KEYS) =============
-        "$modifier SHIFT,left, Resize Left, resizeactive, -30 0"
-        "$modifier SHIFT,right, Resize Right, resizeactive, 30 0"
-        "$modifier SHIFT,up, Resize Up, resizeactive, 0 -30"
-        "$modifier SHIFT,down, Resize Down, resizeactive, 0 30"
+        # ============= WINDOW MOVEMENT (ARROW KEYS) =============
+        "$modifier SHIFT,left, Move Left, movewindow, l"
+        "$modifier SHIFT,right, Move Right, movewindow, r"
+        "$modifier SHIFT,up, Move Up, movewindow, u"
+        "$modifier SHIFT,down, Move Down, movewindow, d"
         # ============= WINDOW MOVEMENT (VI STYLE) =============
         "$modifier SHIFT,h, Move Left (VI), movewindow, l"
         "$modifier SHIFT,l, Move Right (VI), movewindow, r"
@@ -127,8 +129,8 @@ in {
         "$modifier,9, Workspace 9, workspace, 9"
         "$modifier,0, Workspace 10, workspace, 10"
         # ============= MOVE WINDOW TO WORKSPACE (1-10) =============
-        "$modifier CTRL,SPACE, Move to Special, movetoworkspace, special"
-        "$modifier SHIFT,SPACE, Toggle Special, togglespecialworkspace"
+        "$modifier SHIFT,SPACE, Move to Special, movetoworkspace, special"
+        "$modifier,SPACE, Toggle Special, togglespecialworkspace"
         "$modifier SHIFT,1, Move to Workspace 1, movetoworkspace, 1"
         "$modifier SHIFT,2, Move to Workspace 2, movetoworkspace, 2"
         "$modifier SHIFT,3, Move to Workspace 3, movetoworkspace, 3"
