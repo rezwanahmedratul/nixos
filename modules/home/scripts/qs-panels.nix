@@ -7,7 +7,7 @@ pkgs.writeShellScriptBin "qs-panels" ''
     active=""
     if pgrep -x waybar >/dev/null 2>&1; then active="waybar"; fi
     if pgrep -x dms >/dev/null 2>&1 || pgrep -fa dms | grep -q "\bdms\b.*\brun\b"; then active="dms"; fi
-  if pgrep -fa quickshell | grep -q "noctalia-shell"; then active="noctalia"; fi
+    if pgrep -x noctalia >/dev/null 2>&1 || pgrep -fa quickshell | grep -q "noctalia-shell"; then active="noctalia"; fi
 
     tmpdir=$(${pkgs.coreutils}/bin/mktemp -d)
     qml="$tmpdir/panels.qml"

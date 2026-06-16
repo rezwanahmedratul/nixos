@@ -11,17 +11,17 @@
     if barChoice == "noctalia"
     then [
       #"$modifier,SPACE, Noctalia Launcher, exec, noctalia-shell ipc call launcher toggle"
-      "ALT,SPACE, Noctalia Launcher, exec, noctalia-shell ipc call launcher toggle"
-      "$modifier SHIFT,Return, Noctalia Launcher, exec, noctalia-shell ipc call launcher toggle"
-      "$modifier,M, Noctalia Notifications, exec,  noctalia-shell ipc call notifications toggleHistory"
-      "$modifier CTRL,V, Noctalia Clipboard, exec,  noctalia-shell ipc call launcher clipboard"
-      "$modifier ALT,P, Noctalia Settings, exec, noctalia-shell ipc call settings toggle"
-      "$modifier SHIFT,comma, Noctalia Settings, exec, noctalia-shell ipc call settings toggle"
-      "$modifier CTRL,L, Noctalia Lock Screen, exec,  noctalia-shell ipc call sessionMenu lockscreen lock"
-      "$modifier SHIFT,W, Noctalia Wallpaper, exec, noctalia-shell ipc call wallpaper toggle"
-      "$modifier,P, Noctalia Power Menu, exec,  noctalia-shell ipc call sessionMenu toggle"
-      "$modifier,C, Noctalia Control Center, exec,  noctalia-shell ipc call controlCenter toggle"
-      # "$modifier CTRL,R, Noctalia Screen Recorder, exec,  noctalia-shell ipc call screenRecorder toggle"
+      "ALT,SPACE, Noctalia Launcher, exec, noctalia msg panel-toggle launcher"
+      "$modifier SHIFT,Return, Noctalia Launcher, exec, noctalia msg panel-toggle launcher"
+      "$modifier,M, Noctalia Notifications, exec,  noctalia msg panel-toggle control-center notifications"
+      "$modifier CTRL,V, Noctalia Clipboard, exec,  noctalia msg panel-toggle clipboard"
+      "$modifier ALT,P, Noctalia Settings, exec, noctalia msg settings-toggle"
+      "$modifier SHIFT,comma, Noctalia Settings, exec, noctalia msg settings-toggle"
+      "$modifier CTRL,L, Noctalia Lock Screen, exec,  noctalia msg session lock"
+      "$modifier SHIFT,W, Noctalia Wallpaper, exec, noctalia msg panel-toggle wallpaper"
+      "$modifier,P, Noctalia Power Menu, exec,  noctalia msg panel-toggle session"
+      "$modifier,C, Noctalia Control Center, exec,  noctalia msg panel-toggle control-center"
+      # "$modifier CTRL,R, Noctalia Screen Recorder, exec,  noctalia msg screenshot-region"
       "$modifier SHIFT,R, Restart Noctalia shell, exec,  restart.noctalia"
     ]
     else [];
@@ -72,15 +72,14 @@ in {
         #"$modifier CTRL,R, Rebuild Nix Config, exec, ghostty -e zsh -ic 'fr'"
         "$modifier ALT, P, Power Off, exec, poweroff"
         "$modifier ALT, R, Reboot, exec, reboot"
-        
+
         # ============= SCREENSHOTS =============
         "$modifier CTRL,S, Screenshot Output, exec, hyprshot -m output -o $HOME/Pictures/ScreenShots"
         "$modifier SHIFT,S, Screenshot Window, exec, hyprshot -m window -o $HOME/Pictures/ScreenShots"
         "$modifier ALT,S, Screenshot Region, exec, hyprshot -m region -o $HOME/Pictures/ScreenShots"
         "$modifier SHIFT,Z, Screenshot Region Clipboard, exec, hyprshot -m region --clipboard-only"
         "$modifier SHIFT, A, Grab Text from Region, exec, ocr-region"
-        
-        
+
         # ============= SCREEN RECORDING =============
         "$modifier CTRL,R, Screen Recorder, exec, screenrecord"
         "$modifier,O, OBS Studio, exec, obs"

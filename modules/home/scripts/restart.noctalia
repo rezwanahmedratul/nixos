@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Restart the Noctalia QuickShell session by terminating only the noctalia-shell
-# processes, avoiding any signals to unrelated process groups (e.g. Hyprland).
+# Restart the Noctalia session by terminating only Noctalia-related processes,
+# avoiding any signals to unrelated process groups (e.g. Hyprland).
 
 log() { printf "[restart.noctalia] %s\n" "$*"; }
 
 list_target_pids() {
-  # Collect only PIDs whose command explicitly runs noctalia-shell
-  # - direct wrapper: ".../noctalia-shell"
-  # - quickshell/qs with "-c noctalia-shell"
+  # Collect only PIDs whose command explicitly runs:
+  # - standalone v5 binary: ".../noctalia"
+  # - legacy wrapper: ".../noctalia-shell"
+  # - legacy quickshell launch: quickshell/qs with "-c noctalia-shell"
   ps -eo pid=,cmd= \
-    | ${GREP:-grep} -E "(^|/)(noctalia-shell)( |$)|(^| )((qs|quickshell))( | ).*-c( |=)?noctalia-shell( |$)" \
+    | ${GREP:-grep} -E "(^|/)(noctalia)( |$)|(^|/)(noctalia-shell)( |$)|(^| )((qs|quickshell))( | ).*-c( |=)?noctalia-shell( |$)" \
     | awk '{print $1}'
 }
 
@@ -37,15 +38,17 @@ terminate_targets() {
 }
 
 start_noctalia() {
-  # Prefer the noctalia-shell wrapper to ensure proper env and runtime flags
-  if command -v noctalia-shell >/dev/null 2>&1; then
+  # Prefer the standalone v5 binary; keep legacy fallbacks for compatibility.
+  if command -v noctalia >/dev/null 2>&1; then
+    nohup setsid noctalia >/dev/null 2>&1 &
+  elif command -v noctalia-shell >/dev/null 2>&1; then
     nohup setsid noctalia-shell >/dev/null 2>&1 &
   elif command -v quickshell >/dev/null 2>&1; then
     nohup setsid quickshell -c noctalia-shell >/dev/null 2>&1 &
   elif command -v qs >/dev/null 2>&1; then
     nohup setsid qs -c noctalia-shell >/dev/null 2>&1 &
   else
-    echo "Error: noctalia-shell/quickshell/qs not found in PATH" >&2
+    echo "Error: noctalia/noctalia-shell/quickshell/qs not found in PATH" >&2
     exit 1
   fi
 }
