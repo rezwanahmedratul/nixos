@@ -66,15 +66,30 @@
   # Uncomment and adjust the .desktop IDs to set per-host defaults.
   mimeDefaultApps = {
     #   # PDFs
-    "application/pdf" = ["okular.desktop"]; # or evince.desktop
-    "application/x-pdf" = ["okular.desktop"];
-    #   # Web browser
-    "x-scheme-handler/http" = ["zen-beta.desktop"]; # or brave-browser.desktop, firefox.desktop
+    "application/pdf" = ["okular.desktop"]; # change to your preferred reader
+    "application/x-pdf" = ["okular.desktop"]; # legacy alias
+
+    # Web browser
+    "x-scheme-handler/http" = ["zen-beta.desktop"]; # or brave-browser.desktop, firefox.desktop, etc.
     "x-scheme-handler/https" = ["zen-beta.desktop"];
-    #   "text/html"              = ["google-chrome.desktop"];
-    #   # Files
-    #   "inode/directory" = ["thunar.desktop"];      # file manager
-    "text/plain" = ["nvim.desktop"]; # or code.desktop
+    "text/html" = ["zen-beta.desktop"];
+
+    # Text files
+    "text/plain" = ["nvim.desktop"]; # or code.desktop, org.gnome.TextEditor.desktop
+
+    # Images and video
+    "image/png" = ["qimgv.desktop"]; # or org.gnome.eog.desktop
+    "image/jpeg" = ["qimgv.desktop"];
+    "image/jpg" = ["qimgv.desktop"];
+    "image/gif" = ["qimgv.desktop"];
+    "image/webp" = ["qimgv.desktop"];
+    "video/mp4" = ["mpv.desktop"]; # or vlc.desktop
+
+    # Archives
+    "application/zip" = ["org.gnome.FileRoller.desktop"]; # or xarchiver.desktop, peazip.desktop
+
+    # Folders (file manager)
+    "inode/directory" = ["org.gnome.Nautilus.desktop"]; # or org.gnome.Nautilus.desktop, org.kde.dolphin.desktop
   };
 
   keyboardLayout = "us";
