@@ -17,7 +17,7 @@ in
   environment.etc = {
     "shadowsocks-1.json".text = ''
     {
-      "server": "168.245.213.60",
+      "server": "206.245.171.240",
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1081,
@@ -56,7 +56,7 @@ in
   systemd.services = {
     shadowsocks-1 = mkSS {
       name = "shadowsocks-1";
-      server = "168.245.213.60"; # not used anymore, but kept for structure
+      server = "206.245.171.240"; # not used anymore, but kept for structure
       localPort = 1081;
     };
 

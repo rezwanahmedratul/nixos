@@ -12,7 +12,7 @@
   codeRunnerVer = "0.12.2";
   tinymistVer = "0.14.16";
   typstPreviewVer = "0.11.14";
-
+  geminiVer = "2.87.0";
   cppExtsThemesVer = "2.0.0";
   cppExtsDevToolsVer = "0.4.6";
   chatgptVer = "26.429.30905";
@@ -75,6 +75,13 @@
     name = "typst-preview";
     version = typstPreviewVer;
     sha256 = pkgs.lib.fakeSha256;
+  };
+
+  geminiCodeAssistExts = extOrMarketplace {
+    publisher = "google";
+    name = "geminicodeassist";
+    version = geminiVer;
+    sha256 = "sha256-wgsG/8Vph3rtn3oA1B8W1T1VK6U3emnE0bgqlsAPjjc=";
   };
 
   # chatGPTExts = extOrMarketplace {
@@ -152,7 +159,8 @@ in {
         ++ neroHyprlandExts
         #++ codeRunnerExts
         ++ cppExtraExts
-        # ++ chatGPTExts
+        #++ chatGPTExts
+        ++ geminiCodeAssistExts
         ++ tinymistExts;
 
       userSettings = lib.mkForce {
@@ -226,75 +234,75 @@ in {
 
   # C++ snippets
   home.file.".config/Code/User/snippets/cpp.json".text = ''
-          {
-            "CP Basic Boilerplate": {
-              "prefix": "cpb",
-              "body": [
-                "#include <bits/stdc++.h>",
-                "using namespace std;",
-                "",
-                "int main(){",
-                "\t$0",
-                "\treturn 0;",
-                "}"
-              ],
-              "description": "Basic CP boilerplate"
-            },
+    {
+      "CP Basic Boilerplate": {
+        "prefix": "cpb",
+        "body": [
+          "#include <bits/stdc++.h>",
+          "using namespace std;",
+          "",
+          "int main(){",
+          "\t$0",
+          "\treturn 0;",
+          "}"
+        ],
+        "description": "Basic CP boilerplate"
+      },
 
-            "CP Solve Template": {
-              "prefix": "cpp",
-              "body": [
-                "#include <bits/stdc++.h>",
-                "using namespace std;",
-                "typedef long long ll;",
-                "#define YES cout << \"YES\\n\"",
-                "#define NO cout << \"NO\\n\"",
-                "#define vin(v) for(auto &u : v) cin >> u",
-                "#define vout(v) for(ll i = 0; i < (ll)v.size(); i++) cout << v[i] << (i + 1 == (ll)v.size() ? '\\n' : ' ')",
-                "#define sp ' '",
-                "",
-                "void solve(){",
-                "\t$0",
-                "}",
-                "",
-                "int main(){",
-                "\tios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);",
-                "",
-                "\tll t = 1;",
-                "\tcin >> t;",
-                "\twhile(t--){",
-                "\t\tsolve();",
-                "\t}",
-                "",
-                "\treturn 0;",
-                "}"
-              ],
-              "description": "Competitive programming template with solve()"
-            },
+      "CP Solve Template": {
+        "prefix": "cpp",
+        "body": [
+          "#include <bits/stdc++.h>",
+          "using namespace std;",
+          "typedef long long ll;",
+          "#define YES cout << \"YES\\n\"",
+          "#define NO cout << \"NO\\n\"",
+          "#define vin(v) for(auto &u : v) cin >> u",
+          "#define vout(v) for(ll i = 0; i < (ll)v.size(); i++) cout << v[i] << (i + 1 == (ll)v.size() ? '\\n' : ' ')",
+          "#define sp ' '",
+          "",
+          "void solve(){",
+          "\t$0",
+          "}",
+          "",
+          "int main(){",
+          "\tios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);",
+          "",
+          "\tll t = 1;",
+          "\tcin >> t;",
+          "\twhile(t--){",
+          "\t\tsolve();",
+          "\t}",
+          "",
+          "\treturn 0;",
+          "}"
+        ],
+        "description": "Competitive programming template with solve()"
+      },
 
-            "CP Single Main Template": {
-              "prefix": "cpm",
-              "body": [
-                "#include <bits/stdc++.h>",
-                "using namespace std;",
-                "typedef long long ll;",
-                "#define YES cout << \"YES\\n\"",
-                "#define NO cout << \"NO\\n\"",
-                "#define vin(v) for(auto &u : v) cin >> u",
-                "#define vout(v) for(ll i = 0; i < (ll)v.size(); i++) cout << v[i] << (i + 1 == (ll)v.size() ? '\\n' : ' ')",
-                "#define sp ' '",
-                "",
-                "int main(){",
-                "\tios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);",
-                "",
-                "\t$0",
-                "",
-                "\treturn 0;",
-                "}"
-              ],
-              "description": "Competitive programming single main template"
-            }
-          }
+      "CP Single Main Template": {
+        "prefix": "cpm",
+        "body": [
+          "#include <bits/stdc++.h>",
+          "using namespace std;",
+          "typedef long long ll;",
+          "#define YES cout << \"YES\\n\"",
+          "#define NO cout << \"NO\\n\"",
+          "#define vin(v) for(auto &u : v) cin >> u",
+          "#define vout(v) for(ll i = 0; i < (ll)v.size(); i++) cout << v[i] << (i + 1 == (ll)v.size() ? '\\n' : ' ')",
+          "#define sp ' '",
+          "",
+          "int main(){",
+          "\tios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);",
+          "",
+          "\t$0",
+          "",
+          "\treturn 0;",
+          "}"
+        ],
+        "description": "Competitive programming single main template"
+      }
+    }
   '';
 
   nixpkgs.config.allowUnfree = true;

@@ -23,7 +23,7 @@
   vscodeEnable = true; # Microsoft VSCode with telemetry
   zed-editorEnable = false;
   vscodiumEnable = false; # Open-source build of VSCode without telemetry
-  antigravityEnable = false; # Google port of vscodium
+  antigravityEnable = true; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
   helixEnable = false;
   #To install: Enable here, zcli rebuild, then run zcli doom install
