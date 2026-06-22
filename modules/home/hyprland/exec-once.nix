@@ -4,13 +4,7 @@
   noctaliaExec =
     if barChoice == "noctalia"
     then [
-      "killall -q waybar"
-      "pkill waybar"
-      "killall -q swaync"
-      "pkill swaync"
-      "systemctl --user stop noctalia || true"
-      "pkill -x noctalia || true"
-      "noctalia"
+      "start.noctalia"
     ]
     else [];
   # Waybar-specific startup commands
