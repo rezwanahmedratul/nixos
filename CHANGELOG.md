@@ -9,22 +9,27 @@
 
 #### 📅 **Updated: Jun 2026**
 
+- Fix:
+  - Noctalia not starting at login
+    - added systemd service used in main branch
+
 - Fix: `gtk.nix` error regarding `null`
 
+  ```nix
+  {config, pkgs, lib, ...}: {
+    gtk = {
+      gtk4.theme = lib.mkForce null;
+  ```
+
+- Fix: `kmscon` error
+  - `zaneyos/modules/core/stylix.nix`
+  - Added: `targets.kmscon.enable = false;`
     ```nix
-    {config, pkgs, lib, ...}: {
-      gtk = {
-        gtk4.theme = lib.mkForce null;
+    stylix = {
+     enable = true;
+     image = stylixImage;
+     targets.kmscon.enable = false;
     ```
-- Fix:  `kmscon` error
-   - `zaneyos/modules/core/stylix.nix`
-   - Added: `targets.kmscon.enable = false;`
-       ```nix
-     stylix = {
-        enable = true;
-        image = stylixImage;
-        targets.kmscon.enable = false;
-       ```
 - Updated to NixOS v26.11
 - Disabled `plymouth` by default
 - Converted `hyprlang` config to `lua` config files
