@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Restart the Noctalia session by terminating only Noctalia-related processes,
+# avoiding any signals to unrelated process groups (e.g. Hyprland).
+
+log() { printf "[restart.noctalia] %s\n" "$*"; }
+if command -v systemctl >/dev/null 2>&1 && systemctl --user cat noctalia.service >/dev/null 2>&1; then
+  exec systemctl --user restart noctalia.service
+fi
+
+list_target_pids() {
+  # Collect only PIDs whose command explicitly runs:
+  # - standalone v5 binary: ".../noctalia"
+  # - legacy wrapper: ".../noctalia-shell"
+  # - legacy quickshell launch: quickshell/qs with "-c noctalia-shell"
+  ps -eo pid=,cmd= \
+    | ${GREP:-grep} -E "(^|/)(noctalia)( |$)|(^|/)(noctalia-shell)( |$)|(^| )((qs|quickshell))( | ).*-c( |=)?noctalia-shell( |$)" \
+    | awk '{print $1}'
+}
+
+terminate_targets() {
+  local pids left tries
+  mapfile -t pids < <(list_target_pids || true)
+
+  if ((${#pids[@]} > 0)); then
+    kill -TERM "${pids[@]}" 2>/dev/null || true
+  fi
+
+  # Wait up to ~3s for clean exit
+  for tries in {1..15}; do
+    mapfile -t left < <(list_target_pids || true)
+    ((${#left[@]} == 0)) && break
+    sleep 0.2
+  done
+
+  # Force kill leftovers only (do not touch anything else)
+  if ((${#left[@]} > 0)); then
+    kill -KILL "${left[@]}" 2>/dev/null || true
+  fi
+}
+
+start_noctalia() {
+  # Require standalone v5 binary to avoid relaunching legacy shell paths.
+  if command -v noctalia >/dev/null 2>&1; then
+    nohup setsid noctalia >/dev/null 2>&1 &
+  else
+    echo "Error: noctalia not found in PATH (v5 package missing from current generation)" >&2
+    exit 1
+  fi
+}
+
+terminate_targets
+start_noctalia
