@@ -76,6 +76,6 @@
   };
 };
 
-  # Optional but recommended
-  #powerManagement.enable = true;
+  #Optional but recommended
+  powerManagement.enable = true;
 }

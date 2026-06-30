@@ -48,7 +48,7 @@ in {
       ./cachix.nix
       ./fingerprint.nix
       ./shadowsocks.nix
-      ./smb.nix
+      #./smb.nix
       inputs.stylix.nixosModules.stylix
     ];
 }
