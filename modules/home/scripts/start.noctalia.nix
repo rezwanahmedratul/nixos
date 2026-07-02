@@ -9,9 +9,9 @@
     pkgs.bash
     pkgs.systemd
   ];
-  script = builtins.readFile ./restart.noctalia;
+  script = builtins.readFile ./start.noctalia;
 in
-  pkgs.writeShellScriptBin "restart.noctalia" ''
+  pkgs.writeShellScriptBin "start.noctalia" ''
       set -euo pipefail
       export PATH=${binPath}:$PATH
 

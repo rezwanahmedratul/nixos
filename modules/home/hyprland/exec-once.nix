@@ -9,11 +9,7 @@
   noctaliaExec =
     if barChoice == "noctalia"
     then [
-      "killall -q waybar"
-      "pkill waybar"
-      "killall -q swaync"
-      "pkill swaync"
-      "noctalia"
+      "start.noctalia"
     ]
     else [];
   # Waybar-specific startup commands

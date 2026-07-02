@@ -5,6 +5,9 @@ set -euo pipefail
 # avoiding any signals to unrelated process groups (e.g. Hyprland).
 
 log() { printf "[restart.noctalia] %s\n" "$*"; }
+if command -v systemctl >/dev/null 2>&1 && systemctl --user cat noctalia.service >/dev/null 2>&1; then
+  exec systemctl --user restart noctalia.service
+fi
 
 list_target_pids() {
   # Collect only PIDs whose command explicitly runs:
@@ -38,17 +41,11 @@ terminate_targets() {
 }
 
 start_noctalia() {
-  # Prefer the standalone v5 binary; keep legacy fallbacks for compatibility.
+  # Require standalone v5 binary to avoid relaunching legacy shell paths.
   if command -v noctalia >/dev/null 2>&1; then
     nohup setsid noctalia >/dev/null 2>&1 &
-  elif command -v noctalia-shell >/dev/null 2>&1; then
-    nohup setsid noctalia-shell >/dev/null 2>&1 &
-  elif command -v quickshell >/dev/null 2>&1; then
-    nohup setsid quickshell -c noctalia-shell >/dev/null 2>&1 &
-  elif command -v qs >/dev/null 2>&1; then
-    nohup setsid qs -c noctalia-shell >/dev/null 2>&1 &
   else
-    echo "Error: noctalia/noctalia-shell/quickshell/qs not found in PATH" >&2
+    echo "Error: noctalia not found in PATH (v5 package missing from current generation)" >&2
     exit 1
   fi
 }

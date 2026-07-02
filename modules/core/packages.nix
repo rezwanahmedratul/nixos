@@ -50,16 +50,9 @@ in {
     ++ noctaliaPkgs
     ++ [
       alejandra # nix formatter
-      #amfora # Fancy Terminal Browser For Gemini Protocol
       appimage-run # Needed For AppImage Support
       brave # Brave Browser
       brightnessctl # For Screen Brightness Control
-      #cliphist # Clipboard manager using rofi menu
-      #cmatrix # Matrix Movie Effect In Terminal
-      #cowsay # Great Fun Terminal Program
-      #discord # Stable client
-      #discord-canary # beta  client
-      #docker-compose # Allows Controlling Docker From A Single File
       duf # Utility For Viewing Disk Usage In Terminal
       dysk # Disk space util nice formattting
       eza # Beautiful ls Replacement
@@ -67,13 +60,10 @@ in {
       file-roller # Archive Manager
       gearlever # Manage / run Appimages
       icu # dep for gearlever
-      #gimp # Great Photo Editor
       gpu-screen-recorder # needed for nnoctalia-shell
-      #power-profiles-daemon # needed for noctalia-shell power cycle
       mesa-demos # needed for inxi diag util
       tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
       htop # Simple Terminal Based System Monitor
-      #inxi # CLI System Information Tool
       killall # For Killing All Instances Of Programs
       libnotify # For Notifications
       lm_sensors # Used For Getting Hardware Temps
@@ -87,24 +77,17 @@ in {
       onefetch # provides zsaneyos build info on current system
       pavucontrol # For Editing Audio Levels & Devices
       pciutils # Collection Of Tools For Inspecting PCI Devices
-      #picard # For Changing Music Metadata & Getting Cover Art
       playerctl # Allows Changing Media Volume Through Scripts
       rhythmbox # audio player
-      ripgrep # Improved Grep
       socat # Needed For Screenshots
       unrar # Tool For Handling .rar Files
       unzip # Tool For Handling .zip Files
       usbutils # Good Tools For USB Devices
       upower # noctalia shell battery
       uwsm # Universal Wayland Session Manager (optional must be enabled)
-      #v4l-utils # Used For Things Like OBS Virtual Camera
       waypaper # Change wallpaper
       wget # Tool For Fetching Files With Links
-      #ytmdl # Tool For Downloading Audio From YouTube
       python3 # Python 3 programming language
-      #rustdesk
-      #tlp
-      #auto-cpufreq
       telegram-desktop
       nautilus
       freerdp
@@ -115,18 +98,13 @@ in {
       gdb
       cmake
       gnumake
-      #jetbrains.idea
-      #powertop
       libreoffice
-      #heimdall
       typst
-      #python313Packages.opencv4
       jq
       slurp
       hyprpicker
       tesseract
       gnome-calculator
-      # runtime utils (safe to include)
       coreutils
       gnugrep
       gawk

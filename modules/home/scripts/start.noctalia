@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Start Noctalia with a short delay so user systemd is ready.
+
+sleep 0.8
+
+if command -v systemctl >/dev/null 2>&1 && systemctl --user cat noctalia.service >/dev/null 2>&1; then
+  systemctl --user stop waybar.service >/dev/null 2>&1 || true
+  pkill -x waybar >/dev/null 2>&1 || true
+  # Check current status; if inactive, try start, then restart as fallback.
+  if systemctl --user is-active --quiet noctalia.service; then
+    exit 0
+  fi
+
+  if systemctl --user start noctalia.service >/dev/null 2>&1; then
+    exit 0
+  fi
+
+  exec systemctl --user restart noctalia.service
+fi
+
+# Fallback when user systemd isn't available.
+pkill -x waybar >/dev/null 2>&1 || true
+exec restart.noctalia
