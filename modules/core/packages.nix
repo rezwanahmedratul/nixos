@@ -71,6 +71,8 @@ in {
       mpv # Incredible Video Player
       nixfmt # Nix Formatter
       nwg-displays # configure monitor configs via GUI
+      rustc
+      cargo
       #nwg-drawer # Application launcher for wayland
       #nwg-dock-hyprland # Dock for hyprland
       #nwg-menu # App menu for waybar
