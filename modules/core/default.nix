@@ -19,21 +19,22 @@ in {
       ./printing.nix
       ./recording.nix
     ]
-
     # Display manager
-    ++ (if vars.displayManager == "tui"
-        then [ ./ly.nix ]
-        else [ ./sddm.nix ])
-
+    ++ (
+      if vars.displayManager == "tui"
+      then [./ly.nix]
+      else [./sddm.nix]
+    )
     # Power manager (with "none" option)
-    ++ (if vars.powerManager == "auto-cpufreq"
-        then [ ./auto-cpufreq.nix ]
-        else if vars.powerManager == "tlp"
-        then [ ./tlp.nix ]
-        else if vars.powerManager == "ppd"
-        then [ ./power-profiles-deamon.nix ]
-        else [])
-
+    ++ (
+      if vars.powerManager == "auto-cpufreq"
+      then [./auto-cpufreq.nix]
+      else if vars.powerManager == "tlp"
+      then [./tlp.nix]
+      else if vars.powerManager == "ppd"
+      then [./power-profiles-deamon.nix]
+      else []
+    )
     ++ [
       ./security.nix
       ./services.nix
@@ -49,7 +50,7 @@ in {
       ./fingerprint.nix
       ./shadowsocks.nix
       #./smb.nix
-      ./ram-limit.nix
+      ./limit.nix
       inputs.stylix.nixosModules.stylix
     ];
 }

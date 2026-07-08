@@ -12,9 +12,9 @@
   codeRunnerVer = "0.12.2";
   tinymistVer = "0.14.16";
   typstPreviewVer = "0.11.14";
-  geminiVer = "2.87.0";
+  #geminiVer = "2.87.0";
   cppExtsThemesVer = "2.0.0";
-  cppExtsDevToolsVer = "0.4.6";
+  cppExtsDevToolsVer = "0.5.13";
   chatgptVer = "26.429.30905";
 
   # Helper function
@@ -77,12 +77,12 @@
     sha256 = pkgs.lib.fakeSha256;
   };
 
-  geminiCodeAssistExts = extOrMarketplace {
-    publisher = "google";
-    name = "geminicodeassist";
-    version = geminiVer;
-    sha256 = "sha256-wgsG/8Vph3rtn3oA1B8W1T1VK6U3emnE0bgqlsAPjjc=";
-  };
+  # geminiCodeAssistExts = extOrMarketplace {
+  #   publisher = "google";
+  #   name = "geminicodeassist";
+  #   version = geminiVer;
+  #   sha256 = "sha256-wgsG/8Vph3rtn3oA1B8W1T1VK6U3emnE0bgqlsAPjjc=";
+  # };
 
   # chatGPTExts = extOrMarketplace {
   #   publisher = "openai";
@@ -109,7 +109,7 @@
       name = "cpp-devtools";
       publisher = "ms-vscode";
       version = cppExtsDevToolsVer;
-      sha256 = "sha256-K2UCUI7Y3jcJLYeRORSs+nWH+SqDujz8CDP7yWy/aG4=";
+      sha256 = "sha256-g8ZXdEgKB6okJEVXvFQMGz5oDMsOh5mWzl50B/etVjw=";
     }
     {
       publisher = "formulahendry";
@@ -160,7 +160,7 @@ in {
         #++ codeRunnerExts
         ++ cppExtraExts
         #++ chatGPTExts
-        ++ geminiCodeAssistExts
+        #++ geminiCodeAssistExts
         ++ tinymistExts;
 
       userSettings = lib.mkForce {
