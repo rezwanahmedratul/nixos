@@ -49,6 +49,7 @@ in {
       ./fingerprint.nix
       ./shadowsocks.nix
       #./smb.nix
+      ./ram-limit.nix
       inputs.stylix.nixosModules.stylix
     ];
 }
