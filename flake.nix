@@ -11,7 +11,6 @@
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
     };
     stylix = {
       url = "github:danth/stylix/master";

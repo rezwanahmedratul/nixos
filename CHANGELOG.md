@@ -9,13 +9,13 @@
 
 #### 📅 **Updated: Jul 2026**
 
-- Fix: 
-  - cursor eval warnings 
+- Fix:
+  - cursor eval warnings
   - Window Rule for `qs-wlogout`
-  - doom dectection in zcli 
-  - doom dashboard ui syntax change 
-  - ZSH corrupt history error 
-  - LUA LSP build errors 
+  - doom dectection in zcli
+  - doom dashboard ui syntax change
+  - ZSH corrupt history error
+  - `NVF` warning
 
 #### 📅 **Updated: Jun 2026**
 
