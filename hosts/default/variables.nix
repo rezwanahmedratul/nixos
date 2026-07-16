@@ -97,7 +97,8 @@ _: {
 
     # Set Waybar
     #  Available Options:
-    waybarChoice = ../../modules/home/waybar/waybar-jak-catppuccin.nix;
+    #waybarChoice = ../../modules/home/waybar/waybar-jak-catppuccin.nix;
+    waybarChoice = ../../modules/home/waybar/waybar-jak-catppuccin-v2.nix;
     #waybarChoice = ../../modules/home/waybar/waybar-ddubs-2.nix;
     #waybarChoice = ../../modules/home/waybar/waybar-curved.nix;
     #waybarChoice = ../../modules/home/waybar/waybar-ddubs.nix;

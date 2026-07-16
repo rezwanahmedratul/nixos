@@ -7,6 +7,16 @@
 
 # 🚀 **Current Release - ZaneyOS v3.0**
 
+#### 📅 **Updated: Jul 2026**
+
+- Fix: 
+  - cursor eval warnings 
+  - Window Rule for `qs-wlogout`
+  - doom dectection in zcli 
+  - doom dashboard ui syntax change 
+  - ZSH corrupt history error 
+  - LUA LSP build errors 
+
 #### 📅 **Updated: Jun 2026**
 
 - Fix:

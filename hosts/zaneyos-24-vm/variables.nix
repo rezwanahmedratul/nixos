@@ -140,7 +140,8 @@ _: {
     #waybarChoice = ../../modules/home/waybar/waybar-tony.nix;
     #waybarChoice = ../../modules/home/waybar/waybar-ddubsos-v1.nix;
     #waybarChoice = ../../modules/home/waybar/waybar-mecha.nix;
-    waybarChoice = ../../modules/home/waybar/waybar-jak-catppuccin.nix;
+    #waybarChoice = ../../modules/home/waybar/waybar-jak-catppuccin.nix;
+    waybarChoice = ../../modules/home/waybar/waybar-jak-catppuccin-v2.nix;
     #waybarChoice = ../../modules/home/waybar/waybar-jak-ml4w-modern.nix;
     #waybarChoice = ../../modules/home/waybar/waybar-jak-oglo-simple.nix;
     #waybarChoice = ../../modules/home/waybar/waybar-jwt-catppuccin.nix;
