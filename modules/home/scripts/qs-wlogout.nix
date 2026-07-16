@@ -271,8 +271,27 @@ in
         exec "$QML_BIN" "$main_qml"
       fi
 
-      # Run QML application and capture command execution from console output
-      out=$({ "$QML_BIN" "$main_qml" 2>&1 || true; })
+      # Run QML application, force float/center for its window, then capture output.
+      qml_out="$tmpdir/qml.out"
+      "$QML_BIN" "$main_qml" >"$qml_out" 2>&1 &
+      qml_pid=$!
+
+      (
+        for _ in $(${pkgs.coreutils}/bin/seq 1 80); do
+          clients_json="$tmpdir/clients.json"
+          ${pkgs.hyprland}/bin/hyprctl -j clients >"$clients_json" 2>/dev/null || true
+          addr=$(${pkgs.python3}/bin/python3 -c 'import json,sys; target_pid=int(sys.argv[1]); clients=json.load(open(sys.argv[2], "r", encoding="utf-8")); print(next((c.get("address", "") for c in clients if c.get("pid")==target_pid and c.get("title")=="qs-wlogout"), ""))' "$qml_pid" "$clients_json" 2>/dev/null || true)
+          if [ -n "$addr" ]; then
+            ${pkgs.hyprland}/bin/hyprctl dispatch setfloating "address:$addr" >/dev/null 2>&1 || true
+            ${pkgs.hyprland}/bin/hyprctl dispatch centerwindow "address:$addr" >/dev/null 2>&1 || true
+            break
+          fi
+          ${pkgs.coreutils}/bin/sleep 0.05
+        done
+      ) &
+
+      wait "$qml_pid" || true
+      out=$(${pkgs.coreutils}/bin/cat "$qml_out")
       exec_cmd=$(printf "%s\n" "$out" | ${pkgs.gawk}/bin/awk -F'EXEC:' '/EXEC:/{print $2}' | ${pkgs.coreutils}/bin/tail -n1)
 
       if [ -n "''${exec_cmd:-}" ]; then

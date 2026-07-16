@@ -49,6 +49,13 @@ in {
       bindkey "\ej" down-line-or-history
       bindkey "\ek" up-line-or-history
       bindkey "\el" forward-word
+
+      # Keep history writes safe across concurrent shells and abrupt shutdowns.
+      setopt APPEND_HISTORY
+      setopt INC_APPEND_HISTORY
+      setopt EXTENDED_HISTORY
+      setopt HIST_SAVE_BY_COPY
+      unsetopt SHARE_HISTORY
       if [ -f $HOME/.zshrc-personal ]; then
         source $HOME/.zshrc-personal
       fi

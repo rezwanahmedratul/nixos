@@ -1,4 +1,5 @@
 _: {
+  home.pointerCursor.enable = true;
   stylix.targets = {
     waybar.enable = false;
     rofi.enable = false;

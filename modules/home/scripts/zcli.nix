@@ -34,7 +34,7 @@
 
     is_doom_installed() {
       local dir="$1"
-      [[ -x "$dir/bin/doom" ]] && [[ -f "$dir/core/doom.el" ]]
+      [[ -x "$dir/bin/doom" ]] && [[ -f "$dir/core/doom.el" || -f "$dir/lisp/doom.el" ]]
     }
 
     emacsdir_is_empty() {
@@ -42,14 +42,25 @@
       [[ -d "$dir" ]] && [[ -z "$(ls -A "$dir" 2>/dev/null)" ]]
     }
 
+    find_existing_doom_dir() {
+      local candidate
+      for candidate in "$HOME/.emacs.d" "$HOME/.config/emacs"; do
+        if is_doom_installed "$candidate"; then
+          echo "$candidate"
+          return 0
+        fi
+      done
+      return 1
+    }
+
     # --- Main Script ---
     print_banner
-    EMACSDIR="$HOME/.emacs.d"
-
-    if is_doom_installed "$EMACSDIR"; then
-      print_success "Doom Emacs is already installed."
+    if existing_dir="$(find_existing_doom_dir)"; then
+      print_success "Doom Emacs is already installed at $existing_dir."
       exit 0
     fi
+
+    EMACSDIR="$HOME/.emacs.d"
 
     if [[ -d "$EMACSDIR" ]]; then
       if emacsdir_is_empty "$EMACSDIR"; then
@@ -186,7 +197,7 @@ in
       echo "    doom install    - Install Doom Emacs using get-doom script."
       echo "    doom status     - Check if Doom Emacs is installed."
       echo "    doom remove     - Remove Doom Emacs installation."
-      echo "    doom update     - Update Doom Emacs (runs doom sync)."
+      echo "    doom update     - Update Doom Emacs (runs doom upgrade + sync)."
       echo ""
       echo "Options for rebuild, rebuild-boot, and update commands:"
       echo "  --dry, -n        - Show what would be done without doing it"
@@ -672,6 +683,34 @@ in
           fi
         }
 
+        find_doom_emacsdir() {
+          local candidate
+          local doom_path
+          local doom_real
+          local doom_root
+
+          for candidate in "$HOME/.emacs.d" "$HOME/.config/emacs"; do
+            if [ -x "$candidate/bin/doom" ] && { [ -f "$candidate/core/doom.el" ] || [ -f "$candidate/lisp/doom.el" ]; }; then
+              echo "$candidate"
+              return 0
+            fi
+          done
+
+          if doom_path="$(command -v doom 2>/dev/null)"; then
+            doom_real="$(${pkgs.coreutils}/bin/readlink -f "$doom_path" 2>/dev/null || true)"
+            if [ -z "$doom_real" ]; then
+              doom_real="$doom_path"
+            fi
+            doom_root="$(${pkgs.coreutils}/bin/dirname "$(${pkgs.coreutils}/bin/dirname "$doom_real")")"
+            if [ -x "$doom_root/bin/doom" ] && { [ -f "$doom_root/core/doom.el" ] || [ -f "$doom_root/lisp/doom.el" ]; }; then
+              echo "$doom_root"
+              return 0
+            fi
+          fi
+
+          return 1
+        }
+
         doom_subcommand="$2"
         case "$doom_subcommand" in
           install)
@@ -707,21 +746,28 @@ in
             ${get-doom-script}/bin/get-doom
             ;;
           status)
-            if [ -x "$HOME/.emacs.d/bin/doom" ] && [ -f "$HOME/.emacs.d/core/doom.el" ]; then
-              echo "✔ Doom Emacs appears installed at $HOME/.emacs.d"
+            if doom_emacsdir="$(find_doom_emacsdir)"; then
+              doom_bin="$doom_emacsdir/bin/doom"
+              echo "✔ Doom Emacs appears installed at $doom_emacsdir"
               if [ -f "$HOME/.doom.d/init.el" ]; then
                 echo "  • User config found: $HOME/.doom.d/init.el"
               else
                 echo "  • Warning: User config (~/.doom.d) not found"
               fi
               echo "Version information:"
-              "$HOME/.emacs.d/bin/doom" version 2>/dev/null || echo "Could not get version information"
+              "$doom_bin" version 2>/dev/null || echo "Could not get version information"
             else
               if [ -d "$HOME/.emacs.d" ]; then
                 if [ -z "$(ls -A "$HOME/.emacs.d" 2>/dev/null)" ]; then
                   echo "✗ Found empty ~/.emacs.d (not a valid Doom installation)"
                 else
                   echo "✗ ~/.emacs.d exists but Doom was not detected"
+                fi
+              elif [ -d "$HOME/.config/emacs" ]; then
+                if [ -z "$(ls -A "$HOME/.config/emacs" 2>/dev/null)" ]; then
+                  echo "✗ Found empty ~/.config/emacs (not a valid Doom installation)"
+                else
+                  echo "✗ ~/.config/emacs exists but Doom was not detected"
                 fi
               else
                 echo "✗ Doom Emacs is not installed"
@@ -730,30 +776,32 @@ in
             fi
             ;;
           remove)
-            if [ ! -d "$HOME/.emacs.d" ]; then
+            if ! doom_emacsdir="$(find_doom_emacsdir)"; then
               echo "Doom Emacs is not installed"
               exit 0
             fi
 
-            echo "Warning: This will completely remove Doom Emacs and all your configuration!"
+            echo "Warning: This will completely remove Doom Emacs at $doom_emacsdir and all your configuration!"
             read -p "Are you sure you want to continue? (y/N) " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]; then
               echo "Removing Doom Emacs..."
-              ${pkgs.coreutils}/bin/rm -rf "$HOME/.emacs.d"
+              ${pkgs.coreutils}/bin/rm -rf "$doom_emacsdir"
               echo "✔ Doom Emacs has been removed"
             else
               echo "Removal cancelled"
             fi
             ;;
           update)
-            if [ ! -x "$HOME/.emacs.d/bin/doom" ] || [ ! -f "$HOME/.emacs.d/core/doom.el" ]; then
+            if ! doom_emacsdir="$(find_doom_emacsdir)"; then
               echo "Error: Doom Emacs is not installed correctly. Run 'zcli doom install' first." >&2
               exit 1
             fi
 
-            echo "Updating Doom Emacs..."
-            "$HOME/.emacs.d/bin/doom" sync
+            doom_bin="$doom_emacsdir/bin/doom"
+            echo "Updating Doom Emacs at $doom_emacsdir..."
+            "$doom_bin" upgrade
+            "$doom_bin" sync
             echo "✔ Doom Emacs update complete"
             ;;
           *)
