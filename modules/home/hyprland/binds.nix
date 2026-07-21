@@ -90,6 +90,7 @@ in {
         "$modifier ALT,M, Audio Control, exec, pavucontrol"
         # ============= WINDOW MANAGEMENT =============
         "$modifier,X, Kill Active Window, killactive,"
+        "$modifier SHIFT, P, Toggle Presentation Mode, exec, presentation-toggle"
         #"$modifier,P, Pseudo Tile, pseudo,"
         "$modifier SHIFT,I, Toggle Split, layoutmsg, togglesplit"
         "$modifier SHIFT,F, Maximize, fullscreen,"
