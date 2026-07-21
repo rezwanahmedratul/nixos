@@ -44,7 +44,7 @@
   # extraMonitorSettings = "monitor = HDMI-A-1,1920x1080@60,auto,1";
   # You can configure multiple monitors.
   # Inside the quotes, create a new line for each monitor.
-  extraMonitorSettings = "monitor = eDP-1, 1920x1200@60, 0x0, 1.20";
+  # extraMonitorSettings = "monitor = eDP-1, 1920x1200@60, 0x0, 1.20";
 
   # Bar/Shell Settings
   # Choose between noctalia or waybar

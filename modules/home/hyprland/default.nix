@@ -10,5 +10,6 @@ in {
     ./hyprland.nix
     ./hyprlock.nix
     ./windowrules.nix
+    ./monitors.nix
   ];
 }

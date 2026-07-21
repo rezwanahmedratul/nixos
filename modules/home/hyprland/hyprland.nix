@@ -6,7 +6,7 @@
   ...
 }: let
   vars = import ../../../hosts/${host}/variables.nix;
-  extraMonitorSettings = vars.extraMonitorSettings or "";
+  #extraMonitorSettings = vars.extraMonitorSettings or "";
   keyboardLayout = vars.keyboardLayout or "us";
   keyboardVariant = vars.keyboardVariant or "";
   stylixImage = vars.stylixImage or null;
@@ -215,9 +215,9 @@ in {
         force_zero_scaling = true;
       };
     };
-
+#  ${extraMonitorSettings}
     extraConfig = ''
-      ${extraMonitorSettings}
+    
 
       layerrule {
         name = noctalia-bg

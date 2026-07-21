@@ -12,6 +12,7 @@
   codeRunnerVer = "0.12.2";
   tinymistVer = "0.14.16";
   typstPreviewVer = "0.11.14";
+  sqlExtsVer = "1.43.0";
   #geminiVer = "2.87.0";
   cppExtsThemesVer = "2.0.0";
   cppExtsDevToolsVer = "0.5.13";
@@ -75,6 +76,13 @@
     name = "typst-preview";
     version = typstPreviewVer;
     sha256 = pkgs.lib.fakeSha256;
+  };
+
+  sqlExts = extOrMarketplace {
+    publisher = "ms-mssql";
+    name = "mssql";
+    version = sqlExtsVer;
+    sha256 = "sha256-rzBnBZ9Dy7nQOOCL4Cd3GdiI8UrZiLMzbpAElu8103I=";
   };
 
   # geminiCodeAssistExts = extOrMarketplace {
@@ -157,6 +165,7 @@ in {
         ++ hyprlangExts
         ++ hyprlsExts
         ++ neroHyprlandExts
+        ++ sqlExts
         #++ codeRunnerExts
         ++ cppExtraExts
         #++ chatGPTExts

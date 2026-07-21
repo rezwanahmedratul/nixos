@@ -17,7 +17,7 @@ in
   environment.etc = {
     "shadowsocks-1.json".text = ''
     {
-      "server": "208.240.24.65",
+      "server": "64.20.10.126",
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1081,

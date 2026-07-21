@@ -17,6 +17,7 @@
       v = "nvim";
       cat = "bat";
       ".." = "cd ..";
+      ls = "ls -lh";
     };
   };
 }
