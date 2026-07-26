@@ -2045,41 +2045,44 @@ settings = {
 <div style="margin-left: 20px;">
 
 <details>
-<summary> For version v2.3 </summary>
+<summary> For version v2.5+ </summary>
 
-Use the automated v2.3 → v2.4 upgrade. See ZaneyOS-Upgrade.md and
-UPGRADE-2.3-to-2.4.md. To avoid overwriting your config before a backup is
-created, fetch just the script without modifying your working tree:
+1. First backup your existing `zaneyos` directory. e.g.
+   `cp -r ~/zaneyos ~/zaneyos-backup`
 
-- Git (recommended):
+2. If you have your own repository (recommended) Make sure all your updates are commited.
 
-```bash
-git -C ~/zaneyos fetch origin
-git -C ~/zaneyos show origin/main:upgrade-2.3-to-2.4.sh > ~/upgrade-2.3-to-2.4.sh
-chmod +x ~/upgrade-2.3-to-2.4.sh
+| Note: This first step is only needed if you have your own repo
+
+```sh
+git commit -a
+git push
 ```
 
-- Curl:
-
-```bash
-curl -fsSL https://gitlab.com/zaney/zaneyos/-/raw/main/upgrade-2.3-to-2.4.sh -o ~/upgrade-2.3-to-2.4.sh
-chmod +x ~/upgrade-2.3-to-2.4.sh
+```sh
+git stash
+git pull
 ```
 
-Then run the script: `~/upgrade-2.3-to-2.4.sh`. It will create a full backup
-before switching branches and migrate your hosts safely from the backup.
+3. You should now have the current version of `ZaneyOS`.
 
-**IMPORTANT:**
+4. If you have added packages. I suggest you add them to the `~/zaneyos/hosts/HOSTNAME/host-packages.nix`
+   - Packages installed there will be preserved next time you upgrade
+   - Where `HOSTNAME` is the name of your host
+   - You will need to merge any other changes you've made
 
-- Do NOT use the `fu` or `fr` aliases for this upgrade; the script uses a safe
-  boot build.
-- If you have made extensive modifications, do not run the script. Read the docs
-  above and migrate manually instead.
+5. Rebuild. `zcli rebuild`
+
+6. Assuming not rebuild errors, reboot to make sure it's working
+
+7. Then get the latest packages `zcli update`
+
+8. You might needed to reboot again. Depending on what pkgs were updated
 
 </details>
 
 <details>
- <summary> For versions v2.0->2.2 </summary>
+ <summary> For versions v2.0->2.5 </summary>
 
 1. First backup your existing `zaneyos` directory. e.g.
    `cp -r ~/zaneyos ~/zaneyos-backup`
