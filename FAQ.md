@@ -933,8 +933,6 @@ It will be announced on the Zaney [Discord](https://discord.gg/W7efsSDS) server.
 
 </details>
 
-</xxx>
-
 <details><summary>**📂 ZaneyOS v2.3 Layout**</summary>
 
 <div style="margin-left: 25px;">

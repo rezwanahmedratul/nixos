@@ -872,44 +872,48 @@ settings = {
 <div style="margin-left: 20px;">
 
 <details>
-<summary> Para versión v2.3 </summary>
+<summary> Para versión v2.5+ </summary>
 
-Altamente recomendado: Lee `ZaneyOS-Upgrade.md` antes de proceder. Detalla el
-upgrade automatizado seguro, respaldo, y proceso de revert.
+1. Primero respalda tu directorio `zaneyos` existente. ej.
+   `cp -r ~/zaneyos ~/zaneyos-backup`
 
-Usa el upgrade automatizado v2.3 → v2.4. Ve `ZaneyOS-Upgrade.md` y
-`UPGRADE-2.3-to-2.4.md`. Para evitar sobrescribir tu config antes de crear un
-respaldo, fetch solo el script sin modificar tu working tree:
+2. Si tienes tu propio repositorio (recomendado), asegúrate de que todas tus
+   actualizaciones estén confirmadas (committed).
 
-- Git (recomendado):
+| Nota: Este primer paso solo es necesario si tienes tu propio repo
 
-```bash
-git -C ~/zaneyos fetch origin
-git -C ~/zaneyos show origin/main:upgrade-2.3-to-2.4.sh > ~/upgrade-2.3-to-2.4.sh
-chmod +x ~/upgrade-2.3-to-2.4.sh
+```sh
+git commit -a
+git push
 ```
 
-- Curl:
-
-```bash
-curl -fsSL https://gitlab.com/zaney/zaneyos/-/raw/main/upgrade-2.3-to-2.4.sh -o ~/upgrade-2.3-to-2.4.sh
-chmod +x ~/upgrade-2.3-to-2.4.sh
+```sh
+git stash
+git pull
 ```
 
-Luego ejecuta el script: `~/upgrade-2.3-to-2.4.sh`. Creará un respaldo completo
-antes de cambiar branches y migrará tus hosts de forma segura desde el respaldo.
+3. Ahora deberías tener la versión actual de `ZaneyOS`.
 
-**IMPORTANTE:**
+4. Si has agregado paquetes, te sugiero añadirlos a
+   `~/zaneyos/hosts/HOSTNAME/host-packages.nix`
+   - Los paquetes instalados ahí se preservarán la próxima vez que hagas upgrade
+   - Donde `HOSTNAME` es el nombre de tu host
+   - Necesitarás integrar (merge) cualquier otro cambio que hayas hecho
 
-- NO uses los alias `fu` o `fr` para este upgrade; el script usa un boot build
-  seguro.
-- Si has hecho modificaciones extensas, no ejecutes el script. Lee los docs
-  arriba y migra manualmente en su lugar.
+5. Recompila. `zcli rebuild`
+
+6. Asumiendo que no hay errores de recompilación, reinicia para asegurarte de
+   que funciona
+
+7. Luego obtén los últimos paquetes `zcli update`
+
+8. Es posible que necesites reiniciar nuevamente. Depende de qué paquetes se
+   actualizaron
 
 </details>
 
 <details>
-  <summary> Para versiones v2.0->2.2 </summary>
+  <summary> Para versiones v2.0->2.5 </summary>
 
 1. Primero respaldo tu directorio `zaneyos` existente. ej.
    `cp -r ~/zaneyos ~/zaneyos-backup`
