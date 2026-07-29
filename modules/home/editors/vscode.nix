@@ -165,7 +165,7 @@ in {
         ++ hyprlangExts
         ++ hyprlsExts
         ++ neroHyprlandExts
-        ++ sqlExts
+        # ++ sqlExts
         #++ codeRunnerExts
         ++ cppExtraExts
         #++ chatGPTExts

@@ -112,5 +112,6 @@ in {
       gawk
       procps
       qimgv
+      azuredatastudio
     ];
 }
