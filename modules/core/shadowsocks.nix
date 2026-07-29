@@ -41,7 +41,7 @@ in
 
     "shadowsocks-3.json".text = ''
     {
-      "server": "64.190.17.79",
+      "server": "206.245.171.202",
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1083,

@@ -21,12 +21,15 @@
           "$1"
       }
 
+      PRIMARY="eDP-1"
+      EXTERNAL="HDMI-A-1"
+
       # -----------------------------
       # Disable presentation mode
       # -----------------------------
       if [[ -f "$STATE" ]]; then
-        hyprctl keyword monitor "eDP-1,1920x1200@60,0x0,1.20"
-        hyprctl keyword monitor "HDMI-A-1,1920x1080@60,1600x0,1"
+        hyprctl keyword monitor "$PRIMARY,1920x1200@60,0x0,1.20"
+        hyprctl keyword monitor "$EXTERNAL,preferred,auto,1"
 
         rm -f "$STATE"
 
@@ -37,15 +40,13 @@
       # -----------------------------
       # Enable presentation mode
       # -----------------------------
-
-      # Ensure HDMI monitor is connected
-      if ! hyprctl monitors | grep -q "^Monitor HDMI-A-1"; then
+      if ! hyprctl monitors | grep -q "^Monitor $EXTERNAL"; then
         notify "❌ No external display connected"
         exit 1
       fi
 
-      hyprctl keyword monitor "eDP-1,1920x1080@60,0x0,1"
-      hyprctl keyword monitor "HDMI-A-1,1920x1080@60,0x0,1,mirror,eDP-1"
+      hyprctl keyword monitor "$PRIMARY,1920x1200@60,0x0,1.20"
+      hyprctl keyword monitor "$EXTERNAL,preferred,0x0,1,mirror,$PRIMARY"
 
       touch "$STATE"
 
@@ -56,7 +57,7 @@
   wayland.windowManager.hyprland.settings = {
     monitor = [
       "eDP-1,1920x1200@60,0x0,1.20"
-      "HDMI-A-1,1920x1080@60,1600x0,1"
+      "HDMI-A-1,preferred,auto,1"
     ];
   };
 }

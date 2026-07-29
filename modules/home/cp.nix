@@ -7,7 +7,7 @@ cp-session = pkgs.writeShellScriptBin "cp-session" ''
 WS=$(hyprctl activeworkspace -j | ${pkgs.jq}/bin/jq '.id')
 
 # --- FORCE NEW WINDOWS ---
-zen-beta --new-window "https://codeforces.com/" &
+zen-beta -p CP --new-window "https://codeforces.com/" &
 sleep 1
 
 code --new-window "$HOME/Github/CP" &

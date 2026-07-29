@@ -73,6 +73,7 @@ in {
       nwg-displays # configure monitor configs via GUI
       rustc
       cargo
+      google-chrome # Google Chrome Browser
       #nwg-drawer # Application launcher for wayland
       #nwg-dock-hyprland # Dock for hyprland
       #nwg-menu # App menu for waybar
@@ -113,5 +114,6 @@ in {
       procps
       qimgv
       azuredatastudio
+      zapzap
     ];
 }
