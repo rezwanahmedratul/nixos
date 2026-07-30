@@ -74,7 +74,8 @@ in {
       rustc
       cargo
       google-chrome # Google Chrome Browser
-      #nwg-drawer # Application launcher for wayland
+      docker # Docker For Containerization
+      docker-compose # Docker Compose For Containerization
       #nwg-dock-hyprland # Dock for hyprland
       #nwg-menu # App menu for waybar
       onefetch # provides zsaneyos build info on current system
