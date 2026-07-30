@@ -1,6 +1,11 @@
 { config, pkgs, lib, ... }:
 
 let
+  secretsFile = /. + "${toString ./.}/shadowsocks-secrets.nix";
+  secrets = if builtins.pathExists secretsFile
+    then import secretsFile
+    else { password = "CHANGE_ME"; };
+
   mkSS = { name, server, localPort }: {
     description = "Shadowsocks Client (${name})";
     after = [ "network.target" ];
@@ -21,7 +26,7 @@ in
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1081,
-      "password": "T8@qN5#vX3rB!1cE",
+      "password": "${secrets.password}",
       "method": "chacha20-ietf-poly1305",
       "mode": "tcp_and_udp"
     }
@@ -33,7 +38,7 @@ in
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1082,
-      "password": "T8@qN5#vX3rB!1cE",
+      "password": "${secrets.password}",
       "method": "chacha20-ietf-poly1305",
       "mode": "tcp_and_udp"
     }
@@ -45,7 +50,7 @@ in
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1083,
-      "password": "T8@qN5#vX3rB!1cE",
+      "password": "${secrets.password}",
       "method": "chacha20-ietf-poly1305",
       "mode": "tcp_and_udp"
     }
