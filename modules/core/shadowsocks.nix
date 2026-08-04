@@ -1,25 +1,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  secretCandidates = [
-    ./shadowsocks-secrets.nix
-    /home/ratul/nixos/modules/core/shadowsocks-secrets.nix
-    /etc/nixos/modules/core/shadowsocks-secrets.nix
-  ];
-
-  findSecret = paths:
-    if paths == [] then null
-    else if builtins.pathExists (builtins.head paths)
-      then import (builtins.head paths)
-      else findSecret (builtins.tail paths);
-
-  secrets = let found = findSecret secretCandidates; in
-    if found != null then found else { password = "CHANGE_ME"; };
-
-  pass1 = secrets.password1 or secrets.password;
-  pass2 = secrets.password2 or secrets.password;
-  pass3 = secrets.password3 or secrets.password;
-
   mkSS = { name, server, localPort }: {
     description = "Shadowsocks Client (${name})";
     after = [ "network.target" ];
@@ -40,7 +21,7 @@ in
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1081,
-      "password": "${pass1}",
+      "password": "T8@qN5#vX3rB!1cE",
       "method": "chacha20-ietf-poly1305",
       "mode": "tcp_and_udp"
     }
@@ -52,7 +33,7 @@ in
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1082,
-      "password": "${pass2}",
+      "password": "T8@qN5#vX3rB!1cE",
       "method": "chacha20-ietf-poly1305",
       "mode": "tcp_and_udp"
     }
@@ -64,7 +45,7 @@ in
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1083,
-      "password": "${pass3}",
+      "password": "T8@qN5#vX3rB!1cE",
       "method": "chacha20-ietf-poly1305",
       "mode": "tcp_and_udp"
     }
@@ -75,19 +56,19 @@ in
   systemd.services = {
     shadowsocks-1 = mkSS {
       name = "shadowsocks-1";
-      server = "64.20.10.126";
+      server = "206.245.171.240"; # not used anymore, but kept for structure
       localPort = 1081;
     };
 
     shadowsocks-2 = mkSS {
       name = "shadowsocks-2";
-      server = "64.20.10.49";
+      server = "64.190.17.2";
       localPort = 1082;
     };
 
     shadowsocks-3 = mkSS {
       name = "shadowsocks-3";
-      server = "208.240.24.65";
+      server = "64.190.17.79";
       localPort = 1083;
     };
   };
