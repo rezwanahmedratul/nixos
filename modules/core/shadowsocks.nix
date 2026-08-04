@@ -1,6 +1,9 @@
 { config, pkgs, lib, ... }:
 
 let
+  commonPort = 12348;
+  commonMethod = "chacha20-ietf-poly1305";
+
   mkSS = { name, localPort }: {
     description = "Shadowsocks Client (${name})";
     after = [ "network.target" ];
@@ -32,7 +35,12 @@ let
           exit 1
         fi
 
-        exec ${pkgs.shadowsocks-rust}/bin/sslocal -c /etc/${name}.json -s "$SERVER" -k "$PASSWORD"
+        exec ${pkgs.shadowsocks-rust}/bin/sslocal \
+          -b "127.0.0.1:${toString localPort}" \
+          -s "$SERVER:${toString commonPort}" \
+          -m "${commonMethod}" \
+          -U \
+          -k "$PASSWORD"
       ''}";
       Restart = "always";
       RestartSec = 5;
@@ -40,39 +48,6 @@ let
   };
 in
 {
-  # 🔧 Config files (JSON without hardcoded passwords or server IPs)
-  environment.etc = {
-    "shadowsocks-1.json".text = ''
-    {
-      "server_port": 12348,
-      "local_address": "127.0.0.1",
-      "local_port": 1081,
-      "method": "chacha20-ietf-poly1305",
-      "mode": "tcp_and_udp"
-    }
-    '';
-
-    "shadowsocks-2.json".text = ''
-    {
-      "server_port": 12348,
-      "local_address": "127.0.0.1",
-      "local_port": 1082,
-      "method": "chacha20-ietf-poly1305",
-      "mode": "tcp_and_udp"
-    }
-    '';
-
-    "shadowsocks-3.json".text = ''
-    {
-      "server_port": 12348,
-      "local_address": "127.0.0.1",
-      "local_port": 1083,
-      "method": "chacha20-ietf-poly1305",
-      "mode": "tcp_and_udp"
-    }
-    '';
-  };
-
   # 🚀 Services
   systemd.services = {
     shadowsocks-1 = mkSS {
