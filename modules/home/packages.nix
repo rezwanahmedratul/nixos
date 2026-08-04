@@ -9,7 +9,7 @@
 in {
   home.packages =
     [
-      customPkgs.ab-download-manager
+      #customPkgs.ab-download-manager
     ]
     ++ (with pkgs; [
       pangolin-cli

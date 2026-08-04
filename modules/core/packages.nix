@@ -12,7 +12,7 @@
     then
       with pkgs; [
         matugen # color palette generator needed for noctalia-shell
-        app2unit # launcher for noctalia-shell
+        #app2unit # launcher for noctalia-shell
         gpu-screen-recorder # needed for nnoctalia-shell
       ]
     else [];
@@ -115,6 +115,5 @@ in {
       procps
       qimgv
       azuredatastudio
-      zapzap
     ];
 }

@@ -7,7 +7,7 @@
   # `tui` for Text login
   # `sddm` for graphical GUI (default)
   # SDDM background is set with stylixImage
-  displayManager = "sddm";
+  displayManager = "tui";
   # Set Power Manager
   # `tlp` for laptops (default)
   # `auto-cpufreq` for desktops (more aggressive performance)
@@ -49,7 +49,7 @@
   # Bar/Shell Settings
   # Choose between noctalia or waybar
   barChoice = "noctalia"; # Set Bar Choice
-  #barChoice = "waybar"; # Set Bar Choice
+  # barChoice = "waybar"; # Set Bar Choice
 
   # Waybar Settings (used when barChoice = "waybar")
   clock24h = false;
