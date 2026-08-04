@@ -46,7 +46,7 @@ in
 
     "shadowsocks-3.json".text = ''
     {
-      "server": "206.245.171.202",
+      "server": "208.240.24.65",
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1083,
@@ -61,19 +61,19 @@ in
   systemd.services = {
     shadowsocks-1 = mkSS {
       name = "shadowsocks-1";
-      server = "206.245.171.240"; # not used anymore, but kept for structure
+      server = "64.20.10.126";
       localPort = 1081;
     };
 
     shadowsocks-2 = mkSS {
       name = "shadowsocks-2";
-      server = "64.190.17.2";
+      server = "64.20.10.49";
       localPort = 1082;
     };
 
     shadowsocks-3 = mkSS {
       name = "shadowsocks-3";
-      server = "64.190.17.79";
+      server = "208.240.24.65";
       localPort = 1083;
     };
   };
