@@ -1,0 +1,6 @@
+# Secrets & Passwords
+modules/core/shadowsocks-secrets.json
+*secrets*
+*password*
+*.secret
+*.secrets
