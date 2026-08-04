@@ -1,10 +1,23 @@
 { config, pkgs, lib, ... }:
 
 let
-  secretsFile = /. + "${toString ./.}/shadowsocks-secrets.nix";
-  secrets = if builtins.pathExists secretsFile
-    then import secretsFile
-    else { password = "CHANGE_ME"; };
+  secretCandidates = [
+    /home/ratul/nixos/modules/core/shadowsocks-secrets.nix
+    /etc/nixos/modules/core/shadowsocks-secrets.nix
+  ];
+
+  findSecret = paths:
+    if paths == [] then null
+    else if builtins.pathExists (builtins.head paths)
+      then import (builtins.head paths)
+      else findSecret (builtins.tail paths);
+
+  secrets = let found = findSecret secretCandidates; in
+    if found != null then found else { password = "CHANGE_ME"; };
+
+  pass1 = secrets.password1 or secrets.password;
+  pass2 = secrets.password2 or secrets.password;
+  pass3 = secrets.password3 or secrets.password;
 
   mkSS = { name, server, localPort }: {
     description = "Shadowsocks Client (${name})";
@@ -26,7 +39,7 @@ in
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1081,
-      "password": "${secrets.password}",
+      "password": "${pass1}",
       "method": "chacha20-ietf-poly1305",
       "mode": "tcp_and_udp"
     }
@@ -38,7 +51,7 @@ in
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1082,
-      "password": "${secrets.password}",
+      "password": "${pass2}",
       "method": "chacha20-ietf-poly1305",
       "mode": "tcp_and_udp"
     }
@@ -50,7 +63,7 @@ in
       "server_port": 12348,
       "local_address": "127.0.0.1",
       "local_port": 1083,
-      "password": "${secrets.password}",
+      "password": "${pass3}",
       "method": "chacha20-ietf-poly1305",
       "mode": "tcp_and_udp"
     }
