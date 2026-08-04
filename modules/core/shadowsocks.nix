@@ -1,19 +1,10 @@
 { config, pkgs, lib, ... }:
 
 let
-  secretCandidates = [
-    /home/ratul/nixos/modules/core/shadowsocks-secrets.nix
-    /etc/nixos/modules/core/shadowsocks-secrets.nix
-  ];
-
-  findSecret = paths:
-    if paths == [] then null
-    else if builtins.pathExists (builtins.head paths)
-      then import (builtins.head paths)
-      else findSecret (builtins.tail paths);
-
-  secrets = let found = findSecret secretCandidates; in
-    if found != null then found else { password = "CHANGE_ME"; };
+  secretsFile = ./shadowsocks-secrets.nix;
+  secrets = if builtins.pathExists secretsFile
+    then import secretsFile
+    else { password = "CHANGE_ME"; };
 
   pass1 = secrets.password1 or secrets.password;
   pass2 = secrets.password2 or secrets.password;
