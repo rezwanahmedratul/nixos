@@ -1,12 +1,10 @@
-[English](README.md) | [Español](README.es.md)
-
 <div align="center">
 
-## ZaneyOS 🟰 Best ❄️ NixOS Configs
+## Best ❄️ NixOS Configs
 
-\*\* Updated: January 16th, 2026
+** Updated: January 16th, 2026
 
-ZaneyOS is a simple way of reproducing my configuration on any NixOS system.
+This NixOS configuration is a simple way of reproducing my setup on any NixOS system.
 This includes the wallpaper, scripts, applications, config files, and more.
 
 ## Important Note on Noctalia
@@ -49,16 +47,13 @@ This includes the wallpaper, scripts, applications, config files, and more.
 
 ### Cheatsheets and Guides
 
-- Nix Beginner Guide: [English](cheatsheets/nix-beginner-guide.md) |
-  [Español](cheatsheets/nix-beginner-guide.es.md)
-- Hyprland Customization Guide:
-  [English](cheatsheets/hyprland-customization-guide.md) |
-  [Español](cheatsheets/hyprland-customization-guide.es.md)
+- Nix Beginner Guide: [English](cheatsheets/nix-beginner-guide.md)
+- Hyprland Customization Guide: [English](cheatsheets/hyprland-customization-guide.md)
 
 #### 🍖 Requirements
 
 - You must be running on NixOS, version 24.05+.
-- The `zaneyos` folder (this repo) is expected to be in your home directory.
+- The `nixos` folder (this repo) is expected to be in your home directory.
 - You must have installed NIXOS using **GPT** parition with booting with
   **UEFI**.
 - ** 500MB minimum /boot partition required. **
@@ -88,10 +83,10 @@ This includes the wallpaper, scripts, applications, config files, and more.
 
 #### 👼 An Incredible Community Focused On Support
 
-- The entire idea of ZaneyOS is to make NixOS an approachable space.
+- The entire idea of this repository is to make NixOS an approachable space.
 - NixOS is actually a great community that you will want to be a part of.
 - Many people who are patient and happy to spend their free time helping you are
-  running ZaneyOS.
+  running NixOS.
 - Feel free to reach out on the Discord for any help with anything.
 
 #### 📦 How To Install Packages?
@@ -213,8 +208,8 @@ _Available when `barChoice = "waybar"` in `variables.nix`_
 ## Installation:
 
 > **⚠️ IMPORTANT:** These installation methods are for **NEW INSTALLATIONS
-> ONLY**. If you already have ZaneyOS installed and want to upgrade to v2.4, see
-> the [Upgrade Instructions](#upgrading-from-zaneyos-23-to-24) below. Note:
+> ONLY**. If you already have NixOS installed and want to upgrade to v2.4, see
+> the [Upgrade Instructions](#upgrading-from-nixos-23-to-24) below. Note:
 > There is an issue with upgrade script. It's been removed until it's fixed.
 
 <details>
@@ -228,13 +223,13 @@ that you can in the flake or help you install extra packages. It is simply here
 so you can get my configuration installed with as little chances of breakages
 and then fiddle to your hearts content!
 
-> **⚠️ WARNING:** This script will completely replace any existing ~/zaneyos
-> directory. Do NOT use this if you already have ZaneyOS installed and
+> **⚠️ WARNING:** This script will completely replace any existing ~/nixos
+> directory. Do NOT use this if you already have NixOS installed and
 > configured.
 
 Simply copy this and run it:
 
-![ZaneyOS First Install Command](img/first-install-cmd.jpg)
+![NixOS First Install Command](img/first-install-cmd.jpg)
 
 ```
 nix-shell -p git curl pciutils
@@ -242,7 +237,7 @@ nix-shell -p git curl pciutils
 
 Then:
 
-![ZaneyOS Install Script Command](img/install-script.jpg)
+![NixOS Install Script Command](img/install-script.jpg)
 
 ```
 sh <(curl -L https://raw.githubusercontent.com/rezwanahmedratul/nixos/refs/heads/main/install-nixos.sh)
@@ -308,11 +303,13 @@ sudo nixos-rebuild switch --flake .#profile
 
 Now when you want to rebuild the configuration you have access to an alias
 called `fr` that will rebuild the flake and you do not have to be in the
-`zaneyos` folder for it to work.
+`nixos` folder for it to work.
 
-### Special Recognitions:
+### Special Recognitions & Credits:
 
-Thank you for all your assistance
+This NixOS config is inspired from ZaneyOS.
+
+Thank you for all your assistance:
 
 - KoolDots  https://github.com/LinuxBeginnings
 - JakKoolit  https://github.com/Jakoolit
@@ -320,4 +317,3 @@ Thank you for all your assistance
 - Jerry Starke https://github.com/JerrySM64
 
 ## Hope you enjoy!
-```
