@@ -115,5 +115,6 @@ in {
       procps
       qimgv
       azuredatastudio
+      distrobox
     ];
 }

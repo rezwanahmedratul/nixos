@@ -19,7 +19,7 @@
   tmuxEnable = true; # Terminal Multiplexer
   alacrittyEnable = true;
   weztermEnable = false;
-  ghosttyEnable = false;
+  ghosttyEnable = true;
   vscodeEnable = true; # Microsoft VSCode with telemetry
   zed-editorEnable = false;
   vscodiumEnable = false; # Open-source build of VSCode without telemetry
@@ -34,7 +34,7 @@
   # Kitty, ghostty, wezterm, aalacrity
   # Note: kitty, wezterm, alacritty have to be enabled in `variables.nix`
   # Setting it here does not enable it. Kitty is installed by default
-  terminal = "alacritty"; # Set Default System Terminal
+  terminal = "ghostty"; # Set Default System Terminal
 
   # Python development tools are included by default
 
