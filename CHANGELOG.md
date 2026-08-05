@@ -10,6 +10,7 @@
 #### 📅 **Updated: Jul 2026**
 
 - Fix:
+  - Added overlay for HL and Glaze build errors
   - cursor eval warnings
   - Window Rule for `qs-wlogout`
   - doom dectection in zcli
