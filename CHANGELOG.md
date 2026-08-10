@@ -7,6 +7,11 @@
 
 # 🚀 **Current Release - ZaneyOS v3.0**
 
+#### 📅 **Updated: Aug 2026**
+
+- Removed overlays in `overlays.nix`
+   - No longer needed 
+
 #### 📅 **Updated: Jul 2026**
 
 - Fix:
