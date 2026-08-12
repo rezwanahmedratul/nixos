@@ -9,7 +9,7 @@
       ];
 
     docker = {
-      enable = false;
+      enable = true;
     };
 
     podman.enable = true;
