@@ -3,6 +3,7 @@ _: {
     rtkit.enable = true;
     polkit = {
       enable = true;
+      enablePkexecWrapper = true;
       extraConfig = ''
         polkit.addRule(function(action, subject) {
           if ( subject.isInGroup("users") && (

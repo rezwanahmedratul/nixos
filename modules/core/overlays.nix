@@ -1,4 +1,22 @@
 {inputs, ...}: {
   nixpkgs.overlays = [
+    (final: prev: {
+      # Temporary hotfix: dwarfs 0.14.0 / bundled folly fails on GCC with missing
+      # std::memcpy/std::memset (cstring) and treats warnings as errors.
+      # Needed by gearlever. Pin fmt_11 and patch Exception.h to include <cstring>.
+      dwarfs =
+        (prev.dwarfs.override {
+          fmt = prev.fmt_11;
+        }).overrideAttrs (old: {
+          postPatch =
+            (old.postPatch or "")
+            + ''
+              if [ -f folly/folly/lang/Exception.h ]; then
+                sed -i '1i#include <cstring>' folly/folly/lang/Exception.h
+              fi
+            '';
+          cmakeFlags = (old.cmakeFlags or []) ++ ["-DENABLE_WERROR=OFF"];
+        });
+    })
   ];
 }
