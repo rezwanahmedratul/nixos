@@ -9,8 +9,9 @@
 
 #### 📅 **Updated: Aug 2026**
 
+- Fixed yazi startup and git fetcher errors
 - Removed overlays in `overlays.nix`
-   - No longer needed 
+  - No longer needed
 
 #### 📅 **Updated: Jul 2026**
 
