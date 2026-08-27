@@ -13,7 +13,7 @@
   # `auto-cpufreq` for desktops (more aggressive performance)
   # `ppd` for power-profiles-daemon (more aggressive performance)
   # `none` to disable power management
-  powerManager = "tlp";
+  powerManager = "auto-cpufreq";
 
   # Emable/disable bundled applications
   tmuxEnable = true; # Terminal Multiplexer

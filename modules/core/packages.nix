@@ -58,7 +58,7 @@ in {
       eza # Beautiful ls Replacement
       ffmpeg # Terminal Video / Audio Editing
       file-roller # Archive Manager
-      gearlever # Manage / run Appimages
+      #gearlever # Manage / run Appimages
       icu # dep for gearlever
       gpu-screen-recorder # needed for nnoctalia-shell
       mesa-demos # needed for inxi diag util

@@ -12,6 +12,14 @@
       enable = true;
     };
 
+    waydroid = {
+      enable = true;
+      #image = "waydroid:latest";
+      #image = "waydroid:android-13.0";
+      #image = "waydroid:android-14.0";
+      package = pkgs.waydroid-nftables;
+    };
+
     podman.enable = true;
 
     libvirtd = {
