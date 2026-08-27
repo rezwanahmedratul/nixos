@@ -17,6 +17,16 @@
             '';
           cmakeFlags = (old.cmakeFlags or []) ++ ["-DENABLE_WERROR=OFF"];
         });
+
+      # obs-move-transition fails on OBS 32.2.1+ due to deprecated declarations
+      # being treated as errors (-Werror).
+      obs-studio-plugins = prev.obs-studio-plugins // {
+        obs-move-transition = prev.obs-studio-plugins.obs-move-transition.overrideAttrs (old: {
+          NIX_CFLAGS_COMPILE =
+            (old.NIX_CFLAGS_COMPILE or "")
+            + " -Wno-error=deprecated-declarations";
+        });
+      };
     })
   ];
 }
