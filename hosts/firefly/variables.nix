@@ -131,7 +131,8 @@
   #stylixImage = ../../wallpapers/fuji.jpg;
   # stylixImage = ../../wallpapers/daniel-leone-v7daTKlZzaw-unsplash.jpg;
   # stylixImage = ../../wallpapers/gruv-portal-cake.png;
-  stylixImage = ../../wallpapers/call-it-a-day.jpg;
+  # stylixImage = ../../wallpapers/call-it-a-day.jpg;
+  stylixImage = ../../wallpapers/catto.jpg;
 
   # Set Waybar
   #  Available Options:

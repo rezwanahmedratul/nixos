@@ -7,13 +7,13 @@
   # `tui` for Text login
   # `sddm` for graphical GUI (default)
   # SDDM background is set with stylixImage
-  displayManager = "sddm";
+  displayManager = "tui";
   # Set Power Manager
   # `tlp` for laptops (default)
   # `auto-cpufreq` for desktops (more aggressive performance)
   # `ppd` for power-profiles-daemon (more aggressive performance)
   # `none` to disable power management
-  powerManager = "tlp";
+  powerManager = "auto-cpufreq";
 
   # Emable/disable bundled applications
   tmuxEnable = true; # Terminal Multiplexer
@@ -49,7 +49,7 @@
   # Bar/Shell Settings
   # Choose between noctalia or waybar
   barChoice = "noctalia"; # Set Bar Choice
-  #barChoice = "waybar"; # Set Bar Choice
+  # barChoice = "waybar"; # Set Bar Choice
 
   # Waybar Settings (used when barChoice = "waybar")
   clock24h = false;
@@ -131,7 +131,8 @@
   #stylixImage = ../../wallpapers/fuji.jpg;
   # stylixImage = ../../wallpapers/daniel-leone-v7daTKlZzaw-unsplash.jpg;
   # stylixImage = ../../wallpapers/gruv-portal-cake.png;
-  stylixImage = ../../wallpapers/call-it-a-day.jpg;
+  # stylixImage = ../../wallpapers/call-it-a-day.jpg;
+  stylixImage = ../../wallpapers/catto.jpg;
 
   # Set Waybar
   #  Available Options:
