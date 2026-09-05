@@ -3,22 +3,25 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (config.zaneyos) barChoice;
 
   # Noctalia-specific packages
   # gpu-screen-recorder requires x86_64 architecture
   noctaliaPkgs =
-    if pkgs.stdenv.hostPlatform.isx86_64 && barChoice == "noctalia"
-    then
-      with pkgs; [
+    if pkgs.stdenv.hostPlatform.isx86_64 && barChoice == "noctalia" then
+      with pkgs;
+      [
         matugen # color palette generator needed for noctalia-shell
         app2unit # launcher for noctalia-shell
         gpu-screen-recorder # needed for noctalia-shell
         power-profiles-daemon # needed for noctalia-shell power cycle
       ]
-    else [];
-in {
+    else
+      [ ];
+in
+{
   programs = {
     neovim = {
       enable = true;
@@ -41,9 +44,10 @@ in {
   };
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = ["openssl-1.1.1w"];
+  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
 
-  environment.systemPackages = with pkgs;
+  environment.systemPackages =
+    with pkgs;
     [
       awww
       inputs.synfetch.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -68,7 +72,9 @@ in {
       eza # Beautiful ls Replacement
       ffmpeg # Terminal Video / Audio Editing
       file-roller # Archive Manager
-      gearlever # manage appimages
+      # gearlever # manage appimages  # causes OOM on install
+      #  Gearlover requires dwarfs overlay causing build from source
+      # Very large compile that fails with 12-16GB RAM
       gedit # Simple Graphical Text Editor
       gimp # Great Photo Editor
       google-chrome # Browser

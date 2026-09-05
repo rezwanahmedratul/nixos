@@ -9,6 +9,8 @@
 
 #### 📅 **Updated: Aug 2026**
 
+- Removed duplicate fonts
+  - Updated `wezterm` font
 - Fixed yazi startup and git fetcher errors
 - Removed overlays in `overlays.nix`
   - No longer needed
