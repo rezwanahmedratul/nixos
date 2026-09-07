@@ -66,12 +66,6 @@ with lib; {
       default = false;
       description = "Enable VSCode.";
     };
-    # Google port of vscodium
-    antigravityEnable = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Enable Antigravity.";
-    };
     # Note: This is evil-helix with VIM keybindings by default
     helixEnable = mkOption {
       type = types.bool;
