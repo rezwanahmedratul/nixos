@@ -4,8 +4,15 @@
   lib,
   ...
 }: let
-  system = pkgs.stdenv.hostPlatform.system;
-  noctaliaPkg = inputs.noctalia.packages.${system}.default;
+  # Using nixpkgs package by default
+  noctaliaPkg = pkgs.noctalia;
+
+  # To build from source using the flake input:
+  # 1. Uncomment the noctalia input in flake.nix
+  # 2. Comment out the pkgs.noctalia line above
+  # 3. Uncomment the two lines below:
+  # system = pkgs.stdenv.hostPlatform.system;
+  # noctaliaPkg = inputs.noctalia.packages.${system}.default;
   noctaliaServiceEntrypoint = pkgs.writeShellScript "noctalia-service-entrypoint" ''
     set -euo pipefail
 

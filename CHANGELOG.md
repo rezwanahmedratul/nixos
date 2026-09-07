@@ -7,6 +7,12 @@
 
 # 🚀 **Current Release - ZaneyOS v3.0**
 
+#### 📅 **Updated: Sep 2026**
+
+- Change `noctalia` To nikpkgs vs source build
+  - Let source buildl config in place but commented out
+  - Left notes on how to revert if need most current build
+
 #### 📅 **Updated: Aug 2026**
 
 - Removed duplicate fonts

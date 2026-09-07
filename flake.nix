@@ -19,10 +19,12 @@
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
 
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Noctalia is available in nixpkgs (pkgs.noctalia)
+    # Uncomment to build from source via flake:
+    # noctalia = {
+    #   url = "github:noctalia-dev/noctalia";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # Checking nixvim to see if it's better
     nixvim = {
