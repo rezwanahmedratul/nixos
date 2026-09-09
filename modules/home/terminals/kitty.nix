@@ -29,7 +29,7 @@
       enabled_layouts = "splits";
       open_url_with_default = true;
       detect_urls = true;
-      allow_remote_control = true;
+      allow_remote_control = false;
     };
 
     shellIntegration.enableZshIntegration = true;
