@@ -13,7 +13,7 @@
   # `auto-cpufreq` for desktops (more aggressive performance)
   # `ppd` for power-profiles-daemon (more aggressive performance)
   # `none` to disable power management
-  powerManager = "auto-cpufreq";
+  powerManager = "tlp";
 
   # Emable/disable bundled applications
   tmuxEnable = true; # Terminal Multiplexer
@@ -132,7 +132,7 @@
   # stylixImage = ../../wallpapers/daniel-leone-v7daTKlZzaw-unsplash.jpg;
   # stylixImage = ../../wallpapers/gruv-portal-cake.png;
   # stylixImage = ../../wallpapers/call-it-a-day.jpg;
-  stylixImage = ../../wallpapers/catto.jpg;
+  stylixImage = ../../wallpapers/tree.png;
 
   # Set Waybar
   #  Available Options:
