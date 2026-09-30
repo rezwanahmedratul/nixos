@@ -77,3 +77,18 @@ in
     }) serverNames
   );
 }
+
+# Example shadowsocks-secrets.json
+# {
+#   "server-one": {"server": "1.2.3.4", "password": "password-one"},
+#   "server-two": {"server": "5.6.7.8", "password": "password-two"},
+#   "server-three": {"server": "9.10.11.12", "password": "password-three"}
+# }
+#
+# Notes:
+# - Each server entry is on one line.
+# - The key name is the service name used by the generated systemd unit.
+# - Put this file at /etc/shadowsocks-secrets.json or /home/ratul/nixos/modules/core/shadowsocks-secrets.json.
+
+
+

@@ -132,7 +132,7 @@
   # stylixImage = ../../wallpapers/daniel-leone-v7daTKlZzaw-unsplash.jpg;
   # stylixImage = ../../wallpapers/gruv-portal-cake.png;
   # stylixImage = ../../wallpapers/call-it-a-day.jpg;
-  stylixImage = ../../wallpapers/black_cat.jpg;
+  stylixImage = ../../wallpapers/tree.png;
 
   # Set Waybar
   #  Available Options:
