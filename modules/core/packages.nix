@@ -73,7 +73,7 @@ in {
       nwg-displays # configure monitor configs via GUI
       rustc
       cargo
-      google-chrome # Google Chrome Browser
+      #google-chrome # Google Chrome Browser
       docker # Docker For Containerization
       docker-compose # Docker Compose For Containerization
       #nwg-dock-hyprland # Dock for hyprland
@@ -114,10 +114,10 @@ in {
       gawk
       procps
       qimgv
-      distrobox
-      spice-gtk
-      arduino-cli
-      virt-viewer
-      azuredatastudio
+      #distrobox
+      #spice-gtk
+      #arduino-cli
+      #virt-viewer
+      #azuredatastudio
     ];
 }
