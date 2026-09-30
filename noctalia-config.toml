@@ -1,0 +1,217 @@
+[bar.default]
+background_opacity = 0.0
+center = [ "workspaces" ]
+end = [ "tray", "notifications", "network", "bluetooth", "volume", "brightness", "battery", "control-center" ]
+margin_edge = 0
+margin_ends = 0
+padding = 8
+radius = 0
+scale = 0.95000000670552254
+start = [ "status", "clock", "summary", "widget" ]
+thickness = 22
+widget_spacing = 11
+
+[control_center]
+sidebar = "full"
+sidebar_section = "none"
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "power_profile"
+
+    [[control_center.shortcuts]]
+    type = "session"
+
+[desktop_widgets]
+enabled = false
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 250.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 300.0
+
+[location]
+address = "Shahzadpur, Sirajganj"
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 720.0
+    cx = 960.0
+    cy = 961.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 720.0
+    cx = 800.0
+    cy = 877.00006103515625
+    output = "eDP-1"
+    placement_height = 1000.0
+    placement_width = 1600.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[notification]
+background_opacity = 0.47999998927116394
+
+[plugins]
+enabled = [ "tmelik/system-monitor", "mindnbytes/nix-status" ]
+
+[shell]
+avatar_path = "/home/ratul/Downloads/Picsart_23-08-11_11-44-24-918_x2.jpg"
+password_style = "random"
+screen_time_enabled = true
+
+    [shell.panel]
+    borders = false
+    control_center_placement = "floating"
+    launcher_session_search = true
+    open_near_click_control_center = true
+    session_placement = "centered"
+    shadow = false
+    transparency_mode = "glass"
+    wallpaper_placement = "centered"
+
+[theme]
+builtin = "Noctalia"
+community_palette = "Oxocarbon"
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    enable_builtin_templates = false
+    enable_community_templates = false
+
+[wallpaper]
+directory = "/home/ratul/nixos/wallpapers"
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "/home/ratul/nixos/wallpapers/tree.png"
+
+    [wallpaper.last]
+    path = "/home/ratul/nixos/wallpapers/tree.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/ratul/nixos/wallpapers/tree.png"
+
+[widget.battery]
+show_label = false
+
+[widget.brightness]
+show_label = false
+
+    [widget.brightness.actions]
+    scroll_down = "brightness-down 1%"
+    scroll_up = "brightness-up 1%"
+
+[widget.clock]
+format = "{:%I:%M %p}"
+scale = 0.94999999999999996
+
+[widget.control-center]
+glyph = "settings"
+
+[widget.custom_button_2]
+type = "custom_button"
+
+[widget.launcher]
+glyph = "snowflake"
+
+[widget.network]
+show_label = false
+
+[widget.status]
+type = "mindnbytes/nix-status:status"
+
+[widget.summary]
+hide_unavailable = true
+ram_display_mode = "used"
+show_disk = false
+show_gpu_usage = "off"
+type = "tmelik/system-monitor:summary"
+
+[widget.sysmon]
+scale = 0.94999999999999996
+show_value = true
+visualization = "none"
+
+[widget.tray]
+hidden = [ "blueman", "Zero Trust Client", "network" ]
+
+[widget.volume]
+show_label = false
+
+[widget.widget]
+type = "conqazht/share-wifi:widget"
+
+[widget.workspaces]
+minimal = true
+scale = 0.90000000000000013
+style = "minimal"
