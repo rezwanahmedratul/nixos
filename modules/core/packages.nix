@@ -114,7 +114,11 @@ in {
       gawk
       procps
       qimgv
-      azuredatastudio
       distrobox
+      spice-gtk
+      arduino-cli
+      virt-viewer
+      azuredatastudio
     ];
 }
+
