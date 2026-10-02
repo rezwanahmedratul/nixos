@@ -90,7 +90,7 @@ in {
           repeat_delay = 300;
           follow_mouse = 1;
           float_switch_override_focus = 0;
-          sensitivity = 0.7;
+          sensitivity = 0.5;
           scroll_factor = 1.7; # try 1.2 / 1.5 / 2.0
           touchpad = {
             natural_scroll = true;

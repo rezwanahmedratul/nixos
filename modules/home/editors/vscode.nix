@@ -174,6 +174,7 @@ in {
 
       userSettings = lib.mkForce {
         # Java settings for NixOS
+        "security.workspace.trust.untrustedFiles" = "open";
         "java.jdt.ls.java.home" = "${pkgs.jdk21}/lib/openjdk";
 
         "java.configuration.runtimes" = [

@@ -114,6 +114,7 @@ in {
       gawk
       procps
       qimgv
+      nix-search-tv
       #distrobox
       #spice-gtk
       #arduino-cli

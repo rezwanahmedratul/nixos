@@ -14,6 +14,6 @@ in {
     ++ (with pkgs; [
       pangolin-cli
       obsidian
-      code-cursor
+      # code-cursor
     ]);
 }
