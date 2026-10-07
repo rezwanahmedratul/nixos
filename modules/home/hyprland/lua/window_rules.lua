@@ -2,7 +2,7 @@ local cfg = ZANEYOS or {}
 local rules_text = cfg.windowRulesHyprlang or ""
 
 local function trim(value)
-  return (value or ""):gsub("^%s+", ""):gsub("%s+$", "")
+  return ((value or ""):gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
 local function parse_scalar(value)

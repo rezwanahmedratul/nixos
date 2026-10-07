@@ -4,7 +4,7 @@ local bezier_entries = animation_cfg.bezier or {}
 local animation_entries = animation_cfg.animation or {}
 
 local function trim(value)
-  return (value or ""):gsub("^%s+", ""):gsub("%s+$", "")
+  return ((value or ""):gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
 local function split_csv(entry)

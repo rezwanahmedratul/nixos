@@ -4,10 +4,11 @@ local bindd_entries = cfg.bindd or {}
 local bindm_entries = cfg.bindm or {}
 
 local function trim(value)
-  return (value or ""):gsub("^%s+", ""):gsub("%s+$", "")
+  return ((value or ""):gsub("^%s+", ""):gsub("%s+$", ""))
 end
 local function normalize_modifier_token(token)
-  local lowered = trim(token):lower()
+  local cleaned = trim(token)
+  local lowered = cleaned:lower()
   if lowered == "" then
     return ""
   end
@@ -26,14 +27,17 @@ local function normalize_modifier_token(token)
   if lowered == "meta" then
     return "META"
   end
-  return trim(token)
+  return cleaned
 end
 
 local function normalize_mods(mods)
-  local expanded = trim(mods):gsub("%$modifier", modifier)
+  local expanded = (trim(mods):gsub("%$modifier", modifier))
   local tokens = {}
   for token in expanded:gmatch("%S+") do
-    table.insert(tokens, normalize_modifier_token(token))
+    local normalized = normalize_modifier_token(token)
+    if normalized ~= "" then
+      tokens[#tokens + 1] = normalized
+    end
   end
   return table.concat(tokens, " + ")
 end

@@ -15,7 +15,7 @@
       "$modifier CTRL,V, Noctalia Clipboard, exec, noctalia msg panel-toggle clipboard"
       "$modifier ALT,P, Noctalia Settings, exec, noctalia msg settings-toggle"
       "$modifier SHIFT,comma, Noctalia Settings, exec, noctalia msg settings-toggle"
-      "$modifier L, Noctalia Lock Screen, exec, noctalia msg session lock"
+      "$modifier, L, Noctalia Lock Screen, exec, noctalia msg session lock"
       "$modifier SHIFT,W, Noctalia Wallpaper, exec, noctalia msg panel-toggle wallpaper"
       "$modifier,P, Noctalia Power Menu, exec, noctalia msg panel-toggle session"
       "$modifier,C, Noctalia Control Center, exec, noctalia msg panel-toggle control-center"
@@ -65,7 +65,7 @@ in {
         "$modifier SHIFT,D, Discord, exec, discord"
         "$modifier ALT,W, Web Search, exec, web-search"
         "$modifier SHIFT,N, Notification Reset, exec, swaync-client -rs"
-        "$modifier,W, Web Browser, exec, ${browser}"
+        "$modifier,b, Web Browser, exec, ${browser}"
         "$modifier,Y, File Manager, exec, kitty -e yazi"
         "$modifier,F, File Manager, exec, nautilus"
         "$modifier,E, Emoji Picker, exec, emopicker9000"
@@ -178,8 +178,8 @@ in {
         ",XF86AudioPause, Play Pause, exec, playerctl play-pause"
         ",XF86AudioNext, Next Track, exec, playerctl next"
         ",XF86AudioPrev, Previous Track, exec, playerctl previous"
-        ",XF86MonBrightnessDown, Brightness Down, exec, brightnessctl set 5%-"
-        ",XF86MonBrightnessUp, Brightness Up, exec, brightnessctl set +5%"
+        ",XF86MonBrightnessDown, Brightness Down, exec, brightnessctl set 1%-"
+        ",XF86MonBrightnessUp, Brightness Up, exec, brightnessctl set +1%"
       ];
 
     bindm = [

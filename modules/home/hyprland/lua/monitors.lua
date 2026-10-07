@@ -2,7 +2,7 @@ local cfg = ZANEYOS or {}
 local monitor_lines = cfg.monitorLines or {}
 
 local function trim(value)
-  return (value or ""):gsub("^%s+", ""):gsub("%s+$", "")
+  return ((value or ""):gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
 local function parse_monitor(entry)
