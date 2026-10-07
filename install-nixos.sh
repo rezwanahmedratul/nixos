@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ######################################
-# Install script for zaneyos
+# Install script for nixos
 # Author:  Don Williams
 # Date: June 27, 2005
 #######################################
@@ -51,7 +51,7 @@ print_error() {
 # Function to print a success banner
 print_success_banner() {
   echo -e "${GREEN}╔═══════════════════════════════════════════════════════════════════════╗${NC}"
-  echo -e "${GREEN}║                 ZaneyOS Installation Successful!                      ║${NC}"
+  echo -e "${GREEN}║                 NixOS Installation Successful!                      ║${NC}"
   echo -e "${GREEN}║                                                                       ║${NC}"
   echo -e "${GREEN}║   Please reboot your system for changes to take full effect.          ║${NC}"
   echo -e "${GREEN}║                                                                       ║${NC}"
@@ -61,13 +61,14 @@ print_success_banner() {
 # Function to print a failure banner
 print_failure_banner() {
   echo -e "${RED}╔═══════════════════════════════════════════════════════════════════════╗${NC}"
-  echo -e "${RED}║                 ZaneyOS Installation Failed!                          ║${NC}"
+  echo -e "${RED}║                 NixOS Installation Failed!                          ║${NC}"
   echo -e "${RED}║                                                                       ║${NC}"
   echo -e "${RED}║   Please review the log file for details:                             ║${NC}"
   echo -e "${RED}║   ${LOG_FILE}                                                        ║${NC}"
   echo -e "${RED}║                                                                       ║${NC}"
   echo -e "${RED}╚═══════════════════════════════════════════════════════════════════════╝${NC}"
 }
+
 
 # Memory and Swap Safeguards for Low-Memory / VM Environments
 ensure_build_memory() {
@@ -115,6 +116,8 @@ get_build_flags() {
     echo "--max-jobs 2 --cores 4"
   fi
 }
+
+
 
 print_header "Verifying System Requirements"
 
@@ -269,14 +272,14 @@ Please type out your choice: " profile
   echo -e "${GREEN}Selected GPU profile: $profile${NC}"
 fi
 
-print_header "⚠️  CRITICAL WARNING - Existing ZaneyOS Detected"
+print_header "⚠️  CRITICAL WARNING - Existing NixOS Detected"
 
 backupname=$(date +"%Y-%m-%d-%H-%M-%S")
-if [ -d "zaneyos" ]; then
+if [ -d "nixos" ]; then
   echo -e "${RED}╔═══════════════════════════════════════════════════════════════════════╗${NC}"
   echo -e "${RED}║                    ⚠️  IMPORTANT WARNING ⚠️                           ║${NC}"
   echo -e "${RED}║                                                                       ║${NC}"
-  echo -e "${RED}║  An existing ZaneyOS installation was detected at ~/zaneyos           ║${NC}"
+  echo -e "${RED}║  An existing NixOS installation was detected at ~/nixos           ║${NC}"
   echo -e "${RED}║                                                                       ║${NC}"
   echo -e "${RED}║  This installer will COMPLETELY REPLACE your existing configuration!  ║${NC}"
   echo -e "${RED}║  All customizations, packages, and settings will be LOST!             ║${NC}"
@@ -292,25 +295,48 @@ if [ -d "zaneyos" ]; then
     echo -e "${GREEN}Installation cancelled. ${NC}"
     exit 0
   fi
-  echo -e "${GREEN}zaneyos exists, backing up to .config/zaneyos-backups folder.${NC}"
-  if [ -d ".config/zaneyos-backups" ]; then
-    echo -e "${GREEN}Moving current version of ZaneyOS to backups folder.${NC}"
-    mv "$HOME"/zaneyos .config/zaneyos-backups/"$backupname"
+  echo -e "${GREEN}nixos exists, backing up to .config/nixos-backups folder.${NC}"
+  if [ -d ".config/nixos-backups" ]; then
+    echo -e "${GREEN}Moving current version of NixOS to backups folder.${NC}"
+    mv "$HOME"/nixos .config/nixos-backups/"$backupname"
     sleep 1
   else
-    echo -e "${GREEN}Creating the backups folder & moving ZaneyOS to it.${NC}"
-    mkdir -p .config/zaneyos-backups
-    mv "$HOME"/zaneyos .config/zaneyos-backups/"$backupname"
+    echo -e "${GREEN}Creating the backups folder & moving NixOS to it.${NC}"
+    mkdir -p .config/nixos-backups
+    mv "$HOME"/nixos .config/nixos-backups/"$backupname"
     sleep 1
   fi
 else
-  echo -e "${GREEN}Thank you for choosing ZaneyOS.${NC}"
+  echo -e "${GREEN}Thank you for choosing NixOS.${NC}"
   echo -e "${GREEN}I hope you find your time here enjoyable!${NC}"
 fi
 
-print_header "Cloning ZaneyOS Repository"
-git clone https://gitlab.com/zaney/zaneyos.git -b main --depth=1 ~/zaneyos
-cd ~/zaneyos || exit 1
+# Robust clone: retry a few times, prefer HTTP/1.1 to avoid HTTP/2 curl reset issues,
+# increase postBuffer for large transfers, and use an explicit $HOME path.
+REPO_URL="https://github.com/rezwanahmedratul/nixos.git"
+TARGET_DIR="$HOME/nixos"
+CLONE_ATTEMPTS=2
+CLONE_SUCCESS=false
+
+for attempt in $(seq 1 "$CLONE_ATTEMPTS"); do
+  echo "Cloning repository (attempt $attempt/$CLONE_ATTEMPTS)..."
+  # Force HTTP/1.1 and raise postBuffer for robustness; use shallow clone first.
+  git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 clone "$REPO_URL" -b main --depth=1 "$TARGET_DIR" && { CLONE_SUCCESS=true; break; }
+  echo "Clone attempt $attempt failed; retrying in 2s..."
+  sleep 2
+done
+
+if [ "$CLONE_SUCCESS" != true ]; then
+  echo "Shallow clones failed; attempting a final full clone with HTTP/1.1..."
+  git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 clone "$REPO_URL" -b main "$TARGET_DIR" || {
+    print_error "Failed to clone repository after $CLONE_ATTEMPTS attempts."
+    print_failure_banner
+    exit 1
+  }
+fi
+
+cd "$TARGET_DIR" || { print_error "Could not change directory to $TARGET_DIR"; exit 1; }
+
 
 print_header "Git Configuration"
 echo "👤 Setting up git configuration for version control:"
@@ -339,9 +365,9 @@ echo "  • Europe: Europe/London, Europe/Berlin, Europe/Paris, Europe/Rome"
 echo "  • Asia: Asia/Tokyo, Asia/Shanghai, Asia/Seoul, Asia/Kolkata"
 echo "  • Australia: Australia/Sydney, Australia/Melbourne"
 echo "  • UTC (Universal): UTC"
-read -rp "Enter your timezone [ America/New_York ]: " timezone
+read -rp "Enter your timezone [ Asia/Dhaka ]: " timezone
 if [ -z "$timezone" ]; then
-  timezone="America/New_York"
+  timezone="Asia/Dhaka"
 fi
 echo -e "${GREEN}✓ Timezone set to: $timezone${NC}"
 
@@ -501,6 +527,7 @@ NIX_CONFIG="experimental-features = nix-command flakes"
 ensure_build_memory
 buildFlags=$(get_build_flags)
 
+
 print_header "Initiating NixOS Build"
 read -p "Ready to run initial build? (Y/N): " -n 1 -r
 echo
@@ -509,10 +536,12 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
   exit 1
 fi
 
-sudo nixos-rebuild boot $buildFlags --flake ~/zaneyos/#${profile}
+
+sudo nixos-rebuild boot $buildFlags --flake ~/nixos/#${profile}
 
 # Export newly built system binaries to PATH for subsequent steps
 export PATH="/run/current-system/sw/bin:/nix/var/nix/profiles/system/sw/bin:/etc/profiles/per-user/$USER/bin:$PATH"
+
 
 # Check the exit status of the last command (nixos-rebuild)
 if [ $? -eq 0 ]; then
