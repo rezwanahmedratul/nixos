@@ -140,7 +140,7 @@ in
 
 
     # --- Configuration ---
-    PROJECT="zaneyos"   #ddubos or zaneyos
+    PROJECT="nixos"   #ddubos or zaneyos
     PROFILE_DEFAULT="${profile}"
     BACKUP_FILES_STR="${backupFilesString}"
     VERSION="1.0.2"

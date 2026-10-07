@@ -58,7 +58,7 @@ let
   );
 
   monitorLines = [
-    "monitor=,preferred,auto,auto"
+    "monitor=eDP-1,1920x1200@60,0x0,1.20"
     "monitor=Virtual-1,1920x1080@60,auto,1"
   ]
   ++ builtins.filter (line: line != "") (

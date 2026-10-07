@@ -39,11 +39,12 @@ hl.config({
     repeat_delay = 300,
     follow_mouse = 1,
     float_switch_override_focus = 0,
-    sensitivity = 0,
+    sensitivity = 0.5,
+    scroll_factor = 1.7,
     touchpad = {
       natural_scroll = true,
       disable_while_typing = true,
-      scroll_factor = 0.8,
+      scroll_factor = 1.0,
     },
   },
 })
@@ -76,9 +77,9 @@ hl.config({
 hl.config({
   general = {
     layout = "dwindle",
-    gaps_in = 6,
-    gaps_out = 8,
-    border_size = 2,
+    gaps_in = 2,
+    gaps_out = 0,
+    border_size = 0,
     resize_on_border = true,
     col = {
       active_border = active_border,

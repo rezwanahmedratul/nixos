@@ -9,17 +9,17 @@
   noctaliaBind =
     if barChoice == "noctalia"
     then [
-      "$modifier,D, Noctalia Launcher, exec, noctalia msg panel-toggle launcher"
+      "ALT,SPACE, Noctalia Launcher, exec, noctalia msg panel-toggle launcher"
       "$modifier SHIFT,Return, Noctalia Launcher, exec, noctalia msg panel-toggle launcher"
       "$modifier,M, Noctalia Notifications, exec, noctalia msg panel-toggle control-center notifications"
-      "$modifier,V, Noctalia Clipboard, exec, noctalia msg panel-toggle clipboard"
+      "$modifier CTRL,V, Noctalia Clipboard, exec, noctalia msg panel-toggle clipboard"
       "$modifier ALT,P, Noctalia Settings, exec, noctalia msg settings-toggle"
       "$modifier SHIFT,comma, Noctalia Settings, exec, noctalia msg settings-toggle"
-      "$modifier CTRL,L, Noctalia Lock Screen, exec, noctalia msg session lock"
+      "$modifier L, Noctalia Lock Screen, exec, noctalia msg session lock"
       "$modifier SHIFT,W, Noctalia Wallpaper, exec, noctalia msg panel-toggle wallpaper"
-      "$modifier,X, Noctalia Power Menu, exec, noctalia msg panel-toggle session"
+      "$modifier,P, Noctalia Power Menu, exec, noctalia msg panel-toggle session"
       "$modifier,C, Noctalia Control Center, exec, noctalia msg panel-toggle control-center"
-      "$modifier CTRL,R, Noctalia Screenshot Region, exec, noctalia msg screenshot-region"
+      "$modifier ALT,S, Noctalia Screenshot Region, exec, noctalia msg screenshot-region"
       "$modifier SHIFT,R, Restart Noctalia shell, exec, restart.noctalia"
     ]
     else [];
@@ -67,20 +67,35 @@ in {
         "$modifier SHIFT,N, Notification Reset, exec, swaync-client -rs"
         "$modifier,W, Web Browser, exec, ${browser}"
         "$modifier,Y, File Manager, exec, kitty -e yazi"
+        "$modifier,F, File Manager, exec, nautilus"
         "$modifier,E, Emoji Picker, exec, emopicker9000"
         "$modifier,S, Screenshot, exec, screenshootin"
+
+        "$modifier CTRL,Z, Open NixOS in VS Code, exec, code ~/nixos"
+        "$modifier CTRL,C, Open Competitive Programming in VS Code, exec, code ~/Github/CP"
+        "$modifier ALT,C, Competitive Programming Mode, exec, cp-session"
+        #"$modifier CTRL,R, Rebuild Nix Config, exec, ghostty -e zsh -ic 'fr'"
+        "$modifier ALT, P, Power Off, exec, poweroff"
+        "$modifier ALT, R, Reboot, exec, reboot"
+
         # ============= SCREENSHOTS =============
         "$modifier CTRL,S, Screenshot Output, exec, hyprshot -m output -o $HOME/Pictures/ScreenShots"
         "$modifier SHIFT,S, Screenshot Window, exec, hyprshot -m window -o $HOME/Pictures/ScreenShots"
         "$modifier ALT,S, Screenshot Region, exec, hyprshot -m region -o $HOME/Pictures/ScreenShots"
+        "$modifier SHIFT,Z, Screenshot Region Clipboard, exec, hyprshot -m region --clipboard-only"
+        "$modifier SHIFT, A, Grab Text from Region, exec, ocr-region"
+
+        "$modifier CTRL,R, Screen Recorder, exec, screenrecord"
         "$modifier,O, OBS Studio, exec, obs"
+        
         "$modifier ALT,C, Color Picker, exec, hyprpicker -a"
         "$modifier,G, GIMP, exec, gimp"
         "$modifier SHIFT,T, Dropdown Terminal, exec, sh -lc 'DropTerminal'"
         "$modifier,T, Thunar, exec, thunar"
         "$modifier ALT,M, Audio Control, exec, pavucontrol"
+
         # ============= WINDOW MANAGEMENT =============
-        "$modifier,Q, Kill Active Window, killactive,"
+        "$modifier,X, Kill Active Window, killactive,"
         "$modifier,P, Pseudo Tile, pseudo,"
         "$modifier SHIFT,I, Toggle Split, layoutmsg, togglesplit"
         "$modifier,F, Maximize, fullscreen,"
