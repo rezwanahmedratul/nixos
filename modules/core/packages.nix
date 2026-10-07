@@ -12,8 +12,6 @@
     then
       with pkgs; [
         matugen # color palette generator needed for noctalia-shell
-        #app2unit # launcher for noctalia-shell
-        gpu-screen-recorder # needed for nnoctalia-shell
       ]
     else [];
 in {
@@ -50,7 +48,7 @@ in {
     ++ noctaliaPkgs
     ++ [
       alejandra # nix formatter
-      appimage-run # Needed For AppImage Support
+      # appimage-run # Needed For AppImage Support
       brave # Brave Browser
       brightnessctl # For Screen Brightness Control
       duf # Utility For Viewing Disk Usage In Terminal
@@ -119,6 +117,6 @@ in {
       #spice-gtk
       #arduino-cli
       #virt-viewer
-      #azuredatastudio
+      azuredatastudio
     ];
 }

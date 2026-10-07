@@ -12,10 +12,10 @@
     stylix.url = "github:danth/stylix/master";
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
 
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # noctalia = {
+    #   url = "github:noctalia-dev/noctalia";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # Checking nixvim to see if it's better
     nixvim = {
