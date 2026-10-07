@@ -20,6 +20,7 @@ in {
       enable = true;
       defaultEditor = true;
     };
+    kdeconnect.enable = true; # KDE Connect For Phone Integration
     firefox.enable = false; # Firefox is not installed by default
     hyprland = {
       enable = true; # set this so desktop file is created
@@ -37,7 +38,7 @@ in {
   };
 
   nixpkgs.config.allowUnfree = true;
-  #nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
+  nixpkgs.config.permittedInsecurePackages = ["openssl-1.1.1w"];
 
   environment.systemPackages = with pkgs;
     [
@@ -47,74 +48,75 @@ in {
     ++ noctaliaPkgs
     ++ [
       alejandra # nix formatter
-      amfora # Fancy Terminal Browser For Gemini Protocol
-      brave-origin # Brave Browser
+      # appimage-run # Needed For AppImage Support
+      brave # Brave Browser
       brightnessctl # For Screen Brightness Control
-      cliamp # terminal music player
-      cliphist # Clipboard manager using rofi menu
-      cmatrix # Matrix Movie Effect In Terminal
-      cowsay # Great Fun Terminal Program
-      docker-compose # Allows Controlling Docker From A Single File
       duf # Utility For Viewing Disk Usage In Terminal
       dysk # Disk space util nice formattting
       eza # Beautiful ls Replacement
       ffmpeg # Terminal Video / Audio Editing
       file-roller # Archive Manager
-      fd # find util needed for emacs but good util regardless vs. find
-      #gearlever # Manage / run Appimages  # Causes install to fail b/c overlay
+      #gearlever # Manage / run Appimages
       icu # dep for gearlever
-      gimp # Great Photo Editor
-      gnumake # Needed for emacs
-      google-chrome # default browser
-      gpu-screen-recorder # needed for noctalia-shell
-      power-profiles-daemon # needed for noctalia-shell power cycle
+      gpu-screen-recorder # needed for nnoctalia-shell
       mesa-demos # needed for inxi diag util
       tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
       htop # Simple Terminal Based System Monitor
-      eog # For Image Viewing
-      inxi # CLI System Information Tool
       killall # For Killing All Instances Of Programs
       libnotify # For Notifications
       lm_sensors # Used For Getting Hardware Temps
       lolcat # Add Colors To Your Terminal Command Output
-      lshw # Detailed Hardware Information
-      mdcat # CLI markdown parser
       mpv # Incredible Video Player
-      ncdu # Disk Usage Analyzer With Ncurses Interface
       nixfmt # Nix Formatter
       nwg-displays # configure monitor configs via GUI
-      nwg-drawer # Application launcher for wayland
-      nwg-dock-hyprland # Dock for hyprland
-      nwg-menu # App menu for waybar
+      rustc
+      cargo
+      #google-chrome # Google Chrome Browser
+      docker # Docker For Containerization
+      docker-compose # Docker Compose For Containerization
+      #nwg-dock-hyprland # Dock for hyprland
+      #nwg-menu # App menu for waybar
       onefetch # provides zsaneyos build info on current system
-      pandoc # format MD to HTML for cheatsheet parser
       pavucontrol # For Editing Audio Levels & Devices
       pciutils # Collection Of Tools For Inspecting PCI Devices
-      picard # For Changing Music Metadata & Getting Cover Art
-      pkg-config # Wrapper Script For Allowing Packages To Get Info On Others
       playerctl # Allows Changing Media Volume Through Scripts
       rhythmbox # audio player
-      ripgrep # Improved Grep
-      sqlite # needed for emaacs
       socat # Needed For Screenshots
-      ttop # top with histogram
       unrar # Tool For Handling .rar Files
       unzip # Tool For Handling .zip Files
       usbutils # Good Tools For USB Devices
       upower # noctalia shell battery
-      #uwsm # Universal Wayland Session Manager (optional must be enabled)
-      v4l-utils # Used For Things Like OBS Virtual Camera
-      waybar
+      uwsm # Universal Wayland Session Manager (optional must be enabled)
       waypaper # Change wallpaper
       wget # Tool For Fetching Files With Links
-      ytmdl # Tool For Downloading Audio From YouTube
       python3 # Python 3 programming language
-      zenith # like htop but more
-      isd # system util
-      netscanner # find devices on network
-      lstr # Tree alternative
-      cointop # top for ctrypto
-      bottom # top alternative
-      gotop # Another top
+      telegram-desktop
+      nautilus
+      freerdp
+      kdePackages.krdc
+      kdePackages.okular
+      localsend
+      gcc
+      gdb
+      cmake
+      gnumake
+      libreoffice
+      typst
+      jq
+      slurp
+      hyprpicker
+      tesseract
+      gnome-calculator
+      coreutils
+      gnugrep
+      gawk
+      procps
+      qimgv
+      nix-search-tv
+      #distrobox
+      #spice-gtk
+      #arduino-cli
+      #virt-viewer
+      azuredatastudio
     ];
 }

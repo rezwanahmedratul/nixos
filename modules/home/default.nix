@@ -11,6 +11,10 @@
     vscodeEnable
     helixEnable
     doomEmacsEnable
+    antigravityEnable
+    obsEnable
+    zed-editorEnable
+    vscodiumEnable
     ;
   # Select bar module based on barChoice
   barModule =
@@ -40,7 +44,7 @@ in {
       ./hyprland
       ./terminals/kitty.nix
       ./cli/lazygit.nix
-      ./obs-studio.nix
+      #./obs-studio.nix
       #./editors/nvf.nix
       ./editors/nixvim.nix
       ./editors/nano.nix
@@ -57,9 +61,14 @@ in {
       ./wlogout
       ./xdg.nix
       ./yazi
-      #./zen-browser.nix
+      ./zen-browser.nix
       ./zoxide.nix
       ./zsh
+      ./screen-recording.nix
+      ./ocr.nix
+      ./mpv.nix
+      ./packages.nix
+      ./cp.nix
     ]
     ++ (
       if helixEnable
@@ -72,11 +81,26 @@ in {
       else []
     )
     ++ (
+      if zed-editorEnable
+      then [./editors/zed-editor.nix]
+      else []
+    )
+    ++ (
+      if antigravityEnable
+      then [./editors/antigravity.nix]
+      else []
+    )
+    ++ (
       if doomEmacsEnable
       then [
         ./editors/doom-emacs-install.nix
         ./editors/doom-emacs.nix
       ]
+      else []
+    )
+        ++ (
+      if vscodiumEnable
+      then [./editors/vscodium.nix]
       else []
     )
     ++ (
@@ -98,5 +122,11 @@ in {
       if alacrittyEnable
       then [./terminals/alacritty.nix]
       else []
+    )
+    ++ (
+      if obsEnable
+      then [./obs-studio.nix]
+      else []
     );
+
 }

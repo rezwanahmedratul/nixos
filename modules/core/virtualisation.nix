@@ -1,11 +1,26 @@
 {pkgs, ...}: {
   # Only enable either docker or podman -- Not both
   virtualisation = {
+  
+    containers.registries.search = [
+      "docker.io"
+      "quay.io"
+      "ghcr.io"
+      ];
+
     docker = {
       enable = true;
     };
 
-    podman.enable = false;
+    waydroid = {
+      enable = true;
+      #image = "waydroid:latest";
+      #image = "waydroid:android-13.0";
+      #image = "waydroid:android-14.0";
+      package = pkgs.waydroid-nftables;
+    };
+
+    podman.enable = true;
 
     libvirtd = {
       enable = true;
@@ -21,14 +36,9 @@
     virt-manager.enable = false;
   };
 
-  systemd.services.systemd-machined = {
-    stopIfChanged = false;
-    restartIfChanged = false;
-  };
-
   environment.systemPackages = with pkgs; [
-    virt-viewer # View Virtual Machines
-    lazydocker
-    docker-client
+    #virt-viewer # View Virtual Machines
+    #lazydocker
+    #docker-client
   ];
 }

@@ -7,12 +7,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    custom-packages.url = "github:Rishabh5321/custom-packages-flake";
     nvf.url = "github:notashelf/nvf";
     stylix.url = "github:danth/stylix/master";
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
 
-    # Now avilable in nikpkgs
-    # Leaving this in case need latest build
     # noctalia = {
     #   url = "github:noctalia-dev/noctalia";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +20,12 @@
     # Checking nixvim to see if it's better
     nixvim = {
       url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Google Antigravity (IDE)
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -47,9 +52,9 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    host = "zaneyos-24-vm";
-    profile = "vm";
-    username = "dwilliams";
+    host = "firefly";
+    profile = "intel";
+    username = "ratul";
 
     # Deduplicate nixosConfigurations while preserving the top-level 'profile'
     mkNixosConfig = gpuProfile:
