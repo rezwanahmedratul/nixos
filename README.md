@@ -247,7 +247,7 @@ Then:
 ![ZaneyOS Install Script Command](img/install-script.jpg)
 
 ```
-sh <(curl -L https://gitlab.com/Zaney/zaneyos/-/raw/main/install-zaneyos.sh)
+sh <(curl -L https://gitlab.com/rezwanahmedratul/nixos/-/raw/main/install-nixos.sh)
 ```
 
 #### The install process will look something like this:
@@ -278,8 +278,8 @@ nix-shell -p git vim
 2. Clone this repo & enter it:
 
 ```
-cd && git clone https://gitlab.com/zaney/zaneyos.git -b main --depth=1 ~/zaneyos
-cd zaneyos
+cd && git clone https://gitlab.com/rezwanahmedratul/nixos.git -b main ~/nixos
+cd nixos
 
 You can still run the `install.sh` script if you want to.
 ```
