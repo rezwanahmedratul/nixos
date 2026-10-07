@@ -6,14 +6,16 @@
   profile,
   ...
 }: let
-  inherit (import ../../hosts/${host}/variables.nix) gitUsername;
+  zaneyos = import ../../hosts/${host}/variables.nix;
+  inherit (zaneyos) gitUsername;
 in {
+  programs.zsh.enable = true;
   imports = [inputs.home-manager.nixosModules.home-manager];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = false;
     backupFileExtension = "backup";
-    extraSpecialArgs = {inherit inputs username host profile pkgs;};
+    extraSpecialArgs = {inherit inputs username host profile pkgs zaneyos;};
     users.${username} = {
       imports = [./../home];
       home = {
