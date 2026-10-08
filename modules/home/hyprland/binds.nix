@@ -65,7 +65,7 @@ in {
         "$modifier SHIFT,D, Discord, exec, discord"
         "$modifier ALT,W, Web Search, exec, web-search"
         "$modifier SHIFT,N, Notification Reset, exec, swaync-client -rs"
-        "$modifier,b, Web Browser, exec, ${browser}"
+        "$modifier,B, Web Browser, exec, ${browser}"
         "$modifier,Y, File Manager, exec, kitty -e yazi"
         "$modifier,F, File Manager, exec, nautilus"
         "$modifier,E, Emoji Picker, exec, emopicker9000"

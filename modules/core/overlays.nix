@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 let
-  pangolinVersion = "0.18.0";
+  pangolinVersion = "0.18.1";
 in
 {
   nixpkgs.overlays = [
