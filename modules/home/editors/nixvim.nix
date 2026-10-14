@@ -10,7 +10,15 @@
 
   programs.nixvim = {
     enable = true;
-    nixpkgs.source = inputs.nixpkgs;
+    # Use the host (Home Manager) pkgs instance instead of letting nixvim
+    # construct its own from `nixpkgs.source`. Combined with
+    # home-manager.useGlobalPkgs = true, this makes nixvim build against the
+    # system pkgs, so overlays from modules/core/overlays.nix (and nixpkgs.config
+    # from modules/core/packages.nix) actually apply.
+    # Do NOT set `nixpkgs.source`, `nixpkgs.config`, `nixpkgs.overlays`, or
+    # `nixpkgs.pkgs` here; nixvim asserts those are unset when using global
+    # packages.
+    nixpkgs.useGlobalPackages = true;
     viAlias = true;
     vimAlias = true;
 

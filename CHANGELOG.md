@@ -49,6 +49,35 @@
   - Set default login mgr to `ly`
   - Hyprland config moved to LUA
 
+#### 📅 **Updated: October 14th, 2026**
+
+- Fix: overlays were not reaching Home Manager / `nixvim`
+  - `modules/core/user.nix`: `home-manager.useGlobalPkgs = true`
+  - `modules/home/editors/nixvim.nix`: `nixpkgs.useGlobalPackages = true`
+    - Replaces `nixpkgs.source = inputs.nixpkgs`, which built `nixvim` against a
+      pristine nixpkgs instance and ignored every overlay
+  - Removed now-invalid Home Manager level `nixpkgs.config` from
+    `modules/home/editors/vscode.nix`
+    - Already set system wide in `modules/core/packages.nix`
+- Fix: `nixvim` / `neovim` build failure from a stale `typescript-language-server`
+  pnpm dependency hash
+  - Added a guarded overlay in `modules/core/overlays.nix` patching
+    `typescript-language-server.pnpmDeps`
+  - Upstream fix is `NixOS/nixpkgs@ac7b1aa`, not yet in `nixos-unstable`
+  - Guarded so it is a no-op on nixpkgs revisions without `pnpmDeps`
+    (e.g. `typescript-language-server` 5.3.0 on the current pin)
+  - TODO: remove this overlay once `nixos-unstable` contains `ac7b1aa`
+- Fix: `obs-move-transition` fails to build on OBS 32.2.1+
+  - `-Werror=deprecated-declarations`; overlay adds
+    `-Wno-error=deprecated-declarations`
+- Fix: eval warning, `programs.rofi.extraConfig` renamed to
+  `programs.rofi.settings`
+- Chg: `modules/home/terminals/kitty.nix`
+  - Added `remember_window_size no`
+  - Changed `allow_remote_control` from `false` to `socket-only`
+- Removed: `dwarfs` overlay
+  - No longer needed
+
 # 🚀 **Current Release - ZaneyOS v2.6.4**
 
 - Updated:

@@ -14,7 +14,9 @@ in {
   imports = [inputs.home-manager.nixosModules.home-manager];
   home-manager = {
     useUserPackages = true;
-    useGlobalPkgs = false;
+    # Use the system's pkgs instance so nixpkgs.overlays from
+    # modules/core/overlays.nix are visible to Home Manager too.
+    useGlobalPkgs = true;
     backupFileExtension = "backup";
     extraSpecialArgs = {
       inherit inputs username host profile pkgs zaneyos;

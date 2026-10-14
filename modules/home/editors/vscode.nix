@@ -89,6 +89,6 @@ in {
       };
     };
   };
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w" ];
+  # NOTE: nixpkgs.config is set globally in modules/core/packages.nix. It cannot
+  # be set here while home-manager.useGlobalPkgs = true.
 }

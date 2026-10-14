@@ -7,7 +7,8 @@
     rofi = {
       enable = true;
       package = pkgs.rofi;
-      extraConfig = {
+      # Renamed from `extraConfig` in home-manager 25.11.
+      settings = {
         modi = "drun,filebrowser,run";
         show-icons = true;
         icon-theme = "Papirus";
