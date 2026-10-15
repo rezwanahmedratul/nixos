@@ -12,13 +12,6 @@
             });
           })
         ];
-      obs-studio-plugins =
-        prev.obs-studio-plugins
-        // {
-          obs-move-transition = prev.obs-studio-plugins.obs-move-transition.overrideAttrs (old: {
-            NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -Wno-error=deprecated-declarations";
-          });
-        };
 
       # typescript-language-server 6.0.2 (used by nixvim/neovim) ships a stale
       # pnpm dependency hash in some nixpkgs revisions:
@@ -35,22 +28,20 @@
     })
 
     (final: prev: {
-      typescript-language-server =
-        let
-          ts = prev.typescript-language-server;
-          deps = ts.pnpmDeps or null;
-          badHash = "sha256-MUSxDMlbG21KSesGdEvqa2kEpuVfLlXRUX1qV/FGsSo=";
-          goodHash = "sha256-xR/EF60lVBsITKgH7wCM2wHM46PFQevD51KfCENSUH4=";
-        in
-          if deps != null && (deps.outputHash or null) == badHash
-          then
-            ts.overrideAttrs (old: {
-              pnpmDeps = old.pnpmDeps.override {
-                hash = goodHash;
-              };
-            })
-          else
-            ts;
+      typescript-language-server = let
+        ts = prev.typescript-language-server;
+        deps = ts.pnpmDeps or null;
+        badHash = "sha256-MUSxDMlbG21KSesGdEvqa2kEpuVfLlXRUX1qV/FGsSo=";
+        goodHash = "sha256-xR/EF60lVBsITKgH7wCM2wHM46PFQevD51KfCENSUH4=";
+      in
+        if deps != null && (deps.outputHash or null) == badHash
+        then
+          ts.overrideAttrs (old: {
+            pnpmDeps = old.pnpmDeps.override {
+              hash = goodHash;
+            };
+          })
+        else ts;
     })
   ];
 }

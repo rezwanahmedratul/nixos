@@ -32,13 +32,10 @@
       - If the installed NixOS doesn't have:
         - swap defined
         - or zramfs not in effect yet
-  - Removed `gearlever`
-    - Causes long builds
-    - Kept Overlay for dwarfs build error in case someone adds/enables gearlever
 
 - Removed:
   - overlays for glaze and tumbler
-    - `overlay.nix` is now empty template
+    - Removed `obs studio`
     - Reduces rebuild time and better `cacheix` hits
 
 - Updated:
