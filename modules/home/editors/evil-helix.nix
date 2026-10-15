@@ -22,7 +22,7 @@ in {
       docker-compose-language-service
       docker-compose
       docker-language-server
-      typescript-language-server
+      # typescript-language-server intentionally disabled
     ]
     else []
   );

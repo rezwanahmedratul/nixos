@@ -37,6 +37,8 @@
   - overlays for glaze and tumbler
     - Removed `obs studio`
     - Removed `python`
+    - Removed `TypeScript`
+        - Disalbled typscript in nixvim and helix
     - Reduces rebuild time and better `cacheix` hits
 
 - Updated:

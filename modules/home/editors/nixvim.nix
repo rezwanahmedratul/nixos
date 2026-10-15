@@ -187,7 +187,7 @@
           nil_ls.enable = true;
           lua_ls.enable = true;
           pyright.enable = true;
-          ts_ls.enable = true;
+          # ts_ls (TypeScript) intentionally disabled
           html.enable = true;
           cssls.enable = true;
           clangd.enable = true;
@@ -213,9 +213,8 @@
             nix = ["alejandra"];
             lua = ["stylua"];
             javascript = ["prettierd"];
-            typescript = ["prettierd"];
+            # TypeScript formatters intentionally disabled
             javascriptreact = ["prettierd"];
-            typescriptreact = ["prettierd"];
             css = ["prettierd"];
             html = ["prettierd"];
             markdown = ["prettierd"];
@@ -343,8 +342,7 @@
       lazygit
       nil
       hyprls
-      typescript-language-server
-      typescript
+      # TypeScript tooling intentionally disabled
       vscode-langservers-extracted
       pyright
       lua-language-server
