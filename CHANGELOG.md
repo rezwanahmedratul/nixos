@@ -36,6 +36,7 @@
 - Removed:
   - overlays for glaze and tumbler
     - Removed `obs studio`
+    - Removed `python`
     - Reduces rebuild time and better `cacheix` hits
 
 - Updated:
