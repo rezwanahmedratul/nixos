@@ -13,7 +13,7 @@
     };
 
     waydroid = {
-      enable = true;
+      enable = false;
       #image = "waydroid:latest";
       #image = "waydroid:android-13.0";
       #image = "waydroid:android-14.0";
@@ -27,7 +27,7 @@
     };
 
     virtualbox.host = {
-      enable = true;
+      enable = false;
       enableExtensionPack = true;
     };
   };

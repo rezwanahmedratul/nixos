@@ -115,8 +115,8 @@ in {
       nix-search-tv
       #distrobox
       #spice-gtk
-      arduino-cli
+      #arduino-cli
       #virt-viewer
-      azuredatastudio
+      #azuredatastudio
     ];
 }
