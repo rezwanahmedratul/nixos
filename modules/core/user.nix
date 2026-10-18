@@ -38,6 +38,8 @@ in {
       "scanner"
       "wheel" #sudo access
       "vboxusers" #Virtual Box
+      "dialout" #Serial Port Access
+      "uucp" #Modem Access
     ];
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;

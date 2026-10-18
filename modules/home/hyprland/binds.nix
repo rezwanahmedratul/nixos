@@ -98,8 +98,8 @@ in {
         "$modifier,X, Kill Active Window, killactive,"
         "$modifier,P, Pseudo Tile, pseudo,"
         "$modifier SHIFT,I, Toggle Split, layoutmsg, togglesplit"
-        "$modifier,F, Maximize, fullscreen,"
-        "$modifier SHIFT,F, Toggle Floating, togglefloating,"
+        "$modifier SHIFT,F, Maximize, fullscreen,"
+        "$modifier CTRL,F, Toggle Floating, togglefloating,"
         "$modifier ALT,F, Float All Windows, exec, hyprland-float-all"
         # ============= LAYOUTS =============
         "$modifier ALT,L, Toggle Layouts, exec, hyprland-change-layout toggle"
