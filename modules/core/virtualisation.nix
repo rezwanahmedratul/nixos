@@ -33,7 +33,7 @@
   };
 
   programs = {
-    virt-manager.enable = false;
+    virt-manager.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

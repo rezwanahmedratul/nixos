@@ -12,7 +12,7 @@ in {
       customPkgs.ab-download-manager
     ]
     ++ (with pkgs; [
-      #pangolin-cli
+      pangolin-cli
       #obsidian
       # code-cursor
     ]);
