@@ -1,4 +1,4 @@
-{pkgs, host, lib, ...}: let
+{host, lib, ...}: let
   vars = import ../../hosts/${host}/variables.nix;
 in {
   xdg = {
@@ -36,10 +36,10 @@ in {
       #   "inode/directory" = ["thunar.desktop"];      # or org.gnome.Nautilus.desktop, org.kde.dolphin.desktop
       # };
     };
-    portal = {
-      enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-hyprland];
-      configPackages = [pkgs.hyprland];
-    };
+    # NOTE: xdg.portal is intentionally left to the hyprland module
+    # (modules/home/hyprland/hyprland.nix -> wayland.windowManager.hyprland),
+    # which sets xdg.portal.extraPortals to its own finalPortalPackage.
+    # Declaring it here as well would add a second, differently instantiated
+    # xdg-desktop-portal-hyprland to the profile.
   };
 }

@@ -1,7 +1,16 @@
-{...}: {
-  # TypeScript support was removed from this configuration, so the
-  # typescript-language-server pnpm hash overlay that used to live here is no
-  # longer needed. Overlays list intentionally left empty; the module is still
-  # imported from flake.nix, so add future overlays here.
-  nixpkgs.overlays = [];
+{
+  inputs,
+  ...
+}: {
+  nixpkgs.overlays = [
+    # ghee: "git, as a place you leave open", a TUI over every repo in a folder.
+    # The flake input only ships packages.<system>.{ghee,default}, so surface it
+    # as pkgs.ghee for the rest of the configuration (installed in
+    # modules/home/cli/ghee.nix).
+    (
+      final: prev: {
+        ghee = inputs.ghee.packages.${final.stdenv.hostPlatform.system}.ghee;
+      }
+    )
+  ];
 }

@@ -1,11 +1,38 @@
 {
   inputs,
   pkgs,
+  lib,
   host,
   ...
 }: let
   vars = import ../../hosts/${host}/variables.nix;
   inherit (vars) barChoice;
+
+  # Local build of synfetch (github:SXSLVT/synfetch).
+  #
+  # The upstream flake's package reads the deprecated `pkgs.stdenv.isLinux`
+  # attribute, so pulling in `inputs.synfetch.packages.<system>.default` makes
+  # every evaluation of this configuration print:
+  #   evaluation warning: stdenv.isLinux is deprecated, use stdenv.hostPlatform.isLinux instead
+  #
+  # Rebuilding the same writeShellApplication here, using the script from the
+  # input, keeps the tool and drops the warning. Remove this and go back to
+  # `inputs.synfetch.packages.<system>.default` once upstream is fixed.
+  synfetch = pkgs.writeShellApplication {
+    name = "synfetch";
+    runtimeInputs =
+      with pkgs;
+      [
+        coreutils
+        ncurses
+      ]
+      ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+        pciutils
+        procps
+      ];
+    checkPhase = "";
+    text = builtins.readFile "${inputs.synfetch}/synfetch";
+  };
   # Noctalia-specific packages
   noctaliaPkgs =
     if barChoice == "noctalia"
@@ -42,7 +69,7 @@ in {
   environment.systemPackages = with pkgs;
     [
       awww
-      inputs.synfetch.packages.${pkgs.stdenv.hostPlatform.system}.default
+      synfetch
     ]
     ++ noctaliaPkgs
     ++ [

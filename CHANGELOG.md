@@ -78,6 +78,32 @@
 - Removed: `dwarfs` overlay
   - No longer needed
 
+#### 📅 **Updated: October 30th, 2026**
+
+- Fix: `nixos-rebuild` failed building `user-units` with
+  `ln: failed to create symbolic link '.../xdg-desktop-portal-hyprland.service': File exists`
+  - `modules/core/flatpak.nix` and `modules/home/xdg.nix` both declared
+    `xdg.portal`, which `programs.hyprland` already provides
+  - The current nixpkgs hands `programs.hyprland.package` a `withUWSM = false`
+    override, so the duplicate declaration pulled in a second, differently
+    instantiated `xdg-desktop-portal-hyprland`
+  - Both copies ship `lib/systemd/user/xdg-desktop-portal-hyprland.service`, and
+    every `systemd.packages` unit is linked into the same directory
+  - Removed both `xdg.portal` blocks; `programs.hyprland` is now the only source
+- Fix: eval warning
+  `stdenv.isLinux is deprecated, use stdenv.hostPlatform.isLinux instead`
+  - Came from the `synfetch` flake input, not from ZaneyOS
+  - `modules/core/packages.nix` now builds the same `writeShellApplication`
+    locally from the input's script, using `stdenv.hostPlatform.isLinux`
+  - TODO: go back to `inputs.synfetch.packages.<system>.default` once upstream is
+    fixed
+- Add: `ghee` - a git TUI, `git, as a place you leave open`
+  - New input `git+https://codeberg.org/justaguylinux/ghee.git`
+    (`inputs.nixpkgs.follows = "nixpkgs"`)
+  - Exposed as `pkgs.ghee` by an overlay in `modules/core/overlays.nix`
+  - Installed per user in `modules/home/cli/ghee.nix`
+  - Builds with `zig_0_16` from nixpkgs; `ghee ~/Code` walks a folder of repos
+
 # 🚀 **Current Release - ZaneyOS v2.6.4**
 
 - Updated:
