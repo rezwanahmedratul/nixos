@@ -14,7 +14,7 @@ in {
   home.packages =
     [
       customPkgs.ab-download-manager
-      downloadcraft
+      # downloadcraft
     ]
     ++ (with pkgs; [
       pangolin-cli
