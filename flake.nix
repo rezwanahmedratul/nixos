@@ -41,6 +41,10 @@
       url = "github:kamadorueda/alejandra";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    downloadcraft-src = {
+      url = "github:hungry-detective/downloadcraft";
+      flake = false;
+    };
   };
 
   outputs = {

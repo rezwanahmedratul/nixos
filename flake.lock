@@ -129,6 +129,22 @@
         "type": "github"
       }
     },
+    "downloadcraft-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793238287,
+        "narHash": "sha256-fUtvMSFSagw82Ylqh0M7mlBcuNOf0ZloT8GlsHNJdsg=",
+        "owner": "hungry-detective",
+        "repo": "downloadcraft",
+        "rev": "27c4e99cab5a4829172a7e9114d24bdd058fa960",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hungry-detective",
+        "repo": "downloadcraft",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -533,6 +549,7 @@
         "alejandra": "alejandra",
         "antigravity-nix": "antigravity-nix",
         "custom-packages": "custom-packages",
+        "downloadcraft-src": "downloadcraft-src",
         "home-manager": "home-manager",
         "nix-flatpak": "nix-flatpak",
         "nixpkgs": "nixpkgs_2",
