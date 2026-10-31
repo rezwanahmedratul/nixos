@@ -157,6 +157,17 @@ hl.config({
   },
 })
 
+-- Advertise the renderer's full dmabuf format list, not just the formats the
+-- display can scan out. Hyprland 0.57 defaults quirks:skip_non_kms_dmabuf_formats
+-- to true, which narrows the list to the display's scanout set; on virtio-gpu
+-- that leaves XRGB8888 only, so no alpha EGLConfig exists. GLFW asks for
+-- EGL_ALPHA_SIZE 8, so kitty and alacritty fail with "EGL: No EGLConfigs returned".
+hl.config({
+  quirks = {
+    skip_non_kms_dmabuf_formats = false,
+  },
+})
+
 hl.config({
   master = {
     new_status = "slave",

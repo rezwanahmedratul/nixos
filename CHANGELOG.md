@@ -9,6 +9,13 @@
 
 - Fixed:
 
+- `kitty` and `alacritty` could not start on a VM (`virgl`)
+  - Hyprland 0.57 added `quirks:skip_non_kms_dmabuf_formats`, which defaults to `true`
+    - It advertises only the renderer dmabuf formats that can be imported into KMS
+    - On `virtio-gpu` that leaves `XRGB8888` only, so no alpha `EGLConfig` exists
+  - GLFW asks for `EGL_ALPHA_SIZE 8`, so `kitty` exited with `EGL: No EGLConfigs returned`
+  - `modules/home/hyprland/lua/settings.lua` now sets `quirks.skip_non_kms_dmabuf_formats = false`
+    - Applied ahead of the flake update that brings Hyprland 0.57 into this repo
 - `SDDM` uwsm conflicting with HomeMgr systemd
   - Disabled UWSM and masked from SDDM
 - WindowRule for `noctalia` setting panel
