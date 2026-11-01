@@ -73,6 +73,7 @@ in {
 
     # Rice tooling & utilities
     matugen
+    imagemagick
     hyprsunset
     fuzzel
     swappy

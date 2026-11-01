@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
   # Python environment matching the dependencies needed by dots-hyprland
@@ -97,7 +98,32 @@ in {
 
     # Generate initial default colors if not present
     if [ ! -f "$GEN_DIR/colors.json" ]; then
-      ${pkgs.matugen}/bin/matugen color hex "#33ccff" -m dark >/dev/null 2>&1 || true
+      if [ -f "$HOME/nixos/wallpapers/tree.png" ]; then
+        ${pkgs.matugen}/bin/matugen image "$HOME/nixos/wallpapers/tree.png" --source-color-index 0 -m dark >/dev/null 2>&1 || true
+      else
+        ${pkgs.matugen}/bin/matugen color hex "#33ccff" -m dark >/dev/null 2>&1 || true
+      fi
+    fi
+
+    # Set default wallpaper path if not set or set to Null
+    WALLPAPER_FILE="$HOME/.local/state/quickshell/user/generated/wallpaper/path.txt"
+    if [ ! -s "$WALLPAPER_FILE" ] || [ "$(cat "$WALLPAPER_FILE" 2>/dev/null)" = "Null" ]; then
+      if [ -f "$HOME/nixos/wallpapers/tree.png" ]; then
+        printf "%s" "$HOME/nixos/wallpapers/tree.png" > "$WALLPAPER_FILE"
+      fi
+    fi
+
+    # Initialize default illogical-impulse config.json if not present
+    CONFIG_FILE="$HOME/.config/illogical-impulse/config.json"
+    if [ ! -f "$CONFIG_FILE" ]; then
+      mkdir -p "$HOME/.config/illogical-impulse"
+      cat > "$CONFIG_FILE" <<EOF
+{
+  "background": {
+    "wallpaperPath": "${config.home.homeDirectory}/nixos/wallpapers/tree.png"
+  }
+}
+EOF
     fi
   '';
 }
