@@ -49,6 +49,9 @@
       url = "github:hungry-detective/downloadcraft";
       flake = false;
     };
+    ryoku = {
+      url = "github:Ryoku-dev/Ryoku-on-NixOS";
+    };
   };
 
   outputs = {

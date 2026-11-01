@@ -15,6 +15,7 @@ in {
       ./nfs.nix
       ./nh.nix
       ./quickshell.nix
+      ./ryoku.nix
       ./packages.nix
       ./printing.nix
       ./recording.nix

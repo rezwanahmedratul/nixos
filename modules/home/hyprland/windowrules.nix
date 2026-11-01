@@ -440,6 +440,24 @@ _: {
         no_shadow = on
         rounding = 12
       }
+
+      # Ryoku Quickshell Layer Rules
+      layerrule = noanim, ^launcher.*$
+      layerrule = blur, ^launcher$
+      layerrule = ignorealpha 0.05, ^launcher$
+      layerrule = noanim, ^ryoku-notifications$
+      layerrule = noanim, ^ryoku-frame$
+      layerrule = noanim, overview
+      layerrule = blur, overview
+      layerrule = noanim, ^ryoku-keys$
+      layerrule = blur, ^ryoku-keys$
+      layerrule = noanim, ^ryoku-keys-hint$
+      layerrule = blur, ^ryoku-keys-hint$
+      layerrule = ignorealpha 0.05, ^ryoku-keys-hint$
+      layerrule = noanim, ^ryogami-picker$
+      layerrule = blur, ^ryogami-picker$
+      layerrule = ignorealpha 0.05, ^ryogami-picker$
+      layerrule = animation fade, ^(ryoku-wallpaper|awww-daemon|ryoku-livewall|mpvpaper|phonto)$
     '';
   };
 }

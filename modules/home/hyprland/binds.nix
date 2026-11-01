@@ -23,24 +23,42 @@
       "$modifier SHIFT,R, Restart Noctalia shell, exec, restart.noctalia"
     ]
     else [];
-  # Rofi launcher bindings (only included when barChoice != "noctalia")
+  # Ryoku-specific bindings (only included when barChoice == "ryoku")
+  ryokuBind =
+    if barChoice == "ryoku"
+    then [
+      "$modifier,SPACE, Ryoku Launcher, exec, ryoku-shell launcher toggle || qs -c shell ipc call launcher toggle"
+      "ALT,SPACE, Ryoku Launcher, exec, ryoku-shell launcher toggle || qs -c shell ipc call launcher toggle"
+      "$modifier,Escape, Ryoku Quick Settings, exec, ryoku-shell quicksettings toggle || qs -c shell ipc call quicksettings toggle"
+      "$modifier,V, Ryoku Clipboard, exec, ryoku-shell clipboard toggle || qs -c shell ipc call clipboard toggle"
+      "$modifier,M, Ryoku Visualizer, exec, ryoku-shell visualizer toggle || qs -c shell ipc call visualizer toggle"
+      "$modifier,W, Ryoku Wallpaper Picker, exec, ryogami wallpaper ui"
+      "$modifier SHIFT,W, Ryoku Random Wallpaper, exec, ryogami wallpaper random"
+      "$modifier,L, Ryoku Lock Screen, exec, ryoku-shell lock"
+      "$modifier,comma, Ryoku Hub Settings, exec, ryoku-shell hub open"
+      "$modifier SHIFT,D, Ryoku Stage Editor, exec, ryoku-shell hub open widgets"
+      "$modifier SHIFT,S, Ryoku Screenshot, exec, ryoku-cmd-ryoshot"
+      "$modifier,K, Ryoku Keybinds Cheat Sheet, exec, pkill -x -f 'qs -c keys' 2>/dev/null || flock -n -o /tmp/ryoku-keys.lock qs -c keys"
+    ]
+    else [];
+  # Rofi launcher bindings (only included when not noctalia and not ryoku)
   rofiBind =
-    if barChoice != "noctalia"
+    if barChoice != "noctalia" && barChoice != "ryoku"
     then [
       "$modifier,D, Rofi Launcher, exec, rofi-launcher"
       "$modifier SHIFT,Return, Rofi Launcher, exec, rofi-launcher"
     ]
     else [];
-  # Rofi clipboard binding (only included when barChoice != "noctalia")
+  # Rofi clipboard binding (only included when not noctalia and not ryoku)
   rofiClipboardBind =
-    if barChoice != "noctalia"
+    if barChoice != "noctalia" && barChoice != "ryoku"
     then [
       "$modifier,V, Clipboard History, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
     ]
     else [];
-  # Wallpaper binding (only included when barChoice != "noctalia")
+  # Wallpaper binding (only included when not noctalia and not ryoku)
   wallpaperBind =
-    if barChoice != "noctalia"
+    if barChoice != "noctalia" && barChoice != "ryoku"
     then [
       "$modifier SHIFT,W, QS Wallpaper Setter, exec, qs-wallpapers-apply"
     ]
@@ -49,6 +67,7 @@ in {
   wayland.windowManager.hyprland.settings = {
     bindd =
       noctaliaBind
+      ++ ryokuBind
       ++ rofiBind
       ++ rofiClipboardBind
       ++ wallpaperBind

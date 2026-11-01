@@ -48,8 +48,9 @@
   extraMonitorSettings = "monitor = eDP-1, 1920x1200@60, 0x0, 1.20";
 
   # Bar/Shell Settings
-  # Choose between noctalia or waybar
-  barChoice = "noctalia"; # Set Bar Choice
+  # Choose between ryoku, noctalia, or waybar
+  barChoice = "ryoku"; # Set Bar Choice (ryoku, noctalia, waybar)
+  # barChoice = "noctalia"; # Set Bar Choice
   # barChoice = "waybar"; # Set Bar Choice
 
   # Waybar Settings (used when barChoice = "waybar")
@@ -161,11 +162,12 @@
 
   # Set Animation style
   # Available options are:
+  animChoice = ../../modules/home/hyprland/animations-ryoku.nix;
   #animChoice = ../../modules/home/hyprland/animations-def.nix;
   #animChoice = ../../modules/home/hyprland/animations-end4.nix;
   #animChoice = ../../modules/home/hyprland/animations-end4-slide.nix;
   #animChoice = ../../modules/home/hyprland/animations-end-slide.nix;
-  animChoice = ../../modules/home/hyprland/animations-dynamic.nix;
+  #animChoice = ../../modules/home/hyprland/animations-dynamic.nix;
   #animChoice = ../../modules/home/hyprland/animations-moving.nix;
   #animChoice = ../../modules/home/hyprland/animations-hyde-optimized.nix;
   #animChoice = ../../modules/home/hyprland/animations-mahaveer-me-1.nix;

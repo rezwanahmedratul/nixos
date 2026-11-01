@@ -20,6 +20,8 @@
   barModule =
     if barChoice == "noctalia"
     then ./noctalia.nix
+    else if barChoice == "ryoku"
+    then ./ryoku.nix
     else waybarChoice;
 in {
   imports =
