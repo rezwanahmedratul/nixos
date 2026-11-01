@@ -236,7 +236,6 @@ in {
       };
     };
   };
-
   # Java runtime (IMPORTANT)
   home.packages = with pkgs; [
     jdk21
@@ -315,5 +314,6 @@ in {
     }
   '';
 
-  nixpkgs.config.allowUnfree = true;
+  # NOTE: nixpkgs.config is set globally in modules/core/packages.nix. It cannot
+  # be set here while home-manager.useGlobalPkgs = true.
 }

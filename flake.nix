@@ -37,6 +37,10 @@
       url = "github:SXSLVT/synfetch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghee = {
+      url = "git+https://codeberg.org/justaguylinux/ghee.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     alejandra = {
       url = "github:kamadorueda/alejandra";
       inputs.nixpkgs.follows = "nixpkgs";

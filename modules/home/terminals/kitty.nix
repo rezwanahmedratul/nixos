@@ -14,6 +14,7 @@
       font_size = 10;
       wheel_scroll_min_lines = 1;
       window_padding_width = 4;
+      remember_window_size = false;
       confirm_os_window_close = 0;
       scrollback_lines = 10000;
       enable_audio_bell = false;
@@ -29,7 +30,8 @@
       enabled_layouts = "splits";
       open_url_with_default = true;
       detect_urls = true;
-      allow_remote_control = false;
+      # Only allow remote control over the local socket, not TCP.
+      allow_remote_control = "socket-only";
     };
 
     shellIntegration.enableZshIntegration = true;

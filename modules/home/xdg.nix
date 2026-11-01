@@ -97,28 +97,11 @@ in {
       };
     };
 
-    portal = {
-      enable = true;
-
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
-        xdg-desktop-portal-gtk
-      ];
-
-      config = {
-        common.default = [
-          "hyprland"
-          "gtk"
-        ];
-
-        hyprland.default = [
-          "hyprland"
-          "gtk"
-        ];
-      };
-
-      configPackages = [pkgs.hyprland];
-    };
+    # NOTE: xdg.portal is intentionally left to the hyprland module
+    # (modules/home/hyprland/hyprland.nix -> wayland.windowManager.hyprland),
+    # which sets xdg.portal.extraPortals to its own finalPortalPackage.
+    # Declaring it here as well would add a second, differently instantiated
+    # xdg-desktop-portal-hyprland to the profile.
 
     desktopEntries.nvim = {
       name = "Neovim";

@@ -550,6 +550,7 @@
         "antigravity-nix": "antigravity-nix",
         "custom-packages": "custom-packages",
         "downloadcraft-src": "downloadcraft-src",
+        "ghee": "ghee",
         "home-manager": "home-manager",
         "nix-flatpak": "nix-flatpak",
         "nixpkgs": "nixpkgs_2",
@@ -762,6 +763,26 @@
         "ref": "beta",
         "repo": "zen-browser-flake",
         "type": "github"
+      }
+    },
+    "ghee": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793328047,
+        "narHash": "sha256-azXMJahp4yYvuhgO3Q9ibSYTXYsVIs5snQb19wDUArk=",
+        "ref": "refs/heads/main",
+        "rev": "07b362e41225f29ced42a05026bba1e44d58f979",
+        "revCount": 19,
+        "type": "git",
+        "url": "https://codeberg.org/justaguylinux/ghee.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/justaguylinux/ghee.git"
       }
     }
   },

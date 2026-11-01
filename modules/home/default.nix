@@ -38,6 +38,7 @@ in {
       ./fastfetch
       ./cli/fzf.nix
       ./cli/gh.nix
+      ./cli/ghee.nix
       ./cli/git.nix
       ./gtk.nix
       ./cli/htop.nix

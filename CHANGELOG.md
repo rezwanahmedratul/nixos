@@ -9,6 +9,13 @@
 
 - Fixed:
 
+- `kitty` and `alacritty` could not start on a VM (`virgl`)
+  - Hyprland 0.57 added `quirks:skip_non_kms_dmabuf_formats`, which defaults to `true`
+    - It advertises only the renderer dmabuf formats that can be imported into KMS
+    - On `virtio-gpu` that leaves `XRGB8888` only, so no alpha `EGLConfig` exists
+  - GLFW asks for `EGL_ALPHA_SIZE 8`, so `kitty` exited with `EGL: No EGLConfigs returned`
+  - `modules/home/hyprland/lua/settings.lua` now sets `quirks.skip_non_kms_dmabuf_formats = false`
+    - Applied ahead of the flake update that brings Hyprland 0.57 into this repo
 - `SDDM` uwsm conflicting with HomeMgr systemd
   - Disabled UWSM and masked from SDDM
 - WindowRule for `noctalia` setting panel
@@ -32,13 +39,13 @@
       - If the installed NixOS doesn't have:
         - swap defined
         - or zramfs not in effect yet
-  - Removed `gearlever`
-    - Causes long builds
-    - Kept Overlay for dwarfs build error in case someone adds/enables gearlever
 
 - Removed:
   - overlays for glaze and tumbler
-    - `overlay.nix` is now empty template
+    - Removed `obs studio`
+    - Removed `python`
+    - Removed `TypeScript`
+        - Disalbled typscript in nixvim and helix
     - Reduces rebuild time and better `cacheix` hits
 
 - Updated:
@@ -48,6 +55,61 @@
   - Updated yazi to current cfg
   - Set default login mgr to `ly`
   - Hyprland config moved to LUA
+
+#### 📅 **Updated: October 14th, 2026**
+
+- Fix: overlays were not reaching Home Manager / `nixvim`
+  - `modules/core/user.nix`: `home-manager.useGlobalPkgs = true`
+  - `modules/home/editors/nixvim.nix`: `nixpkgs.useGlobalPackages = true`
+    - Replaces `nixpkgs.source = inputs.nixpkgs`, which built `nixvim` against a
+      pristine nixpkgs instance and ignored every overlay
+  - Removed now-invalid Home Manager level `nixpkgs.config` from
+    `modules/home/editors/vscode.nix`
+    - Already set system wide in `modules/core/packages.nix`
+- Fix: `nixvim` / `neovim` build failure from a stale `typescript-language-server`
+  pnpm dependency hash
+  - Added a guarded overlay in `modules/core/overlays.nix` patching
+    `typescript-language-server.pnpmDeps`
+  - Upstream fix is `NixOS/nixpkgs@ac7b1aa`, not yet in `nixos-unstable`
+  - Guarded so it is a no-op on nixpkgs revisions without `pnpmDeps`
+    (e.g. `typescript-language-server` 5.3.0 on the current pin)
+  - TODO: remove this overlay once `nixos-unstable` contains `ac7b1aa`
+- Fix: `obs-move-transition` fails to build on OBS 32.2.1+
+  - `-Werror=deprecated-declarations`; overlay adds
+    `-Wno-error=deprecated-declarations`
+- Fix: eval warning, `programs.rofi.extraConfig` renamed to
+  `programs.rofi.settings`
+- Chg: `modules/home/terminals/kitty.nix`
+  - Added `remember_window_size no`
+  - Changed `allow_remote_control` from `false` to `socket-only`
+- Removed: `dwarfs` overlay
+  - No longer needed
+
+#### 📅 **Updated: October 30th, 2026**
+
+- Fix: `nixos-rebuild` failed building `user-units` with
+  `ln: failed to create symbolic link '.../xdg-desktop-portal-hyprland.service': File exists`
+  - `modules/core/flatpak.nix` and `modules/home/xdg.nix` both declared
+    `xdg.portal`, which `programs.hyprland` already provides
+  - The current nixpkgs hands `programs.hyprland.package` a `withUWSM = false`
+    override, so the duplicate declaration pulled in a second, differently
+    instantiated `xdg-desktop-portal-hyprland`
+  - Both copies ship `lib/systemd/user/xdg-desktop-portal-hyprland.service`, and
+    every `systemd.packages` unit is linked into the same directory
+  - Removed both `xdg.portal` blocks; `programs.hyprland` is now the only source
+- Fix: eval warning
+  `stdenv.isLinux is deprecated, use stdenv.hostPlatform.isLinux instead`
+  - Came from the `synfetch` flake input, not from ZaneyOS
+  - `modules/core/packages.nix` now builds the same `writeShellApplication`
+    locally from the input's script, using `stdenv.hostPlatform.isLinux`
+  - TODO: go back to `inputs.synfetch.packages.<system>.default` once upstream is
+    fixed
+- Add: `ghee` - a git TUI, `git, as a place you leave open`
+  - New input `git+https://codeberg.org/justaguylinux/ghee.git`
+    (`inputs.nixpkgs.follows = "nixpkgs"`)
+  - Exposed as `pkgs.ghee` by an overlay in `modules/core/overlays.nix`
+  - Installed per user in `modules/home/cli/ghee.nix`
+  - Builds with `zig_0_16` from nixpkgs; `ghee ~/Code` walks a folder of repos
 
 # 🚀 **Current Release - ZaneyOS v2.6.4**
 
