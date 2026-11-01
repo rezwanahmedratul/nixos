@@ -1,0 +1,140 @@
+config_version = 16
+
+[bar.default]
+background_opacity = 0.029999999329447746
+center = [ "workspaces", "nix-monitor" ]
+compositor_blur = false
+end = [ "lid-guard", "network", "bluetooth", "volume", "brightness", "battery", "control-center" ]
+margin_ends = 0
+shadow = false
+start = [ "launcher", "clock", "temp", "ram", "cpu", "network_rx" ]
+thickness = 25
+
+[control_center]
+sidebar = "full"
+sidebar_section = "none"
+
+[location]
+address = "Shahzadpur, Rajshahi"
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 800.0
+    cy = 818.0
+    output = "eDP-1"
+    placement_height = 1000.0
+    placement_width = 1600.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_container"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_password_reveal = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[plugin_settings."avivbintangaringga/nix-monitor"]
+clean_command = "zcli cleanup"
+update_command = "zcli update"
+
+[plugin_settings."dmopp/nixos-updates"]
+flake_dir = "/home/ratul/nixos"
+nixos_configuration = "intel"
+update_command = "zcli update"
+
+[plugins]
+enabled = [ "8bury/lid-guard", "knyrps/nix-search", "avivbintangaringga/nix-monitor" ]
+
+[shell]
+button_borders = false
+card_borders = false
+input_borders = false
+panel_anchor_bar = "default"
+popup_borders = false
+screen_time_enabled = true
+
+    [shell.panel]
+    control_center_placement = "floating"
+    open_near_click_control_center = true
+    transparency_mode = "glass"
+
+[theme]
+source = "wallpaper"
+
+[wallpaper]
+directory = "/home/ratul/nixos/wallpapers"
+
+    [wallpaper.default]
+    path = "/home/ratul/nixos/wallpapers/tree.png"
+
+    [wallpaper.last]
+    path = "/home/ratul/nixos/wallpapers/tree.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/ratul/nixos/wallpapers/tree.png"
+
+[widget.battery]
+display_mode = "graphic"
+scale = 0.85000000000000009
+
+[widget.brightness]
+show_label = false
+
+[widget.clock]
+format = "%I:%M %p"
+
+[widget.cpu]
+visualization = "none"
+
+[widget.launcher]
+glyph = "snowflake"
+
+[widget.lid-guard]
+scale = 0.94999999999999996
+type = "8bury/lid-guard:lid-guard"
+
+[widget.network]
+show_label = false
+
+[widget.network_rx]
+visualization = "none"
+
+[widget.nix-monitor]
+show_text = false
+type = "avivbintangaringga/nix-monitor:nix-monitor"
+
+[widget.ram]
+visualization = "none"
+
+[widget.temp]
+visualization = "none"
+
+[widget.volume]
+show_label = false
+
+[widget.workspaces]
+hide_when_empty = true
+show_icons = false
+style = "focus_hint"

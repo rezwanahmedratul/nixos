@@ -27,6 +27,10 @@
   '';
 in {
   home.packages = [noctaliaPkg];
+
+  # Declarative Noctalia settings
+  xdg.configFile."noctalia/settings.toml".source = ./noctalia/settings.toml;
+
   systemd.user.services.noctalia = {
     Unit = {
       Description = "Noctalia panel service";
@@ -41,13 +45,21 @@ in {
     };
   };
 
-  # Ensure declarative v5 config directory exists
-  home.activation.ensureNoctaliaConfigDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  # Ensure declarative config and synchronize state
+  home.activation.ensureNoctaliaConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
     set -eu
-    DEST="$HOME/.config/noctalia"
+    STATE_DIR="$HOME/.local/state/noctalia"
+    mkdir -p "$STATE_DIR"
 
-    if [ ! -d "$DEST" ]; then
-      $DRY_RUN_CMD mkdir -p "$DEST"
+    # Synchronize declarative settings to state so Noctalia restores exact config on switch
+    if [ -f "$HOME/.config/noctalia/settings.toml" ]; then
+      cp -f "$HOME/.config/noctalia/settings.toml" "$STATE_DIR/settings.toml"
+      chmod 644 "$STATE_DIR/settings.toml" 2>/dev/null || true
+    fi
+
+    # Tell running Noctalia instance to reload its config if active
+    if command -v noctalia >/dev/null 2>&1 && pgrep -x noctalia >/dev/null 2>&1; then
+      noctalia msg config-reload >/dev/null 2>&1 || true
     fi
   '';
 }
