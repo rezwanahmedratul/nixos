@@ -13,7 +13,7 @@
 in {
   home.packages =
     [
-      customPkgs.ab-download-manager
+      # customPkgs.ab-download-manager
       # downloadcraft
     ]
     ++ (with pkgs; [

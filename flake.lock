@@ -9,11 +9,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792272235,
-        "narHash": "sha256-7NLiwk8LB7U9qWrSyz+VqBbGLDuzskw7g52PSwk0kL8=",
+        "lastModified": 1793481563,
+        "narHash": "sha256-3TfF2WqD8CYzZDuMkoG2s3kHplwViom9ez7uyYQ1cCg=",
         "owner": "kamadorueda",
         "repo": "alejandra",
-        "rev": "c308a34d629bff737cfb3302a6333b758280ad6d",
+        "rev": "0d76881353ebb80980813cbca5b032f0b7b794e2",
         "type": "github"
       },
       "original": {
@@ -30,11 +30,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793344257,
-        "narHash": "sha256-uehPzucJWe0N+LxzlvgOqyMmea59R1DeV+HXXqanV74=",
+        "lastModified": 1793430542,
+        "narHash": "sha256-JFdtE8/NXJrzzHUPfm4Y46KFHugr469G/Om9xck/7Vg=",
         "owner": "jacopone",
         "repo": "antigravity-nix",
-        "rev": "1b5a9ab6739d2bbf7f3bd63980d21c3ae848ebb4",
+        "rev": "c6065473cf8bb7ba2a43dd198d2a06963e55ce8c",
         "type": "github"
       },
       "original": {
@@ -116,11 +116,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1793363163,
-        "narHash": "sha256-OcU5cfLzIbqJ00lIzmDE4+HZxznVVj0CwznS5nn5SSM=",
+        "lastModified": 1793481116,
+        "narHash": "sha256-2cRdNi9vzAe/tYKcBYzYu5edz69OUBxsRkZgJUJcw4c=",
         "owner": "Rishabh5321",
         "repo": "custom-packages-flake",
-        "rev": "40ad0db0b3e7147a6871522e510926dc393c2192",
+        "rev": "c0fda4be281a7a0f5c81d29feae610bd83af1be1",
         "type": "github"
       },
       "original": {
@@ -132,11 +132,11 @@
     "downloadcraft-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1793238287,
-        "narHash": "sha256-fUtvMSFSagw82Ylqh0M7mlBcuNOf0ZloT8GlsHNJdsg=",
+        "lastModified": 1793542196,
+        "narHash": "sha256-gNzuMTFxwrnu0M9c14LHeh+q1vUPJf4jC8R9FkpEeWo=",
         "owner": "hungry-detective",
         "repo": "downloadcraft",
-        "rev": "27c4e99cab5a4829172a7e9114d24bdd058fa960",
+        "rev": "f981836612ca7e47bd70394413f24208d0c8e8d3",
         "type": "github"
       },
       "original": {
@@ -309,6 +309,26 @@
         "type": "github"
       }
     },
+    "ghee": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793328047,
+        "narHash": "sha256-azXMJahp4yYvuhgO3Q9ibSYTXYsVIs5snQb19wDUArk=",
+        "ref": "refs/heads/main",
+        "rev": "07b362e41225f29ced42a05026bba1e44d58f979",
+        "revCount": 19,
+        "type": "git",
+        "url": "https://codeberg.org/justaguylinux/ghee.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/justaguylinux/ghee.git"
+      }
+    },
     "gnome-shell": {
       "flake": false,
       "locked": {
@@ -403,11 +423,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1793110635,
-        "narHash": "sha256-dhoW6VgFWlaodSY5jrBn+CF2FLmaUvDVgM7+C7T2+NM=",
+        "lastModified": 1793341285,
+        "narHash": "sha256-Y1CiZ4SoBUjLQyQM/pY+rS2dXD3CHLPstF0lmOc73D4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "31ecbaca1bdefa45dffc409f0250bd8039ea0010",
+        "rev": "1c89083e451e891152365b799595cf7790a43325",
         "type": "github"
       },
       "original": {
@@ -434,11 +454,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1793110635,
-        "narHash": "sha256-dhoW6VgFWlaodSY5jrBn+CF2FLmaUvDVgM7+C7T2+NM=",
+        "lastModified": 1793341285,
+        "narHash": "sha256-Y1CiZ4SoBUjLQyQM/pY+rS2dXD3CHLPstF0lmOc73D4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "31ecbaca1bdefa45dffc409f0250bd8039ea0010",
+        "rev": "1c89083e451e891152365b799595cf7790a43325",
         "type": "github"
       },
       "original": {
@@ -763,26 +783,6 @@
         "ref": "beta",
         "repo": "zen-browser-flake",
         "type": "github"
-      }
-    },
-    "ghee": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1793328047,
-        "narHash": "sha256-azXMJahp4yYvuhgO3Q9ibSYTXYsVIs5snQb19wDUArk=",
-        "ref": "refs/heads/main",
-        "rev": "07b362e41225f29ced42a05026bba1e44d58f979",
-        "revCount": 19,
-        "type": "git",
-        "url": "https://codeberg.org/justaguylinux/ghee.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://codeberg.org/justaguylinux/ghee.git"
       }
     }
   },
