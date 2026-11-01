@@ -97,7 +97,6 @@ in {
     # Theming / cursors
     bibata-cursors
     darkly
-    darkly-qt5
     adw-gtk3
   ];
 

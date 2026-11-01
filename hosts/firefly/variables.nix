@@ -48,8 +48,9 @@
   extraMonitorSettings = "monitor = eDP-1, 1920x1200@60, 0x0, 1.20";
 
   # Bar/Shell Settings
-  # Choose between noctalia or waybar
-  barChoice = "noctalia"; # Set Bar Choice
+  # Choose between quickshell, noctalia or waybar
+  barChoice = "quickshell"; # Set Bar Choice
+  # barChoice = "noctalia"; # Set Bar Choice
   # barChoice = "waybar"; # Set Bar Choice
 
   # Waybar Settings (used when barChoice = "waybar")

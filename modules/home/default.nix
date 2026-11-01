@@ -20,6 +20,8 @@
   barModule =
     if barChoice == "noctalia"
     then ./noctalia.nix
+    else if barChoice == "quickshell"
+    then ./quickshell-ii
     else waybarChoice;
 in {
   imports =

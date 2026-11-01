@@ -5,6 +5,7 @@
     browser
     terminal
     ;
+
   # Noctalia-specific bindings (only included when barChoice == "noctalia")
   noctaliaBind =
     if barChoice == "noctalia"
@@ -23,39 +24,84 @@
       "$modifier SHIFT,R, Restart Noctalia shell, exec, restart.noctalia"
     ]
     else [];
-  # Rofi launcher bindings (only included when barChoice != "noctalia")
+
+  # Quickshell II specific bindings (only included when barChoice == "quickshell")
+  quickshellBind =
+    if barChoice == "quickshell"
+    then [
+      "ALT,SPACE, Quickshell Launcher, global, quickshell:searchToggleRelease"
+      "$modifier,SPACE, Quickshell Launcher, global, quickshell:searchToggleRelease"
+      "$modifier SHIFT,Return, Quickshell Launcher, global, quickshell:searchToggleRelease"
+      "$modifier,N, Quickshell Right Sidebar, global, quickshell:sidebarRightToggle"
+      "$modifier,A, Quickshell Left Sidebar, global, quickshell:sidebarLeftToggle"
+      "$modifier CTRL,V, Quickshell Clipboard, global, quickshell:overviewClipboardToggle"
+      "$modifier,Period, Quickshell Emoji Picker, global, quickshell:overviewEmojiToggle"
+      "$modifier,Slash, Quickshell Cheatsheet, global, quickshell:cheatsheetToggle"
+      "$modifier,K, Quickshell On-Screen Keyboard, global, quickshell:oskToggle"
+      "$modifier,M, Quickshell Media Controls, global, quickshell:mediaControlsToggle"
+      "$modifier,G, Quickshell Widget Overlay, global, quickshell:overlayToggle"
+      "$modifier,J, Quickshell Toggle Bar, global, quickshell:barToggle"
+      "CTRL ALT,Delete, Quickshell Session Menu, global, quickshell:sessionToggle"
+      "$modifier CTRL,T, Quickshell Wallpaper Selector, global, quickshell:wallpaperSelectorToggle"
+      "$modifier CTRL SHIFT,D, Quickshell Toggle Light/Dark, global, quickshell:toggleLightDark"
+      "$modifier CTRL,P, Quickshell Cycle Panel Family, global, quickshell:panelFamilyCycle"
+      "$modifier SHIFT,R, Restart Quickshell, exec, killall ydotool qs quickshell; qs -c ii &"
+      "$modifier SHIFT,W, Quickshell Wallpaper Selector, global, quickshell:wallpaperSelectorToggle"
+      "$modifier,P, Quickshell Session Menu, global, quickshell:sessionToggle"
+      "$modifier,C, Quickshell Quick Toggles, global, quickshell:sidebarRightToggle"
+      "$modifier ALT,S, Quickshell Screen Snip, global, quickshell:regionScreenshot"
+      "$modifier SHIFT,X, Quickshell OCR, global, quickshell:regionOcr"
+      "$modifier SHIFT,T, Quickshell Screen Translate, global, quickshell:screenTranslate"
+      "$modifier SHIFT,S, Quickshell Region Record, global, quickshell:regionRecord"
+    ]
+    else [];
+
+  # Rofi launcher bindings (only included when not noctalia and not quickshell)
   rofiBind =
-    if barChoice != "noctalia"
+    if barChoice != "noctalia" && barChoice != "quickshell"
     then [
       "$modifier,D, Rofi Launcher, exec, rofi-launcher"
       "$modifier SHIFT,Return, Rofi Launcher, exec, rofi-launcher"
     ]
     else [];
-  # Rofi clipboard binding (only included when barChoice != "noctalia")
+
+  # Rofi clipboard binding (only included when not noctalia and not quickshell)
   rofiClipboardBind =
-    if barChoice != "noctalia"
+    if barChoice != "noctalia" && barChoice != "quickshell"
     then [
       "$modifier,V, Clipboard History, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
     ]
     else [];
-  # Wallpaper binding (only included when barChoice != "noctalia")
+
+  # Wallpaper binding (only included when not noctalia and not quickshell)
   wallpaperBind =
-    if barChoice != "noctalia"
+    if barChoice != "noctalia" && barChoice != "quickshell"
     then [
       "$modifier SHIFT,W, QS Wallpaper Setter, exec, qs-wallpapers-apply"
     ]
     else [];
+
+  # Overview binding
+  overviewBind =
+    if barChoice == "quickshell"
+    then [
+      "$modifier,Tab, Quickshell Overview, global, quickshell:overviewWorkspacesToggle"
+    ]
+    else [
+      "$modifier,Tab, QS Overview, exec, qs ipc -c overview call overview toggle"
+    ];
 in {
   wayland.windowManager.hyprland.settings = {
     bindd =
       noctaliaBind
+      ++ quickshellBind
       ++ rofiBind
       ++ rofiClipboardBind
       ++ wallpaperBind
+      ++ overviewBind
       ++ [
         # ============= WORKSPACE OVERVIEW =============
         "$modifier CTRL,D, Toggle Dock, exec, dock"
-        "$modifier, TAB, QS Overview, exec, qs ipc -c overview call overview toggle"
         # ============= TERMINALS =============
         "$modifier,Return, Terminal, exec, ${terminal}"
         # ============= APPLICATION LAUNCHERS =============
@@ -87,7 +133,7 @@ in {
 
         "$modifier CTRL,R, Screen Recorder, exec, screenrecord"
         "$modifier,O, OBS Studio, exec, obs"
-        
+
         "$modifier ALT,C, Color Picker, exec, hyprpicker -a"
         "$modifier,G, GIMP, exec, gimp"
         "$modifier SHIFT,T, Dropdown Terminal, exec, sh -lc 'DropTerminal'"
@@ -98,47 +144,11 @@ in {
         "$modifier,X, Kill Active Window, killactive,"
         "$modifier,P, Pseudo Tile, pseudo,"
         "$modifier SHIFT,I, Toggle Split, layoutmsg, togglesplit"
-        "$modifier SHIFT,F, Maximize, fullscreen,"
-        "$modifier CTRL,F, Toggle Floating, togglefloating,"
-        "$modifier ALT,F, Float All Windows, exec, hyprland-float-all"
-        # ============= LAYOUTS =============
-        "$modifier ALT,L, Toggle Layouts, exec, hyprland-change-layout toggle"
-        "$modifier ALT,1, Layout Dwindle, exec, hyprland-change-layout dwindle"
-        "$modifier ALT,2, Layout Master, exec, hyprland-change-layout master"
-        "$modifier ALT,3, Layout Scrolling, exec, hyprland-change-layout scrolling"
-        "$modifier ALT,4, Layout Monocle, exec, hyprland-change-layout monocle"
-        "$modifier SHIFT,C, Exit/Logout of Hyprland, exit,"
-        # ============= WINDOW MOVEMENT (ARROW KEYS) =============
-        "$modifier SHIFT,left, Move Left, movewindow, l"
-        "$modifier SHIFT,right, Move Right, movewindow, r"
-        "$modifier SHIFT,up, Move Up, movewindow, u"
-        "$modifier SHIFT,down, Move Down, movewindow, d"
-        # ============= WINDOW MOVEMENT (VI STYLE) =============
-        "$modifier SHIFT,h, Move Left (VI), movewindow, l"
-        "$modifier SHIFT,l, Move Right (VI), movewindow, r"
-        "$modifier SHIFT,k, Move Up (VI), movewindow, u"
-        "$modifier SHIFT,j, Move Down (VI), movewindow, d"
-        # ============= WINDOW SWAPPING (ARROW KEYS) =============
-        "$modifier ALT, left, Swap Left, swapwindow, l"
-        "$modifier ALT, right, Swap Right, swapwindow, r"
-        "$modifier ALT, up, Swap Up, swapwindow, u"
-        "$modifier ALT, down, Swap Down, swapwindow, d"
-        # ============= WINDOW SWAPPING (VI KEYCODES) =============
-        "$modifier ALT, 43, Swap Left (VI), swapwindow, l"
-        "$modifier ALT, 46, Swap Right (VI), swapwindow, r"
-        "$modifier ALT, 45, Swap Up (VI), swapwindow, u"
-        "$modifier ALT, 44, Swap Down (VI), swapwindow, d"
-        # ============= FOCUS MOVEMENT (ARROW KEYS) =============
-        "$modifier,left, Focus Left, movefocus, l"
-        "$modifier,right, Focus Right, movefocus, r"
-        "$modifier,up, Focus Up, movefocus, u"
-        "$modifier,down, Focus Down, movefocus, d"
-        # ============= FOCUS MOVEMENT (VI STYLE) =============
-        "$modifier,h, Focus Left (VI), movefocus, l"
-        "$modifier,l, Focus Right (VI), movefocus, r"
-        "$modifier,k, Focus Up (VI), movefocus, u"
-        "$modifier,j, Focus Down (VI), movefocus, d"
-        # ============= WORKSPACE SWITCHING (1-10) =============
+        "$modifier,F11, Fullscreen, fullscreen,"
+        "$modifier,Space, Toggle Floating, togglefloating,"
+        "$modifier,F, Maximize Window, fullscreen, 1"
+
+        # ============= WORKSPACE NAVIGATION =============
         "$modifier,1, Workspace 1, workspace, 1"
         "$modifier,2, Workspace 2, workspace, 2"
         "$modifier,3, Workspace 3, workspace, 3"
@@ -149,42 +159,66 @@ in {
         "$modifier,8, Workspace 8, workspace, 8"
         "$modifier,9, Workspace 9, workspace, 9"
         "$modifier,0, Workspace 10, workspace, 10"
-        # ============= MOVE WINDOW TO WORKSPACE (1-10) =============
-        "$modifier SHIFT,SPACE, Move to Special, movetoworkspace, special"
-        "$modifier,SPACE, Toggle Special, togglespecialworkspace"
-        "$modifier SHIFT,1, Move to Workspace 1, movetoworkspace, 1"
-        "$modifier SHIFT,2, Move to Workspace 2, movetoworkspace, 2"
-        "$modifier SHIFT,3, Move to Workspace 3, movetoworkspace, 3"
-        "$modifier SHIFT,4, Move to Workspace 4, movetoworkspace, 4"
-        "$modifier SHIFT,5, Move to Workspace 5, movetoworkspace, 5"
-        "$modifier SHIFT,6, Move to Workspace 6, movetoworkspace, 6"
-        "$modifier SHIFT,7, Move to Workspace 7, movetoworkspace, 7"
-        "$modifier SHIFT,8, Move to Workspace 8, movetoworkspace, 8"
-        "$modifier SHIFT,9, Move to Workspace 9, movetoworkspace, 9"
-        "$modifier SHIFT,0, Move to Workspace 10, movetoworkspace, 10"
-        # ============= WORKSPACE NAVIGATION =============
-        "$modifier CONTROL,right, Next Workspace, workspace, e+1"
-        "$modifier CONTROL,left, Previous Workspace, workspace, e-1"
-        "$modifier,mouse_down, Next Workspace Mouse, workspace, e+1"
-        "$modifier,mouse_up, Previous Workspace Mouse, workspace, e-1"
-        # ============= WINDOW CYCLING =============
-        "ALT,Tab, Cycle Next Window, cyclenext"
-        "ALT,Tab, Bring Active To Top, bringactivetotop"
-        # ============= MEDIA & HARDWARE CONTROLS =============
-        ",XF86AudioRaiseVolume, Volume Up, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+
+        # Move Active Window To Workspace
+        "$modifier SHIFT,1, Move Window to Workspace 1, movetoworkspace, 1"
+        "$modifier SHIFT,2, Move Window to Workspace 2, movetoworkspace, 2"
+        "$modifier SHIFT,3, Move Window to Workspace 3, movetoworkspace, 3"
+        "$modifier SHIFT,4, Move Window to Workspace 4, movetoworkspace, 4"
+        "$modifier SHIFT,5, Move Window to Workspace 5, movetoworkspace, 5"
+        "$modifier SHIFT,6, Move Window to Workspace 6, movetoworkspace, 6"
+        "$modifier SHIFT,7, Move Window to Workspace 7, movetoworkspace, 7"
+        "$modifier SHIFT,8, Move Window to Workspace 8, movetoworkspace, 8"
+        "$modifier SHIFT,9, Move Window to Workspace 9, movetoworkspace, 9"
+        "$modifier SHIFT,0, Move Window to Workspace 10, movetoworkspace, 10"
+
+        # ============= FOCUS MOVEMENT =============
+        "$modifier,left, Focus Left, movefocus, l"
+        "$modifier,right, Focus Right, movefocus, r"
+        "$modifier,up, Focus Up, movefocus, u"
+        "$modifier,down, Focus Down, movefocus, d"
+        "$modifier,h, Focus Left, movefocus, l"
+        "$modifier,l, Focus Right, movefocus, r"
+        "$modifier,k, Focus Up, movefocus, u"
+        "$modifier,j, Focus Down, movefocus, d"
+
+        # Move Active Window
+        "$modifier SHIFT,left, Move Window Left, movewindow, l"
+        "$modifier SHIFT,right, Move Window Right, movewindow, r"
+        "$modifier SHIFT,up, Move Window Up, movewindow, u"
+        "$modifier SHIFT,down, Move Window Down, movewindow, d"
+        "$modifier SHIFT,h, Move Window Left, movewindow, l"
+        "$modifier SHIFT,l, Move Window Right, movewindow, r"
+        "$modifier SHIFT,k, Move Window Up, movewindow, u"
+        "$modifier SHIFT,j, Move Window Down, movewindow, d"
+
+        # ============= SPECIAL WORKSPACE (SCRATCHPAD) =============
+        "$modifier,S, Toggle Special Workspace, togglespecialworkspace, magic"
+        "$modifier SHIFT,U, Move to Special Workspace, movetoworkspace, special:magic"
+
+        # ============= SCROLL THROUGH WORKSPACES =============
+        "$modifier,mouse_down, Next Workspace, workspace, e+1"
+        "$modifier,mouse_up, Previous Workspace, workspace, e-1"
+
+        # ============= HARDWARE CONTROLS =============
+        # Volume Keys
         ",XF86AudioLowerVolume, Volume Down, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        " ,XF86AudioMute, Mute Toggle, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ",XF86AudioPlay, Play Pause, exec, playerctl play-pause"
-        ",XF86AudioPause, Play Pause, exec, playerctl play-pause"
+        ",XF86AudioRaiseVolume, Volume Up, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ",XF86AudioMute, Mute Audio, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMicMute, Mute Mic, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+
+        # Brightness Keys
+        ",XF86MonBrightnessDown, Brightness Down, exec, brightnessctl set 5%-"
+        ",XF86MonBrightnessUp, Brightness Up, exec, brightnessctl set +5%"
+
+        # Media Keys
+        ",XF86AudioPlay, Play/Pause Media, exec, playerctl play-pause"
         ",XF86AudioNext, Next Track, exec, playerctl next"
         ",XF86AudioPrev, Previous Track, exec, playerctl previous"
-        ",XF86MonBrightnessDown, Brightness Down, exec, brightnessctl set 1%-"
-        ",XF86MonBrightnessUp, Brightness Up, exec, brightnessctl set +1%"
       ];
-
     bindm = [
-      "$modifier, mouse:272, movewindow"
-      "$modifier, mouse:273, resizewindow"
+      "$modifier,mouse:272,movewindow"
+      "$modifier,mouse:273,resizewindow"
     ];
   };
 }
