@@ -132,11 +132,11 @@
     "downloadcraft-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1793542196,
-        "narHash": "sha256-gNzuMTFxwrnu0M9c14LHeh+q1vUPJf4jC8R9FkpEeWo=",
+        "lastModified": 1793543182,
+        "narHash": "sha256-luYX/3KGsb7y5PuU9JyXmFRv9HFfoMCrOJeNfSpoMD8=",
         "owner": "hungry-detective",
         "repo": "downloadcraft",
-        "rev": "f981836612ca7e47bd70394413f24208d0c8e8d3",
+        "rev": "94a70fa0d22f4b5c75b778ccc11fcabe5821bd9f",
         "type": "github"
       },
       "original": {
