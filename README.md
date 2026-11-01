@@ -16,6 +16,16 @@ This includes the wallpaper, scripts, applications, config files, and more.
 > The first time you login, screen will be blank SUPER + SHIFT + C to exit.
 > Login in, noctalia will start from then on
 
+## 🌸 Ryoku Desktop (Quickshell) Integration
+
+The `ryoku` branch introduces declarative integration for the [Ryoku-on-NixOS](https://github.com/Ryoku-dev/Ryoku-on-NixOS) desktop shell, built with Quickshell, Qt6/QML, Matugen, and a Go IPC daemon (`ryoku-shell`):
+- **Karuma Floating Bar**: Live hardware metrics, workspaces, network, battery, and media status.
+- **Ryoku App Launcher & Quick Settings**: Instantaneous, keyboard-driven launcher and control center.
+- **Ryogami Dynamic Theming**: Material You accent palette generation from wallpapers via Matugen.
+- **Workspace Expo / Overview**: Full-screen live preview tiles and interactive workspace organization.
+- **Ryoku Spring Animations**: High-fidelity cubic bezier curves (`ryokuBloom`, `ryokuSettle`).
+- **Ryoku Hub & Stage Editor**: Built-in visual settings and widget customization.
+
 <img align="center" width="80%" src="img/ZaneyOS-Floating.png" />
 
 </div>
@@ -88,6 +98,15 @@ This includes the wallpaper, scripts, applications, config files, and more.
   file.
 - Easy to understand file structure and simple, but encompassing, configuration.
 
+#### 🎛️ Declarative Desktop Shell Selection
+
+- Switch between three complete desktop shells in `hosts/<hostname>/variables.nix`:
+  - `"ryoku"`: [Ryoku Desktop](https://github.com/Ryoku-dev/Ryoku-on-NixOS) — Quickshell, Karuma bar, Matugen-powered Ryogami dynamic wallpaper theming, app launcher, control center, and spring bezier animations.
+  - `"noctalia"`: Noctalia Quickshell suite — floating quicksettings, launcher, and system panels.
+  - `"waybar"`: Classic Waybar — highly customizable modular status bar with SwayNC and Rofi.
+- Match animation curves with `animChoice` (e.g. `../../modules/home/hyprland/animations-ryoku.nix`).
+
+
 #### 👼 An Incredible Community Focused On Support
 
 - The entire idea of ZaneyOS is to make NixOS an approachable space.
@@ -115,102 +134,71 @@ This includes the wallpaper, scripts, applications, config files, and more.
 
 # Hyprland Keybindings
 
-Below are the keybindings for Hyprland, formatted for easy reference. The right
-column shows keybindings that are specific to **Noctalia Shell** (only available
-when `barChoice = "noctalia"`).
+Below are the keybindings for Hyprland. Common window management and workspace navigation shortcuts work across all modes, while desktop shell keybindings adapt based on `barChoice` in `hosts/<hostname>/variables.nix`.
 
-<table>
-<tr>
-<td width="50%">
+### 🌸 Ryoku Shell Keybindings (`barChoice = "ryoku"`)
 
-## Standard Keybindings
+| Keybinding | Action | Command / Target |
+| :--- | :--- | :--- |
+| `$modifier + Space` / `Alt + Space` | **App Launcher** | Toggle Ryoku quick application launcher |
+| `$modifier + Escape` | **Quick Settings & Control Center** | Toggle network, volume, brightness, and status controls |
+| `$modifier + Tab` | **Workspace Overview** | Expo view with interactive live window previews |
+| `$modifier + V` | **Clipboard History** | Toggle Ryoku clipboard manager |
+| `$modifier + M` | **Audio Visualizer** | Toggle Ryoku desktop visualizer |
+| `$modifier + W` | **Wallpaper Picker** | Open Ryogami interactive wallpaper selector |
+| `$modifier + Shift + W` | **Random Wallpaper** | Instantly pick and apply random wallpaper with Matugen theming |
+| `$modifier + L` | **Lock Screen** | Lock session via `ryoku-qylock` |
+| `$modifier + ,` | **Ryoku Hub** | Open system settings and visual customization hub |
+| `$modifier + Shift + D` | **Stage Editor** | Open desktop widget and panel layout editor |
+| `$modifier + Shift + S` | **Region Screenshot** | Capture custom screen region via `ryoku-cmd-ryoshot` |
+| `$modifier + K` | **Keybinds Cheat Sheet** | Quickshell overlay with interactive hotkey search |
 
-### Application Launching
+---
 
-- `$modifier + Return` → Launch `terminal`
-- `$modifier + Tab` → Toggle `Quickshell Overview` (workspace overview with live previews)
-- `$modifier + K` → List keybinds
-- `$modifier + Shift + W` → Open `web-search`
-- `$modifier + Alt + W` → Open `wallsetter`
-- `$modifier + Shift + N` → Run `swaync-client -rs`
-- `$modifier + W` → Launch `Web Browser`
-- `$modifier + Y` → Open `kitty` with `yazi`
-- `$modifier + E` → Open `emopicker9000`
-- `$modifier + S` → Take a screenshot
-- `$modifier + Shift + D` → Open `Discord`
-- `$modifier + O` → Launch `OBS Studio`
-- `$modifier + Alt + C` → Color Picker
-- `$modifier + G` → Open `GIMP`
-- `$modifier + T` → Toggle terminal with `pypr`
-- `$modifier + Alt + M` → Open `pavucontrol`
+### 🎨 Noctalia Shell Keybindings (`barChoice = "noctalia"`)
 
-### Window Management
+| Keybinding | Action |
+| :--- | :--- |
+| `Alt + Space` / `$modifier + Shift + Return` | Noctalia Launcher Toggle |
+| `$modifier + M` | Notifications Menu |
+| `$modifier + Ctrl + V` | Clipboard Manager |
+| `$modifier + Alt + P` / `$modifier + Shift + ,` | Settings Panel |
+| `$modifier + L` | Lock Screen |
+| `$modifier + Shift + W` | Wallpaper Manager |
+| `$modifier + P` | Power Menu |
+| `$modifier + C` | Control Center |
+| `$modifier + Alt + S` | Region Screenshot |
 
-- `$modifier + Q` → Kill active window
-- `$modifier + P` → Toggle pseudo tiling
-- `$modifier + Shift + I` → Toggle split mode
-- `$modifier + F` → Toggle fullscreen
-- `$modifier + Shift + F` → Toggle floating mode
-- `$modifier + Alt + F` → Float all windows
-- `$modifier + Shift + C` → Exit Hyprland
+---
 
-### Window Movement
+### 📊 Waybar Mode Keybindings (`barChoice = "waybar"`)
 
-- `$modifier + Shift + ← / → / ↑ / ↓` → Move left/right/up/down
-- `$modifier + Shift + H / L / K / J` → Move left/right/up/down
-- `$modifier + Alt + ← / → / ↑ / ↓` → Swap left/right/up/down
+| Keybinding | Action |
+| :--- | :--- |
+| `$modifier + D` / `$modifier + Shift + Return` | Launch Rofi Application Launcher |
+| `$modifier + V` | Clipboard History via `cliphist` |
+| `$modifier + Shift + W` | Wallpaper Setter |
+| `$modifier + Shift + N` | Restart SwayNC Notification Daemon |
 
-### Focus Movement
+---
 
-- `$modifier + ← / → / ↑ / ↓` → Move focus left/right/up/down
-- `$modifier + H / L / K / J` → Move focus left/right/up/down
+### 🪟 General Window & Workspace Management
 
-### Workspaces
+| Keybinding | Action |
+| :--- | :--- |
+| `$modifier + Return` | Launch default terminal (`alacritty` / `kitty`) |
+| `$modifier + B` | Launch default web browser |
+| `$modifier + F` | Launch GUI file manager (Nautilus) |
+| `$modifier + Y` | Open terminal file manager (`yazi`) |
+| `$modifier + X` | Kill active window |
+| `$modifier + Shift + F` | Toggle window fullscreen |
+| `$modifier + P` | Toggle pseudo tiling |
+| `$modifier + Shift + I` | Toggle layout split |
+| `$modifier + 1-10` | Switch to workspace 1–10 |
+| `$modifier + Shift + 1-10` | Move active window to workspace 1–10 |
+| `Alt + Tab` | Cycle to next window / Bring active to top |
+| `$modifier + Shift + C` | Exit Hyprland |
 
-- `$modifier + 1-10` → Switch to workspace 1-10
-- `$modifier + Shift + Space` → Move window to special workspace
-- `$modifier + Space` → Toggle special workspace
-- `$modifier + Shift + 1-10` → Move window to workspace 1-10
-- `$modifier + Control + → / ←` → Switch workspace forward/backward
-
-### Window Cycling
-
-- `Alt + Tab` → Cycle to next window / Bring active to top
-
-</td>
-<td width="50%">
-
-## 🎨 Noctalia Shell Keybindings
-
-_Available when `barChoice = "noctalia"` in `variables.nix`_
-
-- `$modifier + D` → Launcher Toggle
-- `$modifier + Shift + Return` → Launcher Toggle
-- `$modifier + M` → Notifications Menu
-- `$modifier + V` → Clipboard Manager
-- `$modifier + Alt + P` → Settings Panel
-- `$modifier + Shift + ,` → Settings Panel
-- `$modifier + Alt + L` → Lock Screen
-- `$modifier + Shift + Y` → Wallpaper Manager
-- `$modifier + X` → Power Menu
-- `$modifier + C` → Control Center
-- `$modifier + Ctrl + R` → Screen Recorder
-
-### Rofi Launcher (Waybar Mode)
-
-_Available when `barChoice = "waybar"` in `variables.nix`_
-
-- `$modifier + D` → Launch Rofi Launcher
-- `$modifier + Shift + Return` → Launch Rofi Launcher
-
-### Other Features
-
-- `$modifier + Shift + Return` (Waybar) → Application Launcher
-- `$modifier + V` (Waybar) → Clipboard History via `cliphist`
-
-</td>
-</tr>
-</table>
 
 ## Installation:
 
