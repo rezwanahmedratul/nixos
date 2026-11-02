@@ -15,10 +15,10 @@
       "killall -q swaync 2>/dev/null || true"
       "systemctl --user stop noctalia 2>/dev/null || true"
       "pkill -x noctalia 2>/dev/null || true"
-      "sh -lc 'systemctl --user restart ryoku-session.target || (systemctl --user restart ryoku-shell && systemctl --user restart ryogami) || true'"
+      "sh -lc 'systemctl --user restart ryoku-shell || true'"
     ]
     else [
-      "systemctl --user stop ryoku-session.target ryoku-shell ryogami 2>/dev/null || true"
+      "systemctl --user stop ryoku-shell 2>/dev/null || true"
       "pkill -x ryoku-shell 2>/dev/null || true"
     ];
   # Waybar-specific startup commands
@@ -30,7 +30,7 @@
       "killall -q swaync;sleep .5 && swaync"
       "systemctl --user stop noctalia || true"
       "pkill -x noctalia || true"
-      "systemctl --user stop ryoku-session.target ryoku-shell ryogami || true"
+      "systemctl --user stop ryoku-shell || true"
       "pkill -x ryoku-shell || true"
       "nm-applet --indicator"
       # Delayed-only restore so Stylix finishes first, then user's wallpaper wins with a single change

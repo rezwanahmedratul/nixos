@@ -18,13 +18,14 @@ This includes the wallpaper, scripts, applications, config files, and more.
 
 ## 🌸 Ryoku Desktop (Quickshell) Integration
 
-The `ryoku` branch introduces declarative integration for the [Ryoku-on-NixOS](https://github.com/Ryoku-dev/Ryoku-on-NixOS) desktop shell, built with Quickshell, Qt6/QML, Matugen, and a Go IPC daemon (`ryoku-shell`):
+The `ryoku` branch introduces a native, self-contained implementation of the Ryoku Quickshell desktop for Hyprland directly within this repository — **without external flake inputs**:
 - **Karuma Floating Bar**: Live hardware metrics, workspaces, network, battery, and media status.
 - **Ryoku App Launcher & Quick Settings**: Instantaneous, keyboard-driven launcher and control center.
-- **Ryogami Dynamic Theming**: Material You accent palette generation from wallpapers via Matugen.
+- **Dynamic Theming**: Material You accent palette generation via Matugen.
 - **Workspace Expo / Overview**: Full-screen live preview tiles and interactive workspace organization.
 - **Ryoku Spring Animations**: High-fidelity cubic bezier curves (`ryokuBloom`, `ryokuSettle`).
-- **Ryoku Hub & Stage Editor**: Built-in visual settings and widget customization.
+- **User-Mutable Widgets & Stage Layout**: UI widgets (`~/.config/quickshell/shell`) and stage layout (`~/.config/quickshell/stage`) are seeded into user space, allowing direct in-place customization and edit-mode changes without read-only Nix store locks.
+- **Declarative System Management**: Hyprland window/layer rules, keybindings, bezier animations, local Go IPC daemon (`ryoku-shell`), and Qt6/QML environments are managed 100% declaratively in pure Nix syntax.
 
 <img align="center" width="80%" src="img/ZaneyOS-Floating.png" />
 
@@ -145,12 +146,12 @@ Below are the keybindings for Hyprland. Common window management and workspace n
 | `$modifier + Tab` | **Workspace Overview** | Expo view with interactive live window previews |
 | `$modifier + V` | **Clipboard History** | Toggle Ryoku clipboard manager |
 | `$modifier + M` | **Audio Visualizer** | Toggle Ryoku desktop visualizer |
-| `$modifier + W` | **Wallpaper Picker** | Open Ryogami interactive wallpaper selector |
-| `$modifier + Shift + W` | **Random Wallpaper** | Instantly pick and apply random wallpaper with Matugen theming |
-| `$modifier + L` | **Lock Screen** | Lock session via `ryoku-qylock` |
-| `$modifier + ,` | **Ryoku Hub** | Open system settings and visual customization hub |
+| `$modifier + W` | **Wallpaper Picker** | Open Quickshell / Waypaper wallpaper selector |
+| `$modifier + Shift + W` | **Random Wallpaper** | Instantly pick and apply random wallpaper |
+| `$modifier + L` | **Lock Screen** | Lock session via `ryoku-shell lock` / `hyprlock` |
+| `$modifier + ,` | **Ryoku Settings** | Open system settings and visual customization |
 | `$modifier + Shift + D` | **Stage Editor** | Open desktop widget and panel layout editor |
-| `$modifier + Shift + S` | **Region Screenshot** | Capture custom screen region via `ryoku-cmd-ryoshot` |
+| `$modifier + Shift + S` | **Region Screenshot** | Capture custom screen region to clipboard via `grim + slurp` |
 | `$modifier + K` | **Keybinds Cheat Sheet** | Quickshell overlay with interactive hotkey search |
 
 ---

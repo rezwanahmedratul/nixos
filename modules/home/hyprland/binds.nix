@@ -32,12 +32,12 @@
       "$modifier,Escape, Ryoku Quick Settings, exec, ryoku-shell quicksettings toggle || qs -c shell ipc call quicksettings toggle"
       "$modifier,V, Ryoku Clipboard, exec, ryoku-shell clipboard toggle || qs -c shell ipc call clipboard toggle"
       "$modifier,M, Ryoku Visualizer, exec, ryoku-shell visualizer toggle || qs -c shell ipc call visualizer toggle"
-      "$modifier,W, Ryoku Wallpaper Picker, exec, ryogami wallpaper ui"
-      "$modifier SHIFT,W, Ryoku Random Wallpaper, exec, ryogami wallpaper random"
-      "$modifier,L, Ryoku Lock Screen, exec, ryoku-shell lock"
-      "$modifier,comma, Ryoku Hub Settings, exec, ryoku-shell hub open"
-      "$modifier SHIFT,D, Ryoku Stage Editor, exec, ryoku-shell hub open widgets"
-      "$modifier SHIFT,S, Ryoku Screenshot, exec, ryoku-cmd-ryoshot"
+      "$modifier,W, Ryoku Wallpaper Picker, exec, ryoku-shell wallpaper toggle || qs -c shell ipc call wallpaper toggle || waypaper"
+      "$modifier SHIFT,W, Ryoku Random Wallpaper, exec, qs-wallpapers-random || true"
+      "$modifier,L, Ryoku Lock Screen, exec, ryoku-shell lock || hyprlock"
+      "$modifier,comma, Ryoku Settings, exec, ryoku-shell hub open || qs -c shell ipc call hub toggle"
+      "$modifier SHIFT,D, Ryoku Stage Editor, exec, ryoku-shell hub open widgets || qs -c shell ipc call stage toggle"
+      "$modifier SHIFT,S, Ryoku Screenshot, exec, grim -g \"$(slurp)\" - | wl-copy"
       "$modifier,K, Ryoku Keybinds Cheat Sheet, exec, pkill -x -f 'qs -c keys' 2>/dev/null || flock -n -o /tmp/ryoku-keys.lock qs -c keys"
     ]
     else [];

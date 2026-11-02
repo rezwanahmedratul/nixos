@@ -1,5 +1,4 @@
 {
-  inputs,
   host,
   lib,
   pkgs,
@@ -8,21 +7,21 @@
   vars = import ../../hosts/${host}/variables.nix;
   isRyoku = (vars.barChoice or "") == "ryoku" || (vars.ryokuEnable or false);
 in {
-  imports = [
-    inputs.ryoku.nixosModules.default
-  ];
-
-  programs.ryoku = {
-    enable = isRyoku;
-    defaultCompositor = "hyprland";
-    browser = null; # Defer default browser to host settings (e.g. Zen Browser)
-    shell = "zsh"; # Preserve user's Zsh shell configuration
-    binaryCache.enable = true;
-    updateFlake = "/home/ratul/nixos";
-    updateInput = "ryoku";
-  };
-
   # Prevent conflicts between Ryoku's default power-profiles-daemon and host powerManager (e.g. TLP)
   services.power-profiles-daemon.enable = lib.mkForce (vars.powerManager == "ppd");
-}
 
+  # Declarative binary cache for Ryotunes and Quickshell components
+  nix.settings = lib.mkIf isRyoku {
+    substituters = [
+      "https://ryotunes.cachix.org"
+      "https://cache.garnix.io"
+    ];
+    trusted-public-keys = [
+      "ryotunes.cachix.org-1:ZfG/D567QxP8Z015oB7lW+k4/t78y9eE094r8zKjEBE="
+      "cache.garnix.io:CTFbt0eY2qmDxJ54TU2mwsOX99mmmxuKT5345WBHax8="
+    ];
+  };
+
+  # Ensure PAM services for Hyprland screen lockers are available
+  security.pam.services.hyprlock = lib.mkIf isRyoku {};
+}
