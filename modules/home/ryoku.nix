@@ -69,6 +69,51 @@
     };
   };
 
+  # Build Ryoku.Blobs and Ryoku.Spatial3D Qt6/QML C++ plugins
+  ryokuBlobs = pkgs.stdenv.mkDerivation {
+    pname = "ryoku-blobs";
+    version = "1.0.0";
+    dontWrapQtApps = true;
+    src = ./ryoku/plugin;
+
+    nativeBuildInputs = [
+      pkgs.cmake
+      pkgs.ninja
+      pkgs.pkg-config
+      pkgs.qt6.qtshadertools
+    ];
+
+    buildInputs = [
+      pkgs.qt6.qtbase
+      pkgs.qt6.qtdeclarative
+      pkgs.qt6.qtmultimedia
+      pkgs.qt6.qtquick3d
+      pkgs.qt6.qtshadertools
+    ];
+
+    preConfigure = ''
+      rm -rf build
+    '';
+
+    installPhase = ''
+      runHook preInstall
+
+      mkdir -p "$out/lib/qt-6/qml/Ryoku"
+      for module in Blobs Spatial3D; do
+        cp -a "qml/Ryoku/$module" "$out/lib/qt-6/qml/Ryoku/$module"
+        rm -f "$out/lib/qt-6/qml/Ryoku/$module/"*.qrc
+      done
+
+      runHook postInstall
+    '';
+
+    meta = {
+      description = "Ryoku.Blobs and Ryoku.Spatial3D Qt6/QML modules";
+      license = lib.licenses.gpl3Only;
+      platforms = ["x86_64-linux"];
+    };
+  };
+
   # Build pure QML module tree
   ryokuQml = pkgs.runCommand "ryoku-qml-modules" {} ''
     mkdir -p "$out/lib/qt-6/qml/Ryoku/Wm"
@@ -80,6 +125,7 @@
 in {
   home.packages = [
     ryokuShell
+    ryokuBlobs
     pkgs.quickshell
     pkgs.matugen
     pkgs.grim
@@ -94,12 +140,12 @@ in {
 
   # Qt and Quickshell environment variables for Ryoku QML module resolution
   home.sessionVariables = {
-    QML_IMPORT_PATH = "${ryokuQml}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml:${pkgs.qt6.qt5compat}/lib/qt-6/qml:$HOME/.config/quickshell";
-    QML2_IMPORT_PATH = "${ryokuQml}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml:${pkgs.qt6.qt5compat}/lib/qt-6/qml:$HOME/.config/quickshell";
+    QML_IMPORT_PATH = "${ryokuBlobs}/lib/qt-6/qml:${ryokuQml}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml:${pkgs.qt6.qt5compat}/lib/qt-6/qml:${pkgs.qt6.qtmultimedia}/lib/qt-6/qml:${pkgs.qt6.qtquick3d}/lib/qt-6/qml:$HOME/.config/quickshell";
+    QML2_IMPORT_PATH = "${ryokuBlobs}/lib/qt-6/qml:${ryokuQml}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml:${pkgs.qt6.qt5compat}/lib/qt-6/qml:${pkgs.qt6.qtmultimedia}/lib/qt-6/qml:${pkgs.qt6.qtquick3d}/lib/qt-6/qml:$HOME/.config/quickshell";
     QT_QPA_PLATFORM = "wayland;xcb";
   };
 
-  # Seed Quickshell shell widgets and stage layout once into ~/.config/quickshell
+  # Seed Quickshell shell widgets, stage layout, and inir once into ~/.config/quickshell
   # We do NOT manage ui widgets / stage layout declaratively as read-only store symlinks:
   # copying them ensures the user can customize, edit widgets, and adjust stage layout freely.
   home.activation.seedRyokuQuickshell = lib.hm.dag.entryAfter ["writeBoundary"] ''
@@ -117,6 +163,12 @@ in {
     if [ ! -d "$QS_CONFIG/stage" ]; then
       cp -R "${./ryoku/quickshell/stage}" "$QS_CONFIG/stage"
       chmod -R u+rwX "$QS_CONFIG/stage"
+    fi
+
+    # Seed Quickshell inir services if not already present
+    if [ ! -d "$QS_CONFIG/inir" ]; then
+      cp -R "${./ryoku/quickshell/inir}" "$QS_CONFIG/inir"
+      chmod -R u+rwX "$QS_CONFIG/inir"
     fi
 
     # Seed Quickshell keybind cheat sheet if not already present
@@ -137,8 +189,8 @@ in {
     Service = {
       Type = "simple";
       Environment = [
-        "QML_IMPORT_PATH=${ryokuQml}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml:${pkgs.qt6.qt5compat}/lib/qt-6/qml:%h/.config/quickshell"
-        "QML2_IMPORT_PATH=${ryokuQml}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml:${pkgs.qt6.qt5compat}/lib/qt-6/qml:%h/.config/quickshell"
+        "QML_IMPORT_PATH=${ryokuBlobs}/lib/qt-6/qml:${ryokuQml}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml:${pkgs.qt6.qt5compat}/lib/qt-6/qml:${pkgs.qt6.qtmultimedia}/lib/qt-6/qml:${pkgs.qt6.qtquick3d}/lib/qt-6/qml:%h/.config/quickshell"
+        "QML2_IMPORT_PATH=${ryokuBlobs}/lib/qt-6/qml:${ryokuQml}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml:${pkgs.qt6.qt5compat}/lib/qt-6/qml:${pkgs.qt6.qtmultimedia}/lib/qt-6/qml:${pkgs.qt6.qtquick3d}/lib/qt-6/qml:%h/.config/quickshell"
         "QT_QPA_PLATFORM=wayland;xcb"
         "PATH=${lib.makeBinPath [
           ryokuShell

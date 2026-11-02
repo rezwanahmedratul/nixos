@@ -14,11 +14,9 @@ in {
   nix.settings = lib.mkIf isRyoku {
     substituters = [
       "https://ryotunes.cachix.org"
-      "https://cache.garnix.io"
     ];
     trusted-public-keys = [
       "ryotunes.cachix.org-1:ZfG/D567QxP8Z015oB7lW+k4/t78y9eE094r8zKjEBE="
-      "cache.garnix.io:CTFbt0eY2qmDxJ54TU2mwsOX99mmmxuKT5345WBHax8="
     ];
   };
 
