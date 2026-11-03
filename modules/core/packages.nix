@@ -57,7 +57,7 @@ in {
     seahorse.enable = true;
     fuse.userAllowOther = true;
     mtr.enable = true;
-    hyprlock.enable = true;
+    hyprlock.enable = false; # set this so desktop file is created
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
