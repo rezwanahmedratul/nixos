@@ -145,5 +145,6 @@ in {
       arduino-cli
       #virt-viewer
       azuredatastudio
+      claude-code
     ];
 }

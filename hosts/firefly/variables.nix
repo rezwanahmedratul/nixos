@@ -15,6 +15,8 @@
   # `none` to disable power management
   powerManager = "tlp";
 
+  omniRoute = "enabled"; # Enable OmniRoute (for better network routing)
+
   # Emable/disable bundled applications
   tmuxEnable = true; # Terminal Multiplexer
   alacrittyEnable = true;
