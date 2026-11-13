@@ -35,11 +35,6 @@ in {
       then [./power-profiles-deamon.nix]
       else []
     )
-    ++ (
-      if vars.omniRoute == "enabled"
-      then [./omniroute.nix]
-      else []
-    )
     ++ [
       ./security.nix
       ./services.nix
