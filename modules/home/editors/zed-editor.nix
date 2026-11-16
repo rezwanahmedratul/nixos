@@ -79,13 +79,7 @@
         jdtls = {
           binary.path = "jdtls";
         };
-
-        tinymist = {
-          binary.path = "tinymist";
-        };
       };
     };
   };
-
-  nixpkgs.config.allowUnfree = true;
 }

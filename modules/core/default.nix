@@ -36,7 +36,7 @@ in {
       else []
     )
       ++ (
-      if vars.omniRoute == "enabled"
+      if vars.omniRoute == true
       then [./omniroute.nix]
       else []
     )

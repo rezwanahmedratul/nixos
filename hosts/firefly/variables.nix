@@ -13,9 +13,9 @@
   # `auto-cpufreq` for desktops (more aggressive performance)
   # `ppd` for power-profiles-daemon (more aggressive performance)
   # `none` to disable power management
-  powerManager = "tlp";
+  powerManager = "auto-cpufreq";
 
-  omniRoute = "enabled"; # Enable OmniRoute (for better network routing)
+  omniRoute = true; # Enable OmniRoute (for better network routing)
 
   # Emable/disable bundled applications
   tmuxEnable = true; # Terminal Multiplexer
@@ -23,7 +23,7 @@
   weztermEnable = false;
   ghosttyEnable = false;
   vscodeEnable = true; # Microsoft VSCode with telemetry
-  zed-editorEnable = false;
+  zed-editorEnable = true; # Zed Editor (fast, modern, and open-source)
   vscodiumEnable = false; # Open-source build of VSCode without telemetry
   antigravityEnable = true; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
