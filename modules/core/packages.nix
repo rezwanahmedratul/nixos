@@ -20,8 +20,7 @@
   # `inputs.synfetch.packages.<system>.default` once upstream is fixed.
   synfetch = pkgs.writeShellApplication {
     name = "synfetch";
-    runtimeInputs =
-      with pkgs;
+    runtimeInputs = with pkgs;
       [
         coreutils
         ncurses
@@ -140,11 +139,7 @@ in {
       qimgv
       chromium
       nix-search-tv
-      #distrobox
-      #spice-gtk
       arduino-cli
       #virt-viewer
-      azuredatastudio
-      claude-code
     ];
 }

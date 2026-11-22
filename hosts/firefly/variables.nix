@@ -15,7 +15,7 @@
   # `none` to disable power management
   powerManager = "auto-cpufreq";
 
-  omniRoute = true; # Enable OmniRoute (for better network routing)
+  omniRoute = false; # Enable OmniRoute (for better network routing)
 
   # Emable/disable bundled applications
   tmuxEnable = true; # Terminal Multiplexer
