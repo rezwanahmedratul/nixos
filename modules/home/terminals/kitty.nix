@@ -42,7 +42,7 @@
     extraConfig = ''
 
       #open_url_with default
-      url_prefixes file ftp ftps gemini git gopher http https irc ircs kitty sftp ssh
+      url_prefixes file ftp ftps git gopher http https irc ircs kitty sftp ssh
       #detect_urls yes
 
         # Clipboard

@@ -1,16 +1,24 @@
-_: {
-  stylix.targets = {
-    # Avoid fetching GNOME Shell sources on non-GNOME systems (breaks on some remotes)
-    gnome.enable = false;
-    waybar.enable = false;
-    rofi.enable = false;
-    hyprland.enable = false;
-    hyprlock.enable = false;
-    ghostty.enable = false;
-    yazi.enable = false;
-    qt = {
-      enable = true;
-      platform = "qtct";
+{
+  lib,
+  options,
+  ...
+}: {
+  stylix.targets =
+    {
+      # Avoid fetching GNOME Shell sources on non-GNOME systems (breaks on some remotes)
+      gnome.enable = false;
+      waybar.enable = false;
+      rofi.enable = false;
+      hyprland.enable = false;
+      hyprlock.enable = false;
+      ghostty.enable = false;
+      yazi.enable = false;
+      qt = {
+        enable = true;
+        platform = "qtct";
+      };
+    }
+    // lib.optionalAttrs (options.stylix.targets ? wayprompt) {
+      wayprompt.enable = false;
     };
-  };
 }

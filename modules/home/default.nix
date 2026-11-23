@@ -24,7 +24,7 @@
 in {
   imports =
     [
-      ./amfora.nix
+      # ./amfora.nix
       ./bash.nix
       ./bashrc-personal.nix
       ./overview.nix

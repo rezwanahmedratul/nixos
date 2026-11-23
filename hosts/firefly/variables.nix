@@ -13,7 +13,7 @@
   # `auto-cpufreq` for desktops (more aggressive performance)
   # `ppd` for power-profiles-daemon (more aggressive performance)
   # `none` to disable power management
-  powerManager = "auto-cpufreq";
+  powerManager = "tlp";
 
   omniRoute = false; # Enable OmniRoute (for better network routing)
 
