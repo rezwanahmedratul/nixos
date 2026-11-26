@@ -35,6 +35,12 @@ in {
     NIXOS_OZONE_WL = "1";
     ZANEYOS_VERSION = "2.6.5";
     ZANEYOS = "true";
+    SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+    SSL_CERT_DIR = "/etc/ssl/certs";
+  };
+  environment.etc = {
+    "ssl/cert.pem".source = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    "pki/tls/cert.pem".source = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
   };
   programs.nix-ld = {
     enable = true;
