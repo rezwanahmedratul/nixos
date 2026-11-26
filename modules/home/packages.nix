@@ -18,6 +18,7 @@ in {
     ]
     ++ (with pkgs; [
       pangolin-cli
+      zed-editor
       #obsidian
       # code-cursor
     ]);

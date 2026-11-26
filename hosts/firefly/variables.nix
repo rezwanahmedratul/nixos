@@ -23,7 +23,7 @@
   weztermEnable = false;
   ghosttyEnable = false;
   vscodeEnable = true; # Microsoft VSCode with telemetry
-  zed-editorEnable = true; # Zed Editor (fast, modern, and open-source)
+  zed-editorEnable = false; # Zed Editor (fast, modern, and open-source)
   vscodiumEnable = false; # Open-source build of VSCode without telemetry
   antigravityEnable = true; # Google port of vscodium
   # Note: This is evil-helix with VIM keybindings by default
