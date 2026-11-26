@@ -1,4 +1,8 @@
-{host, ...}: let
+{
+  host,
+  pkgs,
+  ...
+}: let
   vars = import ../../hosts/${host}/variables.nix;
   consoleKeyMap = vars.consoleKeyMap or "us";
 in {
@@ -31,6 +35,19 @@ in {
     NIXOS_OZONE_WL = "1";
     ZANEYOS_VERSION = "2.6.5";
     ZANEYOS = "true";
+  };
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc
+      zlib
+      fuse3
+      icu
+      nss
+      openssl
+      curl
+      expat
+    ];
   };
   console.keyMap = "${consoleKeyMap}";
   system.stateVersion = "23.11"; # Do not change!
